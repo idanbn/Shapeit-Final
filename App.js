@@ -5,7 +5,8 @@ import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-nativ
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import MealsScreen from './screens/MealsScreen';
-
+import Tabs from './navigation/tabs';
+import SearchScreen from './screens/SearchScreen';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -18,8 +19,8 @@ export default function App() {
       initialRouteName={"Login"}
     >
      <Stack.Screen name="Login" component={LoginScreen} />
-     <Stack.Screen name="Home" component={HomeScreen} />
-     <Stack.Screen name="Meals" component={MealsScreen} />
+     <Stack.Screen name="Home" component={Tabs} />
+
     </Stack.Navigator>
   </NavigationContainer>
   );
