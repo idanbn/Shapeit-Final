@@ -1,8 +1,12 @@
+import { async } from '@firebase/util';
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { React, useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView } from 'react-native';
 import { auth } from '../FireBase/Users/reduce';
+import {LogBox} from 'react-native';
+
+LogBox.ignoreAllLogs();
 
 
 const LoginScreen = () => {
@@ -24,7 +28,7 @@ const LoginScreen = () => {
     }, [])
 
 
-    const handleSignUp = () => {
+    const handleSignUp = async () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -36,7 +40,7 @@ const LoginScreen = () => {
             });
     }
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredentials) => {
                 const user = userCredentials.user;

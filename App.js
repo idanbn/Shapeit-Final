@@ -6,14 +6,20 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import MealsScreen from './screens/MealsScreen';
 
+
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
   <NavigationContainer>
-    <Stack.Navigator>
-    <Stack.Screen name="Meals" component={MealsScreen} />
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+      initialRouteName={"Login"}
+    >
      <Stack.Screen name="Login" component={LoginScreen} />
      <Stack.Screen name="Home" component={HomeScreen} />
+     <Stack.Screen name="Meals" component={MealsScreen} />
     </Stack.Navigator>
   </NavigationContainer>
   );

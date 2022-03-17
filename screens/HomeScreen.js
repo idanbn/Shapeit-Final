@@ -8,16 +8,20 @@ import { auth } from '../FireBase/Users/reduce'
 const HomeScreen = () => {
 
     const navigation = useNavigation()
+    
+    const GoMeals = () => {
+        navigation.replace("Meals")
+    }
 
     const handleSignOut = () => {
         signOut(auth)
-          .then(() => {
-            console.log('Disconnect user');
-            navigation.replace("Login")
-          })
-          .catch(error => alert(error.message))
-      }
-    
+            .then(() => {
+                console.log('Disconnect user');
+                navigation.replace("Login")
+            })
+            .catch(error => alert(error.message))
+    }
+
     return (
         <View style={styles.container}>
 
@@ -30,6 +34,14 @@ const HomeScreen = () => {
 
                 <Text style={styles.buttonText}>Sign out</Text>
 
+            </TouchableOpacity>
+
+
+            <TouchableOpacity
+                style={[styles.button, styles.buttonOutline]}
+                onPress={GoMeals}
+            >
+                <Text style={styles.buttonOutlineText}>Go Meals List</Text>
             </TouchableOpacity>
 
         </View>
@@ -55,5 +67,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: '700',
         fontSize: 16,
+    },
+    buttonOutline: {
+        backgroundColor: 'white',
+        marginTop: 5,
+        borderColor: '#0782F9',
+        borderWidth: 2,
     },
 })
