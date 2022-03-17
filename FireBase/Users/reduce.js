@@ -1,4 +1,4 @@
-import { app_config } from "../firebase-configartion";
+import { app_config } from "../configuration/firebase-configartion";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore"
 
