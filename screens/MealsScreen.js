@@ -4,6 +4,7 @@ import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { collection, getDocs, doc, setDoc } from "firebase/firestore";
 import { db } from '../FireBase/FireStore/reduce';
 import { async } from '@firebase/util';
+import { fetchData } from '../FireBase/FireStore/action';
 
 const MealsScreen = () => {
 
