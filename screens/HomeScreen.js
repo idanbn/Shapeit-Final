@@ -1,36 +1,17 @@
-import { useNavigation } from '@react-navigation/native'
-import { signOut } from 'firebase/auth'
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
+import { SIGNOUT } from '../FireBase/Users/action'
 import { auth } from '../FireBase/Users/reduce'
 
 
 const HomeScreen = () => {
-
-    const navigation = useNavigation()
-    
-    const handleSignOut = () => {
-        signOut(auth)
-            .then(() => {
-                console.log('Disconnect user');
-                navigation.replace("Login")
-            })
-            .catch(error => alert(error.message))
-    }
 
     return (
         <View style={styles.container}>
 
             <Text>Email: {auth.currentUser?.email}</Text>
 
-            <TouchableOpacity
-                style={styles.button}
-                onPress={handleSignOut}
-            >
-
-                <Text style={styles.buttonText}>Sign out</Text>
-
-            </TouchableOpacity>
+            <SIGNOUT />
 
         </View>
     )
@@ -43,17 +24,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    button: {
-        backgroundColor: '#0782F9',
-        width: '60%',
-        padding: 15,
-        borderRadius: 10,
-        alignItems: 'center',
-        marginTop: 40,
-    },
-    buttonText: {
-        color: 'white',
-        fontWeight: '700',
-        fontSize: 16,
-    },
+
 })

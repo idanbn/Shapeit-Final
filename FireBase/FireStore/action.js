@@ -10,9 +10,7 @@ const fetchData = async () => {
         mealdata.mealId = doc.id;
         meals.push(mealdata);
     })
-    const mealsList = mealsSnapshot.docs.map(doc => doc.data());
 
-    console.log(mealsList);
     return { meals }
 
 }

@@ -5,7 +5,7 @@ import Svg, { Path } from 'react-native-svg';
 
 import HomeScreen from '../screens/HomeScreen';
 import MealsScreen from '../screens/MealsScreen';
-import SearchScreen from '../screens/SearchScreen';
+import TestScreen from '../screens/TestScreen';
 
 import { COLORS, icons } from '../constants';
 
@@ -95,8 +95,8 @@ const TabsNavigator = () => {
             />
 
             <Tab.Screen
-                name="Search"
-                component={SearchScreen}
+                name="Test"
+                component={TestScreen}
                 options={{
                     tabBarShowLabel: false,
 

@@ -1,89 +1,56 @@
-import { useNavigation } from '@react-navigation/native';
-import { React } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import { collection, getDocs, doc, setDoc } from "firebase/firestore";
-import { db } from '../FireBase/FireStore/reduce';
-import { async } from '@firebase/util';
+import { React, useState, useEffect } from 'react';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+
 import { fetchData } from '../FireBase/FireStore/action';
 
 const MealsScreen = () => {
 
-    const navigation = useNavigation()
+    const [meals, setMeals] = useState(new Array());
 
-    const GetData = async () => {
-        const mealsSnapshot = await getDocs(collection(db, "meals"));
-        const mealsList = mealsSnapshot.docs.map(doc => doc.data());
+    useEffect(() => {
+        getMeals();
+    }, []);
 
-        console.log(mealsList);
+    const getMeals = async () =>  {
+        const mealsdata = await fetchData();
+        setMeals(mealsdata.meals)
     }
 
-    const SetData = async () => {
-        // Add a new document in collection "meals"
-        await setDoc(doc(db, "meals", "random_doc"), {
-            meal_name: "steak",
-            calorie_level: "0",
-        });
-
-    }
-
-    return (
-        <View style={styles.container}>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={GetData}
-                >
-                    <Text style={styles.buttonText}>get data</Text>
-
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={[styles.button, styles.buttonOutline]}
-                    onPress={SetData}
-                >
-                    <Text style={styles.buttonOutlineText}>set data</Text>
-                </TouchableOpacity>
-
-            </View>
+    const Item = ({ title }) => (
+        <View style={styles.item}>
+            <Text style={styles.title}>{title}</Text>
         </View>
     );
+
+    const renderItem = ({ item }) => (
+        <Item title={item.meal_name} />
+    );
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <FlatList
+                data={meals}
+                renderItem={renderItem}
+            />
+        </SafeAreaView>
+    );
 }
+
 export default MealsScreen;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        marginTop: StatusBar.currentHeight || 0,
     },
-    buttonContainer: {
-        width: '60%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 40,
+    item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
     },
-    button: {
-        backgroundColor: '#0782F9',
-        width: '100%',
-        padding: 15,
-        borderRadius: 10,
-        alignItems: 'center',
-    },
-
-    buttonText: {
-        color: 'white',
-        fontWeight: '700',
-        fontSize: 16,
-    },
-    buttonOutline: {
-        backgroundColor: 'white',
-        marginTop: 5,
-        borderColor: '#0782F9',
-        borderWidth: 2,
-    },
-    buttonOutlineText: {
-        color: '#0782F9',
-        fontWeight: '700',
-        fontSize: 16,
+    title: {
+        fontSize: 32,
     },
 });
+
