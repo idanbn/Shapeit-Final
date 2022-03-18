@@ -1,12 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { React } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native';
-import HomeScreen from './screens/HomeScreen';
+import { StyleSheet} from 'react-native';
+
+
 import LoginScreen from './screens/LoginScreen';
-import MealsScreen from './screens/MealsScreen';
-import Tabs from './navigation/tabs';
-import SearchScreen from './screens/SearchScreen';
+import TabsNavigator from './navigation/tabs';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -19,7 +18,7 @@ export default function App() {
       initialRouteName={"Login"}
     >
      <Stack.Screen name="Login" component={LoginScreen} />
-     <Stack.Screen name="Home" component={Tabs} />
+     <Stack.Screen name="tabs" component={TabsNavigator} />
 
     </Stack.Navigator>
   </NavigationContainer>
