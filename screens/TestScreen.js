@@ -1,20 +1,14 @@
-import { useNavigation } from '@react-navigation/native';
 import { React } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import { collection, getDocs, doc, setDoc } from "firebase/firestore";
+import { StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
+import { doc, setDoc } from "firebase/firestore";
 import { db } from '../FireBase/FireStore/reduce';
+import { COLORS } from '../constants';
 import { async } from '@firebase/util';
 
+import Hello from '../components/Home/Hello';
+import DailyiInTake from '../components/Home/DailyiIntake';
+
 const TestScreen = () => {
-
-    const navigation = useNavigation()
-
-    const GetData = async () => {
-        const mealsSnapshot = await getDocs(collection(db, "meals"));
-        const mealsList = mealsSnapshot.docs.map(doc => doc.data());
-
-        console.log(mealsList);
-    }
 
     const SetData = async () => {
         // Add a new document in collection "meals"
@@ -25,31 +19,25 @@ const TestScreen = () => {
 
     }
 
+    //ScreenShot26
+
     return (
-        <View style={styles.container}>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={GetData}
-                >
-                    <Text style={styles.buttonText}>get data</Text>
+        <SafeAreaView style={styles.safearea}>
 
-                </TouchableOpacity>
+            <Hello />
+            <DailyiInTake />
 
-                <TouchableOpacity
-                    style={[styles.button, styles.buttonOutline]}
-                    onPress={SetData}
-                >
-                    <Text style={styles.buttonOutlineText}>set data</Text>
-                </TouchableOpacity>
 
-            </View>
-        </View>
+        </SafeAreaView>
     );
 }
 export default TestScreen;
 
 const styles = StyleSheet.create({
+    safearea: {
+        flex: 1,
+        backgroundColor: COLORS.lightGray3
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
@@ -85,5 +73,6 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         fontSize: 16,
     },
+
 });
 

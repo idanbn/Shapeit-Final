@@ -1,5 +1,5 @@
 import { React } from 'react';
-import { View, Image, TouchableOpacity,StyleSheet } from 'react-native';
+import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 import Svg, { Path } from 'react-native-svg';
 
@@ -67,7 +67,12 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
 
 const TabsNavigator = () => {
     return (
-        <Tab.Navigator style={styles.container}>
+        <Tab.Navigator
+            style={styles.container}
+            screenOptions={{
+                headerShown: false
+            }}
+        >
 
             <Tab.Screen
                 name="Meals"

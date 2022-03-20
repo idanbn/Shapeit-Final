@@ -10,7 +10,6 @@ const SIGNOUT = () => {
     const handleSignOut = () => {
         signOut(auth)
             .then(() => {
-                console.log('Disconnect user');
                 navigation.replace("Login")
             })
             .catch(error => alert(error.message))

@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { COLORS } from '../constants';
 
 import { fetchData } from '../FireBase/FireStore/action';
 
@@ -16,14 +17,14 @@ const MealsScreen = () => {
         setMeals(mealsdata.meals)
     }
 
-    const Item = ({ title }) => (
-        <View style={styles.item}>
-            <Text style={styles.title}>{title}</Text>
+    const Item = ({ meal , index}) => (
+        <View key={index} style={styles.item}>
+            <Text style={styles.meal}>{meal}</Text>
         </View>
     );
 
     const renderItem = ({ item }) => (
-        <Item title={item.meal_name} />
+        <Item meal={item.meal_name} index={item.mealId} />
     );
 
     return (
@@ -44,12 +45,12 @@ const styles = StyleSheet.create({
         marginTop: StatusBar.currentHeight || 0,
     },
     item: {
-        backgroundColor: '#f9c2ff',
+        backgroundColor: COLORS.secondary,
         padding: 20,
         marginVertical: 8,
         marginHorizontal: 16,
     },
-    title: {
+    meal: {
         fontSize: 32,
     },
 });

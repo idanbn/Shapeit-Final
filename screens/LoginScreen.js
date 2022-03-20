@@ -18,7 +18,6 @@ const LoginScreen = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log('Connected user:', user.email);
                 navigation.replace("tabs")
             }
         })
@@ -31,7 +30,6 @@ const LoginScreen = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log('Register with:', user.email);
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -43,7 +41,6 @@ const LoginScreen = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredentials) => {
                 const user = userCredentials.user;
-                console.log('Logged in with:', user.email);
             })
             .catch(error => alert(error.message))
     }
