@@ -1,33 +1,112 @@
 import React from 'react';
-import { View, StyleSheet, Text, ImageBackground } from 'react-native';
+import { View, StyleSheet, Text, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { COLORS, images } from '../../constants';
+import Feather from 'react-native-vector-icons/Feather';
 
-const PopularRecipes = () => {
+const Mealsdb = [
+
+    {
+        m_id: 1,
+        m_name: 'Spicy Ramen with Mixing Sea Food',
+        calorie: '223',
+        cookingTime: '20',
+        imageUrl: images.kolo_mee,
+    },
+    {
+        m_id: 2,
+        m_name: 'Hamburger with friesd',
+        calorie: '760',
+        cookingTime: '25',
+        imageUrl: images.burger_restaurant_1,
+    },
+    {
+        m_id: 3,
+        m_name: 'Chicken breast with rice',
+        calorie: '190',
+        cookingTime: '35',
+        imageUrl: images.ice_kacang,
+    },
+    {
+        m_id: 4,
+        m_name: 'Ceaser salad',
+        calorie: '100',
+        cookingTime: '7',
+        imageUrl: images.nasi_lemak,
+    },
+
+];
+
+
+const PopularMeals = () => {
     return (
         <View>
-            <Card>
-                <SecoundCard>
-                    <CardTexts />
-                </SecoundCard>
-            </Card>
+            <RenderTitele name='Popular Meals' />
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {Mealsdb.map((item, index) => (
+                    <MealCard backgroundImage={item.imageUrl} key={index} >
+                        <SecoundCard>
+                            <View style={{ flexDirection: 'row' }}>
+                                <CardTexts 
+                                name={item.m_name}
+                                calorieValue={item.calorie}
+                                cookingTimeValue={item.cookingTime}
+                                />
+                                <Icon />
+                            </View>
+                        </SecoundCard>
+                    </MealCard>
+                ))}
+            </ScrollView>
         </View>
 
     );
 }
 
+const Icon = () => {
+    return (
+        <TouchableOpacity
+            style={{ justifyContent: 'flex-end', marginLeft: 24, paddingTop: 50 }}
+            onPress={() => { console.log('meal data'); }}
+        >
+            <Feather
+                name='bookmark'
+                style={styles.markIcon}
+                color={COLORS.white}
+
+            />
+        </TouchableOpacity>
+    )
+}
+
+const RenderTitele = (props) => {
+
+    return (
+        <View style={styles.continuer}>
+
+            <Text style={styles.categoryText}> {props.name} </Text>
+            <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => { console.log('See All') }}
+            >
+                <Text style={styles.seeAll}> See All </Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
 
 const CardTexts = (props) => {
     return (
         <View>
-            <Text style={styles.firstText}> Feeling Better! </Text>
+            <Text style={styles.firstText}>{props.name}</Text>
+            <Text style={styles.secondText}>{props.calorieValue} Calories  •  {props.cookingTimeValue} Min </Text>
         </View>
     );
 };
 
-const Card = (props) => {
+const MealCard = (props) => {
     return (
-        <ImageBackground source={images.crispy_chicken_burger} borderRadius={30} style={styles.card}>
-                {props.children}
+        <ImageBackground source={props.backgroundImage} borderRadius={20} key={props.key} style={styles.card}>
+            {props.children}
         </ImageBackground>
     );
 };
@@ -50,46 +129,71 @@ const styles = StyleSheet.create({
 
     card: {
         marginHorizontal: 25,
-        marginVertical: 28,
-        borderRadius: 30,
+        marginVertical: 3,
+        borderRadius: 20,
         shadowOffset: { width: 1, height: 1 },
         shadowColor: '#333',
         shadowOpacity: 0.3,
         shadowRadius: 2,
         height: 320,
-        width: 260,
-        justifyContent : 'flex-end',
+        width: 280,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
 
     },
     cardContent: {
-        marginVertical: 20,
-        marginHorizontal: 20,
+        marginVertical: 12,
+        marginHorizontal: 12,
 
     },
     secoundcard: {
         backgroundColor: COLORS.card,
-        marginBottom : 8,
-        marginHorizontal: 4,
-        borderRadius: 30,
+        marginBottom: 8,
+        borderRadius: 20,
         shadowOffset: { width: 1, height: 1 },
         shadowColor: '#333',
         shadowOpacity: 0.3,
         shadowRadius: 2,
-        height: 120,
-        width: 250,
+        height: 110,
+        width: 265,
         opacity: 0.92
     },
     firstText: {
-        fontSize: 24,
+        fontSize: 20,
+        fontWeight: '700',
+        color: COLORS.white,
+        opacity: 0.95,
+        width: 190
+    },
+    secondText: {
+        fontSize: 14.5,
+        fontWeight: '500',
+        color: COLORS.white,
+        marginTop: 16,
+        opacity: 0.6,
+    },
+    continuer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 22,
+        marginVertical: 14,
+    },
+    categoryText: {
+        fontSize: 20,
         fontWeight: '700',
         color: COLORS.black,
     },
-    secondText: {
-        fontSize: 18,
-        fontWeight: '500',
-        color: COLORS.lightGreen,
-        marginTop: 6,
+    seeAll: {
+        fontSize: 14,
+        fontWeight: '400',
+        color: COLORS.icons,
+        marginTop: 5,
     },
+    markIcon: {
+        fontSize: 28,
+        opacity: 0.7,
+
+    }
 })
 
-export default PopularRecipes;
+export default PopularMeals;
