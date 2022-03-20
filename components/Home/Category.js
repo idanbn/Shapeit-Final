@@ -47,7 +47,7 @@ const Categorydb = [
 
 const Category = () => {
     return (
-        <View style={{}}>
+        <View style={{ backgroundColor: '#eff5f5', }}>
             {<RenderTitele />}
             {<RenderCategoryImages />}
 
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         color: COLORS.icons,
-        marginTop:5,
+        marginTop: 5,
     },
     imageText: {
         flex: 1,
