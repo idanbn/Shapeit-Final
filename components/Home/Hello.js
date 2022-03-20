@@ -5,7 +5,7 @@ import { COLORS, SIZES } from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
-const Hello = () => {
+const HelloHeader = () => {
     return (
         <View style={styles.continuer}>
             <RenderWellcome />
@@ -31,7 +31,7 @@ const RenderWellcome = () => {
 
             <Text style={styles.timeText}> Good Morning</Text>
             <TouchableOpacity
-            onPress={() => console.log('updates')}
+                onPress={() => console.log('updates')}
             >
 
                 <FontAwesome
@@ -39,7 +39,7 @@ const RenderWellcome = () => {
                     style={styles.bellIcon}
                     color={COLORS.icons}
                 />
-                
+
             </TouchableOpacity>
 
         </View>
@@ -93,4 +93,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Hello;
+export default HelloHeader;

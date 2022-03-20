@@ -5,8 +5,9 @@ import { db } from '../FireBase/FireStore/reduce';
 import { COLORS } from '../constants';
 import { async } from '@firebase/util';
 
-import Hello from '../components/Home/Hello';
+import HelloHeader from '../components/Home/Hello';
 import DailyiInTake from '../components/Home/DailyiIntake';
+import Category from '../components/Home/Category';
 
 const TestScreen = () => {
 
@@ -24,8 +25,9 @@ const TestScreen = () => {
     return (
         <SafeAreaView style={styles.safearea}>
 
-            <Hello />
+            <HelloHeader />
             <DailyiInTake />
+            <Category />
 
 
         </SafeAreaView>
