@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { React, useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView } from 'react-native';
 import { auth } from '../FireBase/Users/reduce';
-import {LogBox} from 'react-native';
+import { LogBox } from 'react-native';
 
 LogBox.ignoreAllLogs();
 
@@ -12,6 +12,8 @@ const LoginScreen = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [userName, setUserName] = useState('')
+
 
     const navigation = useNavigation()
 
@@ -30,11 +32,30 @@ const LoginScreen = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                
+                //add user name
+                updateProfile(user, {
+                    displayName: userName,
+                    //photoURL: "https://example.com/jane-q-user/profile.jpg"
+                }).then(() => {
+                    // Profile updated!
+                }).catch((error) => {
+                    // An error occurred
+                });
+
+
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
             });
+
+
+    }
+
+    const AddUserFields = () => {
+
+
     }
 
     const handleLogin = async () => {
@@ -46,17 +67,25 @@ const LoginScreen = () => {
     }
 
     return (
-        <KeyboardAvoidingView 
+        <KeyboardAvoidingView
             style={styles.container}
             behavior="padding"
         >
             <View style={styles.inputContainer}>
+                <TextInput
+                    placeholder="Name"
+                    value={userName}
+                    onChangeText={text => setUserName(text)}
+                    style={styles.input}
+                />
+
                 <TextInput
                     placeholder="Email"
                     value={email}
                     onChangeText={text => setEmail(text)}
                     style={styles.input}
                 />
+
                 <TextInput
                     placeholder="Password"
                     value={password}
@@ -64,6 +93,7 @@ const LoginScreen = () => {
                     style={styles.input}
                     secureTextEntry
                 />
+
             </View>
 
 

@@ -5,27 +5,28 @@ import { COLORS, images, SIZES } from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { async } from '@firebase/util';
+import { auth } from '../../FireBase/Users/reduce';
 
 const Userdb = [
 
     {
         u_id: 1,
         u_name: 'Faruch Ismailov',
-        calorie: '1052',
-        NutritionalValues: { protein: '421', fat: '78', carbohydrate: '553' },
         email: 'test@test.com',
         password: 'nlhuogidgayiugiudhcjixjcix',
         imageUrl: images.avatar_3,
+        calorie: '1052',
+        NutritionalValues: { protein: '421', fat: '78', carbohydrate: '553' },
     },
 
     {
         u_id: 2,
         u_name: 'idan ben bahom',
-        calorie: '2302',
-        NutritionalValues: { protein: '534', fat: '200', carbohydrate: '1300' },
         email: 'test@test.com',
         password: 'nlhuogidgayiugiudhcjixjcix',
         imageUrl: images.avatar_1,
+        calorie: '2302',
+        NutritionalValues: { protein: '534', fat: '200', carbohydrate: '1300' },
     },
 
 
@@ -72,7 +73,7 @@ const HelloHeader = (props) => {
     return (
         <View style={styles.continuer}>
             <RenderWellcome timeText={timeText} iconName={iconName} />
-            <RenderUserName name={Userdb[0].u_name} />
+            <RenderUserName name={auth.currentUser?.displayName} />
 
         </View>
     );
