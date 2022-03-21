@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'rea
 import { COLORS, images } from '../../constants';
 
 
-const Categorydb = [
+export const LocalCategorydb = [
 
     {
         c_id: 1,
@@ -49,7 +49,7 @@ const Category = ({navigation, ...props}) => {
     return (
         <View style={{ backgroundColor: '#eff5f5', }}>
             {<RenderTitele />}
-            {<RenderCategoryImages />}
+            {<RenderCategoryImages categoryData={props.categoryData}/>}
 
         </View>
     );
@@ -71,12 +71,12 @@ const RenderTitele = () => {
     )
 }
 
-const RenderCategoryImages = () => {
+const RenderCategoryImages = (props) => {
     const [activeCategory, setActiveCategory] = useState('meat');
 
     return (
         <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-            {Categorydb.map((item, index) => (
+            {props.categoryData.map((item, index) => (
 
                 <View key={index} style={{ flexDirection: 'row' }}>
 

@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useEffect, useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
 import { doc, setDoc } from "firebase/firestore";
 import { db } from '../FireBase/FireStore/reduce';
@@ -7,7 +7,7 @@ import { async } from '@firebase/util';
 
 import HelloHeader from '../components/Home/Hello';
 import DailyiInTake from '../components/Home/DailyiIntake';
-import Category from '../components/Home/Category';
+import Category, { LocalCategorydb } from '../components/Home/Category';
 import PopularMeals from '../components/Home/PopularMeals';
 
 const TestScreen = () => {
@@ -22,15 +22,14 @@ const TestScreen = () => {
     }
 
     //ScreenShot26
-
     
-
+    const [categoryData, setCategoryData] = useState(LocalCategorydb);
     return (
         <SafeAreaView style={styles.safearea}>
-
+            
             <HelloHeader />
             <DailyiInTake />
-            <Category />
+            <Category categoryData={categoryData} setCategoryData={setCategoryData} />
             <PopularMeals />
 
         </SafeAreaView>

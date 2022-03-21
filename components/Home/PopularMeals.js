@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, ImageBackground, TouchableOpacity, ScrollView }
 import { COLORS, images } from '../../constants';
 import Feather from 'react-native-vector-icons/Feather';
 
-const Mealsdb = [
+export const LocalMealsdb = [
 
     {
         m_id: 1,
@@ -42,7 +42,7 @@ const PopularMeals = () => {
         <View style={{ backgroundColor: '#eff5f5' }}>
             <RenderTitele name='Popular Meals' />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {Mealsdb.map((item, index) => (
+                {LocalMealsdb.map((item, index) => (
                     <View key={index}>
                     <MealCard backgroundImage={item.imageUrl} >
                         <SecoundCard>
