@@ -45,7 +45,7 @@ const Categorydb = [
 
 ];
 
-const Category = () => {
+const Category = ({navigation, ...props}) => {
     return (
         <View style={{ backgroundColor: '#eff5f5', }}>
             {<RenderTitele />}

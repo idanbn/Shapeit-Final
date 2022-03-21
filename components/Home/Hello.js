@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { COLORS, images, SIZES } from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { async } from '@firebase/util';
 
 const Userdb = [
 
@@ -31,35 +32,23 @@ const Userdb = [
 ];
 
 
-const HelloHeader = () => {
-    return (
-        <View style={styles.continuer}>
-            <RenderWellcome />
-            <RenderUserName name={Userdb[0].u_name} />
-
-        </View>
-    );
-}
-
-const RenderWellcome = () => {
-    const [currentHours, setCurrentHours] = useState('');
+const HelloHeader = (props) => {
     const [timeText, setTimeText] = useState('');
     const [iconName, setIconName] = useState('');
 
 
     useEffect(() => {
-
         var hours = new Date().getHours(); //Current Hours
-        setCurrentHours(hours);
-        getTimeText(currentHours);
+        getTimeText(hours);
+        
 
     }, []);
 
 
-    const getTimeText = (currentHours) => {
+    const getTimeText = async (currentHours) => {
         if (currentHours >= 6) {
             if (currentHours < 12) {
-                setTimeText('Good Morning');
+                setTimeText('Good Morning  ');
                 setIconName('partly-sunny-outline');
             }
             else if (currentHours < 18) {
@@ -67,17 +56,29 @@ const RenderWellcome = () => {
                 setIconName('sunny-outline');
             }
             else if (currentHours < 24) {
-                setTimeText('Good Evening');
+                setTimeText('Good Evening  ');
                 setIconName('moon-outline');
             }
         }
         else {
-            setTimeText('Good Night');
+            setTimeText('Good Night    ');
             setIconName('cloudy-night-outline');
         }
+
+       // console.log(currentHours);
     }
 
 
+    return (
+        <View style={styles.continuer}>
+            <RenderWellcome timeText={timeText} iconName={iconName} />
+            <RenderUserName name={Userdb[0].u_name} />
+
+        </View>
+    );
+}
+
+const RenderWellcome = (props) => {
 
     return (
         <View style={{
@@ -86,12 +87,12 @@ const RenderWellcome = () => {
         }}>
 
             <Ionicons
-                name={iconName}
+                name={props.iconName}
                 style={styles.SunIcon}
                 color={COLORS.icons}
             />
 
-            <MorningOrNight currentTimeText={timeText} />
+            <MorningOrNight currentTimeText={props.timeText} />
 
             <TouchableOpacity
                 onPress={() => console.log('updates')}

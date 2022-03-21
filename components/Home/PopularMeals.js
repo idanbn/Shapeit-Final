@@ -43,7 +43,8 @@ const PopularMeals = () => {
             <RenderTitele name='Popular Meals' />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {Mealsdb.map((item, index) => (
-                    <MealCard backgroundImage={item.imageUrl} indexr={index} >
+                    <View key={index}>
+                    <MealCard backgroundImage={item.imageUrl} >
                         <SecoundCard>
                             <View style={{ flexDirection: 'row' }}>
                                 <CardTexts
@@ -55,6 +56,7 @@ const PopularMeals = () => {
                             </View>
                         </SecoundCard>
                     </MealCard>
+                    </View>
                 ))}
             </ScrollView>
         </View>
@@ -105,11 +107,9 @@ const CardTexts = (props) => {
 
 const MealCard = (props) => {
     return (
-        <ImageBackground source={props.backgroundImage} borderRadius={20} style={styles.card}>
-            <View key={props.indexr} >
+            <ImageBackground source={props.backgroundImage} borderRadius={20} style={styles.card}>
                 {props.children}
-            </View>
-        </ImageBackground>
+            </ImageBackground>
     );
 };
 
