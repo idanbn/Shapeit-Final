@@ -1,5 +1,5 @@
 //materials.map(material => material.length)
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { COLORS, SIZES } from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -16,6 +16,34 @@ const HelloHeader = () => {
 }
 
 const RenderWellcome = () => {
+    const [currentHours, setCurrentHours] = useState('');
+    const [timeText, setTimeText] = useState('');
+
+
+    useEffect(() => {
+
+        var hours = new Date().getHours(); //Current Hours
+        setCurrentHours(hours);
+        getTimeText(currentHours);
+
+
+    }, []);
+
+
+    const getTimeText = (currentHours) => {
+        if (currentHours >= 6) {
+            if (currentHours < 12)
+                setTimeText('Good Morning');
+            else if (currentHours < 18)
+                setTimeText('Good Afternoon');
+            else if (currentHours < 24)
+                setTimeText('Good Evening');
+        }
+        else
+            setTimeText('Good Night');
+    }
+
+
 
     return (
         <View style={{
@@ -29,7 +57,8 @@ const RenderWellcome = () => {
                 color={COLORS.icons}
             />
 
-            <Text style={styles.timeText}> Good Morning</Text>
+            <MorningOrNight currentTimeText={timeText} />
+
             <TouchableOpacity
                 onPress={() => console.log('updates')}
             >
@@ -41,6 +70,18 @@ const RenderWellcome = () => {
                 />
 
             </TouchableOpacity>
+
+        </View>
+    )
+}
+
+const MorningOrNight = (props) => {
+
+    return (
+        <View>
+            { }
+
+            <Text style={styles.timeText}> {props.currentTimeText}</Text>
 
         </View>
     )

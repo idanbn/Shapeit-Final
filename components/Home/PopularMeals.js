@@ -39,17 +39,17 @@ const Mealsdb = [
 
 const PopularMeals = () => {
     return (
-        <View>
+        <View style={{ backgroundColor: '#eff5f5' }}>
             <RenderTitele name='Popular Meals' />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {Mealsdb.map((item, index) => (
-                    <MealCard backgroundImage={item.imageUrl} key={index} >
+                    <MealCard backgroundImage={item.imageUrl} indexr={index} >
                         <SecoundCard>
                             <View style={{ flexDirection: 'row' }}>
-                                <CardTexts 
-                                name={item.m_name}
-                                calorieValue={item.calorie}
-                                cookingTimeValue={item.cookingTime}
+                                <CardTexts
+                                    name={item.m_name}
+                                    calorieValue={item.calorie}
+                                    cookingTimeValue={item.cookingTime}
                                 />
                                 <Icon />
                             </View>
@@ -105,8 +105,10 @@ const CardTexts = (props) => {
 
 const MealCard = (props) => {
     return (
-        <ImageBackground source={props.backgroundImage} borderRadius={20} key={props.key} style={styles.card}>
-            {props.children}
+        <ImageBackground source={props.backgroundImage} borderRadius={20} style={styles.card}>
+            <View key={props.indexr} >
+                {props.children}
+            </View>
         </ImageBackground>
     );
 };
