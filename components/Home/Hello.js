@@ -1,15 +1,41 @@
 //materials.map(material => material.length)
 import { React, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { COLORS, SIZES } from '../../constants';
+import { COLORS, images, SIZES } from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+
+const Userdb = [
+
+    {
+        u_id: 1,
+        u_name: 'Faruch Ismailov',
+        calorie: '1052',
+        NutritionalValues: { protein: '421', fat: '78', carbohydrate: '553' },
+        email: 'test@test.com',
+        password: 'nlhuogidgayiugiudhcjixjcix',
+        imageUrl: images.avatar_3,
+    },
+
+    {
+        u_id: 2,
+        u_name: 'idan ben bahom',
+        calorie: '2302',
+        NutritionalValues: { protein: '534', fat: '200', carbohydrate: '1300' },
+        email: 'test@test.com',
+        password: 'nlhuogidgayiugiudhcjixjcix',
+        imageUrl: images.avatar_1,
+    },
+
+
+];
+
 
 const HelloHeader = () => {
     return (
         <View style={styles.continuer}>
             <RenderWellcome />
-            <RenderUserName />
+            <RenderUserName name={Userdb[0].u_name} />
 
         </View>
     );
@@ -18,6 +44,7 @@ const HelloHeader = () => {
 const RenderWellcome = () => {
     const [currentHours, setCurrentHours] = useState('');
     const [timeText, setTimeText] = useState('');
+    const [iconName, setIconName] = useState('');
 
 
     useEffect(() => {
@@ -26,21 +53,28 @@ const RenderWellcome = () => {
         setCurrentHours(hours);
         getTimeText(currentHours);
 
-
     }, []);
 
 
     const getTimeText = (currentHours) => {
         if (currentHours >= 6) {
-            if (currentHours < 12)
+            if (currentHours < 12) {
                 setTimeText('Good Morning');
-            else if (currentHours < 18)
+                setIconName('partly-sunny-outline');
+            }
+            else if (currentHours < 18) {
                 setTimeText('Good Afternoon');
-            else if (currentHours < 24)
+                setIconName('sunny-outline');
+            }
+            else if (currentHours < 24) {
                 setTimeText('Good Evening');
+                setIconName('moon-outline');
+            }
         }
-        else
+        else {
             setTimeText('Good Night');
+            setIconName('cloudy-night-outline');
+        }
     }
 
 
@@ -52,7 +86,7 @@ const RenderWellcome = () => {
         }}>
 
             <Ionicons
-                name='sunny-outline'
+                name={iconName}
                 style={styles.SunIcon}
                 color={COLORS.icons}
             />
@@ -87,12 +121,12 @@ const MorningOrNight = (props) => {
     )
 }
 
-const RenderUserName = () => {
+const RenderUserName = (props) => {
 
     return (
         <View>
 
-            <Text style={styles.userNameText}> Faruch Ismailov</Text>
+            <Text style={styles.userNameText}> {props.name} </Text>
 
         </View>
     )

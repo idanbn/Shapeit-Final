@@ -39,7 +39,7 @@ export default TestScreen;
 const styles = StyleSheet.create({
     safearea: {
         flex: 1,
-        backgroundColor: COLORS.lightGray3
+        backgroundColor: '#eff5f5'
     },
     container: {
         flex: 1,

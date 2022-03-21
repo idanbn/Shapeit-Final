@@ -63,7 +63,7 @@ const RenderTitele = () => {
             <Text style={styles.categoryText}> Category </Text>
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => { console.log('See All') }}
+                onPress={() => { console.log('See All Category') }}
             >
                 <Text style={styles.seeAll}> See All </Text>
             </TouchableOpacity>
