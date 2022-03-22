@@ -6,6 +6,8 @@ const StatisticsScreen = () => {
     return (
         <SafeAreaView style={styles.safearea} >
             <DayCalorieCircular />
+
+
         </SafeAreaView>
     );
 }
