@@ -2,12 +2,14 @@ import { React } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 import Svg, { Path } from 'react-native-svg';
+import Foundation from 'react-native-vector-icons/Foundation'
 
 import HomeScreen from '../screens/HomeScreen';
 import MealsScreen from '../screens/MealsScreen';
 import TestScreen from '../screens/TestScreen';
 
 import { COLORS, icons } from '../constants';
+import StatisticsScreen from '../screens/StatisticsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -75,19 +77,20 @@ const TabsNavigator = () => {
         >
 
             <Tab.Screen
-                name="Meals"
-                component={MealsScreen}
+                name="Test"
+                component={TestScreen}
                 options={{
                     tabBarShowLabel: false,
 
                     tabBarIcon: ({ focused }) => (
-                        <Image
-                            source={icons.cutlery}
-                            resizeMode='contain'
+
+                        <Foundation
+                            name='home'
+                            color={focused ? COLORS.primary : COLORS.secondary}
                             style={{
-                                width: 30,
-                                height: 30,
-                                tintColor: focused ? COLORS.primary : COLORS.secondary
+                                fontSize: 34,
+
+
                             }}
                         />
                     ),
@@ -100,21 +103,23 @@ const TabsNavigator = () => {
             />
 
             <Tab.Screen
-                name="Test"
-                component={TestScreen}
+                name="Statistics"
+                component={StatisticsScreen}
                 options={{
                     tabBarShowLabel: false,
 
                     tabBarIcon: ({ focused }) => (
-                        <Image
-                            source={icons.search}
-                            resizeMode='contain'
+
+                        <Foundation
+                            name='graph-bar'
+                            color={focused ? COLORS.primary : COLORS.secondary}
                             style={{
-                                width: 30,
-                                height: 30,
-                                tintColor: focused ? COLORS.primary : COLORS.secondary
+                                fontSize: 32,
+
+
                             }}
                         />
+
                     ),
                     tabBarButton: (props) => (
                         <TabBarCustomButton
@@ -123,6 +128,7 @@ const TabsNavigator = () => {
                     )
                 }}
             />
+
 
             <Tab.Screen
                 name="Home"
