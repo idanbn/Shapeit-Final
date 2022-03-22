@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
 import DayCalorieCircular from '../components/Statistics/DayCalorieCircular';
+import Daynutritionalvalues from '../components/Statistics/DayNutritionalValues';
 
 const StatisticsScreen = () => {
     return (
         <SafeAreaView style={styles.safearea} >
             <DayCalorieCircular />
+            <Daynutritionalvalues />
 
 
         </SafeAreaView>

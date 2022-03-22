@@ -1,5 +1,5 @@
-import { React, useState , useEffect} from 'react';
-import { View, StyleSheet, Text , TouchableOpacity} from 'react-native';
+import { React, useState, useEffect } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Svg from 'react-native-svg';
 import { COLORS } from '../../constants';
@@ -15,17 +15,18 @@ const DayCalorieCircular = () => {
 
     }, [dayCalorie]);
 
+
     const CalcFill = () => {
-        setFill(Math.round((100*dayCalorie)/maxCalorie))
+        setFill(Math.round((100 * dayCalorie) / maxCalorie))
     }
 
 
-    
+
 
     return (
         <View>
-            <Text style={{ alignSelf:'center', fontSize:26, fontWeight:'700', marginTop: 10}} > Activity </Text>
-            
+            <Text style={{ alignSelf: 'center', fontSize: 26, fontWeight: '700', marginTop: 10 }} > Activity </Text>
+
             <DraweCircular fill={fill} max_calorie={maxCalorie} >
 
                 <TextCircular max_calorie={maxCalorie} day_calorie={dayCalorie} />
@@ -43,7 +44,7 @@ const DraweCircular = (props) => {
 
     return (
 
-        <View style={{ position: 'relative', alignItems: 'center', marginTop: 26}}>
+        <View style={{ position: 'relative', alignItems: 'center', marginTop: 26 }}>
 
             <View style={styles.circularContent} >
                 {props.children}
@@ -56,7 +57,7 @@ const DraweCircular = (props) => {
                 fill={props.fill}
                 tintColor={COLORS.icons}
                 tintColorSecondary={COLORS.card}
-                backgroundColor="lightgray"
+                backgroundColor={COLORS.border}
                 arcSweepAngle={240}
                 rotation={240}
                 lineCap='round'

@@ -7,6 +7,7 @@ export const COLORS = {
     secondary: "#CDCDD2",   // gray
     icons : '#58879a',
     card : '#85b1b3',
+    border: '#d2e3e4',
 
     // colors
     black: "#1E1F20",
