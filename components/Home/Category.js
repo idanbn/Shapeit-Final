@@ -9,47 +9,220 @@ export const LocalCategorydb = [
         c_id: 1,
         text: 'meat',
         imageUrl: images.baked_fries,
+        categoryMeals: [
+            {
+                m_id: 1,
+                m_name: 'Spicy Ramen with Mixing Sea Food',
+                calorie: '223',
+                cookingTime: '20',
+                imageUrl: images.kolo_mee,
+            },
+            {
+                m_id: 2,
+                m_name: 'Hamburger with friesd',
+                calorie: '760',
+                cookingTime: '25',
+                imageUrl: images.burger_restaurant_1,
+            },
+            {
+                m_id: 3,
+                m_name: 'Chicken breast with rice',
+                calorie: '190',
+                cookingTime: '35',
+                imageUrl: images.ice_kacang,
+            },
+            {
+                m_id: 4,
+                m_name: 'Ceaser salad',
+                calorie: '100',
+                cookingTime: '7',
+                imageUrl: images.nasi_lemak,
+            },
+        ]
     },
     {
         c_id: 2,
         text: 'fish',
         imageUrl: images.chicago_hot_dog,
+        categoryMeals: [
+            {
+                m_id: 1,
+                m_name: 'Spicy Ramen with Mixing Sea Food',
+                calorie: '223',
+                cookingTime: '20',
+                imageUrl: images.nasi_briyani_mutton,
+            },
+            {
+                m_id: 2,
+                m_name: 'Ceaser salad',
+                calorie: '100',
+                cookingTime: '7',
+                imageUrl: images.nasi_lemak,
+            },
+            {
+                m_id: 3,
+                m_name: 'Chicken breast with rice',
+                calorie: '190',
+                cookingTime: '35',
+                imageUrl: images.ice_kacang,
+            },
+            {
+                m_id: 4,
+                m_name: 'Hamburger with friesd',
+                calorie: '760',
+                cookingTime: '25',
+                imageUrl: images.burger_restaurant_1,
+            },
+        ]
     },
     {
         c_id: 3,
         text: 'pasta',
         imageUrl: images.hawaiian_pizza,
+        categoryMeals: [
+            {
+                m_id: 1,
+                m_name: 'Spicy Ramen with Mixing Sea Food',
+                calorie: '223',
+                cookingTime: '20',
+                imageUrl: images.sarawak_laksa,
+            },
+            {
+                m_id: 2,
+                m_name: 'Hamburger with friesd',
+                calorie: '760',
+                cookingTime: '25',
+                imageUrl: images.burger_restaurant_1,
+            },
+            {
+                m_id: 3,
+                m_name: 'Chicken breast with rice',
+                calorie: '190',
+                cookingTime: '35',
+                imageUrl: images.ice_kacang,
+            },
+            {
+                m_id: 4,
+                m_name: 'Ceaser salad',
+                calorie: '100',
+                cookingTime: '7',
+                imageUrl: images.nasi_lemak,
+            },
+        ]
     },
     {
         c_id: 4,
         text: 'salat',
         imageUrl: images.japanese_restaurant,
+        categoryMeals: [
+            {
+                m_id: 1,
+                m_name: 'Spicy Ramen with Mixing Sea Food',
+                calorie: '223',
+                cookingTime: '20',
+                imageUrl: images.sushi,
+            },
+            {
+                m_id: 2,
+                m_name: 'Hamburger with friesd',
+                calorie: '760',
+                cookingTime: '25',
+                imageUrl: images.burger_restaurant_1,
+            },
+            {
+                m_id: 3,
+                m_name: 'Chicken breast with rice',
+                calorie: '190',
+                cookingTime: '35',
+                imageUrl: images.ice_kacang,
+            },
+            {
+                m_id: 4,
+                m_name: 'Ceaser salad',
+                calorie: '100',
+                cookingTime: '7',
+                imageUrl: images.nasi_lemak,
+            },
+        ]
     },
     {
         c_id: 5,
         text: 'jankfood',
         imageUrl: images.kolo_mee,
+        categoryMeals: [
+            {
+                m_id: 1,
+                m_name: 'Spicy Ramen with Mixing Sea Food',
+                calorie: '223',
+                cookingTime: '20',
+                imageUrl: images.kolo_mee,
+            },
+            {
+                m_id: 2,
+                m_name: 'Hamburger with friesd',
+                calorie: '760',
+                cookingTime: '25',
+                imageUrl: images.burger_restaurant_1,
+            },
+            {
+                m_id: 3,
+                m_name: 'Chicken breast with rice',
+                calorie: '190',
+                cookingTime: '35',
+                imageUrl: images.ice_kacang,
+            },
+            {
+                m_id: 4,
+                m_name: 'Ceaser salad',
+                calorie: '100',
+                cookingTime: '7',
+                imageUrl: images.nasi_lemak,
+            },
+        ]
     },
     {
         c_id: 6,
         text: 'test',
         imageUrl: images.noodle_shop,
+        categoryMeals: [
+            {
+                m_id: 1,
+                m_name: 'Spicy Ramen with Mixing Sea Food',
+                calorie: '223',
+                cookingTime: '20',
+                imageUrl: images.kolo_mee,
+            },
+            {
+                m_id: 2,
+                m_name: 'Hamburger with friesd',
+                calorie: '760',
+                cookingTime: '25',
+                imageUrl: images.burger_restaurant_1,
+            },
+            {
+                m_id: 3,
+                m_name: 'Chicken breast with rice',
+                calorie: '190',
+                cookingTime: '35',
+                imageUrl: images.ice_kacang,
+            },
+            {
+                m_id: 4,
+                m_name: 'Ceaser salad',
+                calorie: '100',
+                cookingTime: '7',
+                imageUrl: images.nasi_lemak,
+            },
+        ]
     },
-    {
-        c_id: 7,
-        text: 'test1',
-        imageUrl: images.honey_mustard_chicken_burger,
-    },
-
-
 
 ];
 
-const Category = ({navigation, ...props}) => {
+const Category = ({ navigation, selectCategory, selectCategoryHandler, ...props }) => {
     return (
         <View style={{ backgroundColor: '#eff5f5', }}>
             {<RenderTitele />}
-            {<RenderCategoryImages categoryData={props.categoryData}/>}
+            {<RenderCategoryImages categoryData={props.categoryData} selectCategory={selectCategory} selectCategoryHandler={selectCategoryHandler} />}
 
         </View>
     );
@@ -72,7 +245,6 @@ const RenderTitele = () => {
 }
 
 const RenderCategoryImages = (props) => {
-    const [activeCategory, setActiveCategory] = useState('meat');
 
     return (
         <ScrollView horizontal showsHorizontalScrollIndicator={false} >
@@ -80,7 +252,7 @@ const RenderCategoryImages = (props) => {
 
                 <View key={index} style={{ flexDirection: 'row' }}>
 
-                    <RenderCategoryImage category={item.text} imageUrl={item.imageUrl} activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+                    <RenderCategoryImage category={item.text} imageUrl={item.imageUrl} activeCategory={props.selectCategory} setActiveCategory={props.selectCategoryHandler} />
 
                 </View>
             ))}
@@ -95,7 +267,6 @@ const RenderCategoryImage = (props) => {
             activeOpacity={0.8}
             onPress={() => {
                 props.setActiveCategory(props.category);
-                console.log(props.category);
             }}
         >
             <View style={[

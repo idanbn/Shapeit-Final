@@ -43,7 +43,7 @@ const HelloHeader = (props) => {
         getTimeText(hours);
         
 
-    }, []);
+    }, [timeText]);
 
 
     const getTimeText = async (currentHours) => {

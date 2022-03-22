@@ -37,25 +37,26 @@ export const LocalMealsdb = [
 ];
 
 
-const PopularMeals = () => {
+const PopularMeals = ({ ...props }) => {
     return (
         <View style={{ backgroundColor: '#eff5f5' }}>
             <RenderTitele name='Popular Meals' />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {LocalMealsdb.map((item, index) => (
+
+            {props.data.map((item, index) => (
                     <View key={index}>
-                    <MealCard backgroundImage={item.imageUrl} >
-                        <SecoundCard>
-                            <View style={{ flexDirection: 'row' }}>
-                                <CardTexts
-                                    name={item.m_name}
-                                    calorieValue={item.calorie}
-                                    cookingTimeValue={item.cookingTime}
-                                />
-                                <Icon />
-                            </View>
-                        </SecoundCard>
-                    </MealCard>
+                        <MealCard backgroundImage={item.imageUrl} >
+                            <SecoundCard>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <CardTexts
+                                        name={item.m_name}
+                                        calorieValue={item.calorie}
+                                        cookingTimeValue={item.cookingTime}
+                                    />
+                                    <Icon />
+                                </View>
+                            </SecoundCard>
+                        </MealCard>
                     </View>
                 ))}
             </ScrollView>
@@ -107,9 +108,9 @@ const CardTexts = (props) => {
 
 const MealCard = (props) => {
     return (
-            <ImageBackground source={props.backgroundImage} borderRadius={20} style={styles.card}>
-                {props.children}
-            </ImageBackground>
+        <ImageBackground source={props.backgroundImage} borderRadius={20} style={styles.card}>
+            {props.children}
+        </ImageBackground>
     );
 };
 

@@ -8,7 +8,7 @@ import { async } from '@firebase/util';
 import HelloHeader from '../components/Home/Hello';
 import DailyiInTake from '../components/Home/DailyiIntake';
 import Category, { LocalCategorydb } from '../components/Home/Category';
-import PopularMeals from '../components/Home/PopularMeals';
+import PopularMeals, { LocalMealsdb } from '../components/Home/PopularMeals';
 
 const TestScreen = () => {
 
@@ -22,15 +22,35 @@ const TestScreen = () => {
     }
 
     //ScreenShot26
-    
-    const [categoryData, setCategoryData] = useState(LocalCategorydb);
+
+    const [categorysData, setCategoryData] = useState(LocalCategorydb);
+    const [popularMealsData, setPopularMealsData] = useState(LocalMealsdb);
+    const [selectCategory, setSelectCategory] = useState('meat');
+
+
+    useEffect(() => {
+        PopularMealsData();
+
+    }, [selectCategory]);
+
+
+    const PopularMealsData = () => {
+
+        let result = categorysData.filter(t => t.text === selectCategory)
+        .map((categoryMeals) => {return categoryMeals.categoryMeals});
+
+        setPopularMealsData(result[0]);
+
+    }
+
+
     return (
         <SafeAreaView style={styles.safearea}>
-            
+
             <HelloHeader />
             <DailyiInTake />
-            <Category categoryData={categoryData} setCategoryData={setCategoryData} />
-            <PopularMeals />
+            <Category categoryData={categorysData} selectCategory={selectCategory} selectCategoryHandler={setSelectCategory} />
+            <PopularMeals Category={selectCategory} data={popularMealsData} />
 
         </SafeAreaView>
     );
