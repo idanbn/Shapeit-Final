@@ -10,7 +10,7 @@ const DayNutritionalValues = () => {
             <NutritionalValuesCard iconName='pizza-outline' nutritionalValue='864' nutritionalName='Protein' />
             <NutritionalValuesCard iconName='pizza-outline' nutritionalValue='60' nutritionalName='Carbs' />
             <NutritionalValuesCard iconName='pizza-outline' nutritionalValue='126' nutritionalName='Fat' />
-            <NutritionalValuesCard iconName='pizza-outline' nutritionalValue='542' nutritionalName='Fat' />
+            <NutritionalValuesCard iconName='pizza-outline' nutritionalValue='542' nutritionalName='colosterol' />
 
 
 
@@ -42,15 +42,14 @@ const Icon = (props) => {
 
 const NutritionalValuesCard = (props) => {
     return (
-        <View style={{marginLeft: 0 ,}}>
+        <View>
         <BorderCard >
 
             <Icon name={props.iconName} />
-
             <Text style={styles.borderText}>{props.nutritionalValue}g</Text>
 
-
         </BorderCard>
+        <Text style={styles.nutritionalNameText}>{props.nutritionalName}</Text>
 
 </View>
     )
@@ -78,6 +77,14 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight:'500',
         marginTop:8,
+        opacity:0.8
+
+    },
+    nutritionalNameText: {
+        fontSize: 17,
+        fontWeight:'600',
+        marginTop:8,
+        alignSelf:'center',
         opacity:0.8
 
     }

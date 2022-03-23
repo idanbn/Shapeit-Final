@@ -5,11 +5,14 @@ import Svg, { Path } from 'react-native-svg';
 import Foundation from 'react-native-vector-icons/Foundation'
 
 import HomeScreen from '../screens/HomeScreen';
+import StatisticsScreen from '../screens/StatisticsScreen';
+import UserInfoScreen from '../screens/UserInfoScreen';
+
+
 import MealsScreen from '../screens/MealsScreen';
-import TestScreen from '../screens/TestScreen';
+
 
 import { COLORS, icons } from '../constants';
-import StatisticsScreen from '../screens/StatisticsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -77,8 +80,8 @@ const TabsNavigator = () => {
         >
 
             <Tab.Screen
-                name="Test"
-                component={TestScreen}
+                name="home"
+                component={HomeScreen}
                 options={{
                     tabBarShowLabel: false,
 
@@ -131,8 +134,8 @@ const TabsNavigator = () => {
 
 
             <Tab.Screen
-                name="Home"
-                component={HomeScreen}
+                name="userInfo"
+                component={UserInfoScreen}
                 options={{
                     tabBarShowLabel: false,
 
