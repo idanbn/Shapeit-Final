@@ -7,8 +7,9 @@ import { async } from '@firebase/util';
 
 import HelloHeader from '../components/Home/Hello';
 import DailyiInTake from '../components/Home/DailyiIntake';
-import Category, { LocalCategorydb } from '../components/Home/Category';
-import PopularMeals, { LocalMealsdb } from '../components/Home/PopularMeals';
+import Category from '../components/Home/Category';
+import PopularMeals from '../components/Home/PopularMeals';
+import { LocalCategorydb, LocalMealsdb } from '../Localdbs';
 
 const HomeScreen = ({navigation}) => {
 
@@ -36,7 +37,7 @@ const HomeScreen = ({navigation}) => {
 
     const PopularMealsData = () => {
 
-        let result = categorysData.filter(t => t.text === selectCategory)
+        let result = categorysData.filter(selectcategory => selectcategory.text === selectCategory)
         .map((categoryMeals) => {return categoryMeals.categoryMeals});
 
         setPopularMealsData(result[0]);

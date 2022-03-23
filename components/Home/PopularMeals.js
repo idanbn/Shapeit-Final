@@ -3,39 +3,6 @@ import { View, StyleSheet, Text, ImageBackground, TouchableOpacity, ScrollView }
 import { COLORS, images } from '../../constants';
 import Feather from 'react-native-vector-icons/Feather';
 
-export const LocalMealsdb = [
-
-    {
-        m_id: 1,
-        m_name: 'Spicy Ramen with Mixing Sea Food',
-        calorie: '223',
-        cookingTime: '20',
-        imageUrl: images.kolo_mee,
-    },
-    {
-        m_id: 2,
-        m_name: 'Hamburger with friesd',
-        calorie: '760',
-        cookingTime: '25',
-        imageUrl: images.burger_restaurant_1,
-    },
-    {
-        m_id: 3,
-        m_name: 'Chicken breast with rice',
-        calorie: '190',
-        cookingTime: '35',
-        imageUrl: images.ice_kacang,
-    },
-    {
-        m_id: 4,
-        m_name: 'Ceaser salad',
-        calorie: '100',
-        cookingTime: '7',
-        imageUrl: images.nasi_lemak,
-    },
-
-];
-
 
 const PopularMeals = ({ ...props }) => {
     return (
@@ -101,7 +68,9 @@ const CardTexts = (props) => {
     return (
         <View>
             <Text style={styles.firstText}>{props.name}</Text>
+            <View style={{position:'absolute',bottom:-4}} >
             <Text style={styles.secondText}>{props.calorieValue} Calories  •  {props.cookingTimeValue} Min </Text>
+            </View>
         </View>
     );
 };
@@ -172,7 +141,6 @@ const styles = StyleSheet.create({
         fontSize: 14.5,
         fontWeight: '500',
         color: COLORS.white,
-        marginTop: 16,
         opacity: 0.6,
     },
     continuer: {

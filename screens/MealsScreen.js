@@ -12,24 +12,26 @@ const MealsScreen = () => {
         getMeals();
     }, []);
 
-    const getMeals = async () =>  {
+    const getMeals = async () => {
         const mealsdata = await fetchData();
         setMeals(mealsdata.meals)
     }
 
-    const Item = ({ meal , index}) => (
-        <View key={index} style={styles.item}>
+    const Item = ({ meal }) => (
+        <View style={styles.item}>
             <Text style={styles.meal}>{meal}</Text>
         </View>
     );
 
     const renderItem = ({ item }) => (
-        <Item meal={item.meal_name} index={item.mealId} />
+        <Item meal={item.meal_name} />
     );
 
     return (
         <SafeAreaView style={styles.container}>
             <FlatList
+                numColumns={2}
+                keyExtractor={(item) => item.mealId}
                 data={meals}
                 renderItem={renderItem}
             />

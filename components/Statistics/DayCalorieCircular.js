@@ -1,13 +1,15 @@
 import { React, useState, useEffect } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import Svg from 'react-native-svg';
+
+import { Userdb } from '../../Localdbs';
+
 import { COLORS } from '../../constants';
 
 const DayCalorieCircular = () => {
 
-    const [dayCalorie, setDayCalorie] = useState(1725);
-    const [maxCalorie, setMaxCalorie] = useState(2500);
+    const [dayCalorie, setDayCalorie] = useState(Userdb[0].calorie);
+    const [maxCalorie, setMaxCalorie] = useState(Userdb[0].active_BMR);
     const [fill, setFill] = useState(2052);
 
     useEffect(() => {

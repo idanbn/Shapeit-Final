@@ -2,30 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { COLORS, FONTS, images } from '../../constants';
 
-const Userdb = [
-
-    {
-        u_id: 1,
-        u_name: 'Faruch Ismailov',
-        calorie: '1052',
-        NutritionalValues: { protein: '421', fat: '78', carbohydrate: '553' },
-        email: 'test@test.com',
-        password: 'nlhuogidgayiugiudhcjixjcix',
-        imageUrl: images.avatar_3,
-    },
-
-    {
-        u_id: 2,
-        u_name: 'idan ben bahom',
-        calorie: '2302',
-        NutritionalValues: { protein: '534', fat: '200', carbohydrate: '1300' },
-        email: 'test@test.com',
-        password: 'nlhuogidgayiugiudhcjixjcix',
-        imageUrl: images.avatar_1,
-    },
-
-
-];
+import { Userdb } from '../../Localdbs';
 
 
 const DailyiInTake = ({ navigation, ...props }) => {
@@ -76,7 +53,7 @@ const CardTexts = (props) => {
             <Text style={styles.secondText}> healty food </Text>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: 190 }}>
-                <ValueAndName name='Protein' value={Userdb[0].NutritionalValues.protein} g_cal='g' />
+                <ValueAndName name='Protein' value={Userdb[0].nutritionalValues.protein} g_cal='g' />
                 <ValueAndName name='Calories' value={Userdb[0].calorie} g_cal='kcal' />
 
             </View>

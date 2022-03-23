@@ -37,6 +37,9 @@ export const menu = require("../assets/icons/menu_icon.png");
 export const more = require("../assets/icons/more_icon.png");
 export const sports_icon = require("../assets/icons/sports_icon.png");
 export const up_arrow = require("../assets/icons/up_arrow.png");
+export const protein = require("../assets/icons/protein.png");
+export const carbs = require("../assets/icons/carbs.png");
+export const sugar = require("../assets/icons/sugar.png");
 
 export default {
     back,
@@ -55,7 +58,6 @@ export default {
     nearby,
     noodle,
     pin,
-    pizza,
     red_pin,
     rice_bowl,
     salad,
@@ -77,5 +79,9 @@ export default {
     menu,
     more,
     sports_icon,
-    up_arrow
+    up_arrow,
+    protein,
+    carbs,
+    sugar,
+    pizza
 }

@@ -1,16 +1,17 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { COLORS } from '../../constants';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import { View, StyleSheet, Text, Image } from 'react-native';
+import { COLORS, icons } from '../../constants';
+
+import { Userdb } from '../../Localdbs';
 
 const DayNutritionalValues = () => {
     return (
-        <View style={{marginTop:26, flexDirection:'row', alignItems:'center', justifyContent:'space-between',marginLeft:14,marginRight:14}}>
-            
-            <NutritionalValuesCard iconName='pizza-outline' nutritionalValue='864' nutritionalName='Protein' />
-            <NutritionalValuesCard iconName='pizza-outline' nutritionalValue='60' nutritionalName='Carbs' />
-            <NutritionalValuesCard iconName='pizza-outline' nutritionalValue='126' nutritionalName='Fat' />
-            <NutritionalValuesCard iconName='pizza-outline' nutritionalValue='542' nutritionalName='colosterol' />
+        <View style={{ marginTop: 26, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginLeft: 14, marginRight: 14 }}>
+
+            <NutritionalValuesCard iconName={icons.protein} nutritionalValue={Userdb[0].nutritionalValues.protein} nutritionalName='Protein' />
+            <NutritionalValuesCard iconName={icons.carbs} nutritionalValue={Userdb[0].nutritionalValues.carbs} nutritionalName='Carbs' />
+            <NutritionalValuesCard iconName={icons.food} nutritionalValue={Userdb[0].nutritionalValues.fat} nutritionalName='Fat' />
+            <NutritionalValuesCard iconName={icons.sugar} nutritionalValue={Userdb[0].nutritionalValues.sugar} nutritionalName='Sugar' />
 
 
 
@@ -30,9 +31,9 @@ const BorderCard = (props) => {
 
 const Icon = (props) => {
     return (
-        <Ionicons
-            name={props.name}
-            color={COLORS.icons}
+        <Image
+            source={props.name}
+            resizeMode='contain'
             style={styles.borderIcon}
 
 
@@ -43,15 +44,15 @@ const Icon = (props) => {
 const NutritionalValuesCard = (props) => {
     return (
         <View>
-        <BorderCard >
+            <BorderCard >
 
-            <Icon name={props.iconName} />
-            <Text style={styles.borderText}>{props.nutritionalValue}g</Text>
+                <Icon name={props.iconName} />
+                <Text style={styles.borderText}>{props.nutritionalValue}g</Text>
 
-        </BorderCard>
-        <Text style={styles.nutritionalNameText}>{props.nutritionalName}</Text>
+            </BorderCard>
+            <Text style={styles.nutritionalNameText}>{props.nutritionalName}</Text>
 
-</View>
+        </View>
     )
 }
 
@@ -67,25 +68,27 @@ const styles = StyleSheet.create({
 
     },
     borderIcon: {
-        fontSize: 48,
-        transform: [{ rotate: '45deg' }],
-        marginTop: 18,
-        opacity:0.65
+        height: 50,
+        width: 50,
+        marginTop: 14,
+        opacity: 0.85,
+        tintColor:COLORS.icons
+
 
     },
     borderText: {
         fontSize: 22,
-        fontWeight:'500',
-        marginTop:8,
-        opacity:0.8
+        fontWeight: '500',
+        marginTop: 12,
+        opacity: 0.8
 
     },
     nutritionalNameText: {
         fontSize: 17,
-        fontWeight:'600',
-        marginTop:8,
-        alignSelf:'center',
-        opacity:0.8
+        fontWeight: '600',
+        marginTop: 8,
+        alignSelf: 'center',
+        opacity: 0.8
 
     }
 })

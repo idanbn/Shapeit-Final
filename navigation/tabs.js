@@ -106,6 +106,33 @@ const TabsNavigator = () => {
             />
 
             <Tab.Screen
+                name="userInfo"
+                component={UserInfoScreen}
+                options={{
+                    tabBarShowLabel: false,
+
+                    tabBarIcon: ({ focused }) => (
+                        <Foundation
+                            name='camera'
+                            color={focused ? COLORS.primary : COLORS.secondary}
+                            style={{
+                                fontSize: 38,
+
+
+                            }}
+                        />
+                    ),
+                    tabBarButton: (props) => (
+                        <TabBarCustomButton
+                            {...props}
+                        />
+                    )
+                }}
+            />
+
+
+
+            <Tab.Screen
                 name="Statistics"
                 component={StatisticsScreen}
                 options={{
@@ -131,33 +158,6 @@ const TabsNavigator = () => {
                     )
                 }}
             />
-
-
-            <Tab.Screen
-                name="userInfo"
-                component={UserInfoScreen}
-                options={{
-                    tabBarShowLabel: false,
-
-                    tabBarIcon: ({ focused }) => (
-                        <Image
-                            source={icons.user}
-                            resizeMode='contain'
-                            style={{
-                                width: 30,
-                                height: 30,
-                                tintColor: focused ? COLORS.primary : COLORS.secondary
-                            }}
-                        />
-                    ),
-                    tabBarButton: (props) => (
-                        <TabBarCustomButton
-                            {...props}
-                        />
-                    )
-                }}
-            />
-
 
 
         </Tab.Navigator>
