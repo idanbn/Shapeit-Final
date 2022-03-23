@@ -28,12 +28,12 @@ const Userdb = [
 ];
 
 
-const DailyiInTake = () => {
+const DailyiInTake = ({ navigation, ...props }) => {
     return (
         <View style={styles.continer}>
             <TouchableOpacity
                 activeOpacity={0.9}
-                onPress={() => { console.log('Show Daily Intake') }}
+                onPress={() => navigation.navigate('Statistics')}
 
             >
                 <Card >

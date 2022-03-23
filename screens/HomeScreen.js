@@ -10,7 +10,7 @@ import DailyiInTake from '../components/Home/DailyiIntake';
 import Category, { LocalCategorydb } from '../components/Home/Category';
 import PopularMeals, { LocalMealsdb } from '../components/Home/PopularMeals';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
 
     const SetData = async () => {
         // Add a new document in collection "meals"
@@ -49,7 +49,7 @@ const HomeScreen = () => {
         <SafeAreaView style={styles.safearea}>
 
             <HelloHeader />
-            <DailyiInTake />
+            <DailyiInTake navigation={navigation}/>
             <Category categoryData={categorysData} selectCategory={selectCategory} selectCategoryHandler={setSelectCategory} />
             <PopularMeals Category={selectCategory} data={popularMealsData} />
 

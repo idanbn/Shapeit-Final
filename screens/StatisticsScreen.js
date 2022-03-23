@@ -3,7 +3,7 @@ import {View, StyleSheet, SafeAreaView} from 'react-native';
 import DayCalorieCircular from '../components/Statistics/DayCalorieCircular';
 import Daynutritionalvalues from '../components/Statistics/DayNutritionalValues';
 
-const StatisticsScreen = () => {
+const StatisticsScreen = ({route}) => {
     return (
         <SafeAreaView style={styles.safearea} >
             <DayCalorieCircular />
