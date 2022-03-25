@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
 
     },
     borderIcon: {
-        height: 50,
-        width: 50,
+        height: 40,
+        width: 40,
         marginTop: 14,
         opacity: 0.85,
         tintColor:COLORS.icons
@@ -78,14 +78,14 @@ const styles = StyleSheet.create({
     },
     borderText: {
         fontSize: 22,
-        fontWeight: '500',
-        marginTop: 12,
+        fontWeight: '600',
+        marginTop: 18,
         opacity: 0.8
 
     },
     nutritionalNameText: {
         fontSize: 17,
-        fontWeight: '600',
+        fontWeight: '500',
         marginTop: 8,
         alignSelf: 'center',
         opacity: 0.8

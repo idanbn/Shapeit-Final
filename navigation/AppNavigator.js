@@ -10,6 +10,7 @@ import TabsNavigator from './tabs';
 import HomeScreen from '../screens/HomeScreen';
 import StatisticsScreen from '../screens/StatisticsScreen';
 import UserInfoScreen from '../screens/UserInfoScreen';
+import MealsScreen from '../screens/MealsScreen';
 
 
 
@@ -18,6 +19,7 @@ export default function AppNavigator() {
     return (
         <NavigationContainer>
             <Stack.Navigator
+                mode='model'
                 screenOptions={{
                     headerShown: false
                 }}
@@ -28,6 +30,7 @@ export default function AppNavigator() {
                 <Stack.Screen name="home" component={HomeScreen} />
                 <Stack.Screen name="Statistics" component={StatisticsScreen} />
                 <Stack.Screen name="userInfo" component={UserInfoScreen} />
+                <Stack.Screen name="mealsScreen" component={MealsScreen} />
 
             </Stack.Navigator>
         </NavigationContainer>

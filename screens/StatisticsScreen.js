@@ -1,13 +1,43 @@
-import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import { React, useState, useEffect } from 'react';
+import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+
 import DayCalorieCircular from '../components/Statistics/DayCalorieCircular';
 import Daynutritionalvalues from '../components/Statistics/DayNutritionalValues';
+import MealsList from '../components/Statistics/MealsList';
+import MealsListHeader from '../components/Statistics/MealsListHeader';
 
-const StatisticsScreen = ({route}) => {
+const StatisticsScreen = ({ navigation, route }) => {
+
+    const [BreakfastSelcted, setBreakfastSelcted] = useState(false);
+    const [LunchSelcted, LunchsetSelcted] = useState(false);
+    const [DinnerSelcted, DinnersetSelcted] = useState(false);
+
+
+    useEffect(() => {
+
+    }, [BreakfastSelcted, LunchSelcted, DinnerSelcted]);
+
     return (
         <SafeAreaView style={styles.safearea} >
             <DayCalorieCircular />
             <Daynutritionalvalues />
+
+
+            <ScrollView showsVerticalScrollIndicator={false}>
+
+                <MealsListHeader navigation={navigation} name='Breakfast' isSelect={BreakfastSelcted} IsSelectedHandler={setBreakfastSelcted} />
+                {BreakfastSelcted ? <MealsList /> : null}
+
+                <MealsListHeader navigation={navigation} name='Lunch' isSelect={LunchSelcted} IsSelectedHandler={LunchsetSelcted} />
+                {LunchSelcted ? <MealsList /> : null}
+
+
+                <MealsListHeader navigation={navigation} name='Dinner' isSelect={DinnerSelcted} IsSelectedHandler={DinnersetSelcted} />
+                {DinnerSelcted ? <MealsList /> : null}
+
+
+
+            </ScrollView>
 
 
         </SafeAreaView>
@@ -20,6 +50,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#eff5f5'
     },
 })
+
 
 
 
