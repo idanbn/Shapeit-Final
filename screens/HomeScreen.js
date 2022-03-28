@@ -1,8 +1,7 @@
 import { React, useEffect, useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { doc, setDoc } from "firebase/firestore";
 import { db } from '../FireBase/FireStore/reduce';
-import { COLORS } from '../constants';
 import { async } from '@firebase/util';
 
 import HelloHeader from '../components/Home/Hello';

@@ -7,10 +7,7 @@ import { StyleSheet } from 'react-native';
 
 import LoginScreen from '../screens/LoginScreen';
 import TabsNavigator from './tabs';
-import HomeScreen from '../screens/HomeScreen';
-import StatisticsScreen from '../screens/StatisticsScreen';
 import UserInfoScreen from '../screens/UserInfoScreen';
-import CameraScreen from '../screens/CameraScreen';
 
 
 

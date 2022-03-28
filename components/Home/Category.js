@@ -1,6 +1,6 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
-import { COLORS, images } from '../../constants';
+import { COLORS } from '../../constants';
 
 
 const Category = ({ navigation, selectCategory, selectCategoryHandler, ...props }) => {

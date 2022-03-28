@@ -37,18 +37,22 @@ const StatisticsScreen = ({ navigation, route }) => {
             <DayCalorieCircular navigation={navigation} />
             <Daynutritionalvalues />
 
-            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} nestedScrollEnabled={true}>
 
+                <View key='1'>
+                    <MealsListHeader navigation={navigation} name='Breakfast' isSelect={BreakfastSelcted} IsSelectedHandler={setBreakfastSelcted} />
+                    {BreakfastSelcted ? <MealsList nestedScrollEnabled={true} /> : null}
+                </View>
 
-                <MealsListHeader navigation={navigation} name='Breakfast' isSelect={BreakfastSelcted} IsSelectedHandler={setBreakfastSelcted} />
-                {BreakfastSelcted ? <MealsList /> : null}
+                <View key='2'>
+                    <MealsListHeader navigation={navigation} name='Lunch' isSelect={LunchSelcted} IsSelectedHandler={setLunchSelcted} />
+                    {LunchSelcted ? <MealsList /> : null}
+                </View>
 
-                <MealsListHeader navigation={navigation} name='Lunch' isSelect={LunchSelcted} IsSelectedHandler={setLunchSelcted} />
-                {LunchSelcted ? <MealsList /> : null}
-
-
-                <MealsListHeader navigation={navigation} name='Dinner' isSelect={DinnerSelcted} IsSelectedHandler={setDinnerSelcted} />
-                {DinnerSelcted ? <MealsList /> : null}
+                <View key='3'>
+                    <MealsListHeader navigation={navigation} name='Dinner' isSelect={DinnerSelcted} IsSelectedHandler={setDinnerSelcted} />
+                    {DinnerSelcted ? <MealsList /> : null}
+                </View>
 
 
 

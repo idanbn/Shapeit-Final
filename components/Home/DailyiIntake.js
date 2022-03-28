@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
-import { COLORS, FONTS, images } from '../../constants';
+import { COLORS, images } from '../../constants';
 
 import { Userdb } from '../../Localdbs';
 

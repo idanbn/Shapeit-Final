@@ -6,7 +6,7 @@ import { fetchData } from '../../FireBase/FireStore/action';
 
 
 
-const MealsList = () => {
+const MealsList = (props) => {
 
     const [meals, setMeals] = useState(new Array());
 
@@ -19,7 +19,7 @@ const MealsList = () => {
         setMeals(mealsdata.meals)
     }
 
-    
+
 
     return (
         <View style={styles.container}>
@@ -28,12 +28,13 @@ const MealsList = () => {
                 data={meals}
                 renderItem={renderMeals}
                 showsVerticalScrollIndicator={false}
+                nestedScrollEnabled={true}
             />
         </View>
     );
 }
 
-    
+
 
 const renderMeals = ({ item }) => (
     <MealCard >
@@ -45,7 +46,7 @@ const renderMeals = ({ item }) => (
                 height: 55,
                 width: 55,
                 marginTop: 6,
-                borderRadius:14
+                borderRadius: 14
 
             }}
 
@@ -61,7 +62,7 @@ const renderMeals = ({ item }) => (
                 width: 20,
                 tintColor: COLORS.icons,
                 marginTop: 25,
-                marginRight:12
+                marginRight: 12
 
             }}
 
@@ -72,7 +73,7 @@ const renderMeals = ({ item }) => (
 );
 
 
-const MealCard = (props ) => (
+const MealCard = (props) => (
     <View style={styles.mealCard}>
         <View style={styles.cardContent}>
 
@@ -102,8 +103,8 @@ export default MealsList;
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
-        marginTop:10
+        flex: 1,
+        marginTop: 10
     },
     mealCard: {
         backgroundColor: COLORS.border,
@@ -121,14 +122,14 @@ const styles = StyleSheet.create({
     mealName: {
         fontSize: 20,
         fontWeight: '600',
-        opacity:0.8
+        opacity: 0.8
     },
     mealDetiels: {
         fontSize: 16,
-        fontWeight:'500',
-        marginTop:8,
-        color:COLORS.icons,
-        opacity:0.9
+        fontWeight: '500',
+        marginTop: 8,
+        color: COLORS.icons,
+        opacity: 0.9
 
     },
 });

@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react';
+import { React } from 'react';
 import { View, StyleSheet, TouchableOpacity, TextInput, Text } from 'react-native';
 import SlideModel from './SlideModel';
 import { Formik } from 'formik'
@@ -68,7 +68,7 @@ const LoginForm = (props) => {
                                 >
 
                                     <View>
-                                        <Text style={{ color: 'white' ,fontWeight:'600'}}>Login</Text>
+                                        <Text style={{ color: 'white', fontWeight: '600' }}>Login</Text>
                                     </View>
 
                                 </TouchableOpacity>

@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { React, useEffect, useState } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { auth } from '../FireBase/Users/reduce';
 import { LogBox } from 'react-native';
 import LoginForm from '../components/Login/LoginForm'

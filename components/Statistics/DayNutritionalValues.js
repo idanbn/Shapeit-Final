@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         width: 40,
         marginTop: 14,
         opacity: 0.85,
-        tintColor:COLORS.icons
+        tintColor: COLORS.icons
 
 
     },

@@ -47,7 +47,7 @@ const UserInfoScreen = ({ navigation }) => {
                         borderRadius: 30,
                         width: '50%',
                         alignItems: 'center'
-                    }}
+                    }}ß
                 >
 
                     <View>
@@ -74,7 +74,7 @@ export default UserInfoScreen
 const styles = StyleSheet.create({
     safearea: {
         flex: 1,
-        backgroundColor: COLORS.lightGray3
+        backgroundColor: '#eff5f5'
     },
     container: {
         flex: 1,

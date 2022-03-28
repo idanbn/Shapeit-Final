@@ -27,23 +27,23 @@ const DayCalorieCircular = ({ navigation }) => {
 
     return (
         <View>
-                <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 10  }}>
-                    <Text style={{ fontSize: 26, fontWeight: '700' }} > Activity </Text>
-                </View>
+            <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 10 }}>
+                <Text style={{ fontSize: 26, fontWeight: '700' }} > Activity </Text>
+            </View>
 
-                <TouchableOpacity
-                    style={{ position:'absolute', alignSelf: 'flex-end', width: 50, marginTop:10 }}
-                    onPress={() => navigation.navigate('userInfo')}
-                >
-                    <Image
-                        source={icons.more}
-                        style={{
-                            width: 32,
-                            height: 32,
-                            tintColor: COLORS.primary
-                        }}
-                    />
-                </TouchableOpacity>
+            <TouchableOpacity
+                style={{ position: 'absolute', alignSelf: 'flex-end', width: 50, marginTop: 10 }}
+                onPress={() => navigation.navigate('userInfo')}
+            >
+                <Image
+                    source={icons.more}
+                    style={{
+                        width: 32,
+                        height: 32,
+                        tintColor: COLORS.primary
+                    }}
+                />
+            </TouchableOpacity>
 
             <DraweCircular fill={fill} max_calorie={maxCalorie} >
 

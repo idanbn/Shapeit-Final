@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 
         paddingTop: 6,
         alignItems: 'center',
-        marginRight:4,
+        marginRight: 4,
     },
     buttonText: {
         color: COLORS.icons,

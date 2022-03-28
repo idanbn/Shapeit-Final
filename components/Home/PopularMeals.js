@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
-import { COLORS, images } from '../../constants';
+import { COLORS } from '../../constants';
 import Feather from 'react-native-vector-icons/Feather';
 
 
@@ -10,7 +10,7 @@ const PopularMeals = ({ ...props }) => {
             <RenderTitele name='Popular Meals' />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
 
-            {props.data.map((item, index) => (
+                {props.data.map((item, index) => (
                     <View key={index}>
                         <MealCard backgroundImage={item.imageUrl} >
                             <SecoundCard>
@@ -68,8 +68,8 @@ const CardTexts = (props) => {
     return (
         <View>
             <Text style={styles.firstText}>{props.name}</Text>
-            <View style={{position:'absolute',bottom:-4}} >
-            <Text style={styles.secondText}>{props.calorieValue} Calories  •  {props.cookingTimeValue} Min </Text>
+            <View style={{ position: 'absolute', bottom: -4 }} >
+                <Text style={styles.secondText}>{props.calorieValue} Calories  •  {props.cookingTimeValue} Min </Text>
             </View>
         </View>
     );

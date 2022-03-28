@@ -1,5 +1,5 @@
-import { React, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Modal, Dimensions } from 'react-native'
+import { React } from 'react';
+import { StyleSheet, View, TouchableOpacity, Modal, Dimensions } from 'react-native'
 import { COLORS } from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -14,7 +14,7 @@ const SlideModel = (props) => {
                 style={{
                     flex: 1,
                     marginTop: Dimensions.get('window').height / 2.4,
-                    justifyContent:'space-between',
+                    justifyContent: 'space-between',
                     backgroundColor: COLORS.border,
                     opacity: 0.98,
                     borderRadius: 36,
@@ -24,10 +24,10 @@ const SlideModel = (props) => {
                 }}
             >
 
-                <View style={{flex:1}}>
+                <View style={{ flex: 1 }}>
                     {props.children}
                 </View>
-                <View style={{alignItems:'center', justifyContent:'center', paddingBottom:120}}>
+                <View style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: 120 }}>
                     <TouchableOpacity
                         onPress={() => props.setModelSelcted(false)}
                         style={{
@@ -37,14 +37,14 @@ const SlideModel = (props) => {
                         }}
                     >
 
-                        <Ionicons 
+                        <Ionicons
                             name='ios-close-circle'
                             style={{
-                                fontSize:50,
+                                fontSize: 50,
                                 color: COLORS.card,
-                                
+
                             }}
-                        
+
                         />
 
                     </TouchableOpacity>
