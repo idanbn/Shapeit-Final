@@ -121,11 +121,15 @@ const styles = StyleSheet.create({
     mealName: {
         fontSize: 20,
         fontWeight: '600',
+        opacity:0.8
     },
     mealDetiels: {
         fontSize: 16,
-        fontWeight:'400',
-        marginTop:8
+        fontWeight:'500',
+        marginTop:8,
+        color:COLORS.icons,
+        opacity:0.9
+
     },
 });
 

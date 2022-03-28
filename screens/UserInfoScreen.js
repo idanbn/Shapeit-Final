@@ -1,10 +1,11 @@
 import { React, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Modal, Dimensions } from 'react-native'
 import RenderNavBar from '../components/header2'
 import { SIGNOUT } from '../FireBase/Users/action'
 import { auth } from '../FireBase/Users/reduce'
 import { icons, SIZES, COLORS, FONTS } from '../constants'
 import { onAuthStateChanged } from 'firebase/auth';
+
 
 
 const UserInfoScreen = () => {
@@ -16,6 +17,23 @@ const UserInfoScreen = () => {
             <RenderNavBar />
 
             <View style={styles.container} >
+
+                <TouchableOpacity
+                    onPress={() => setModelSelcted(true)}
+                    style={{
+                        backgroundColor: 'black',
+                        padding: 10,
+                        borderRadius: 30,
+                        width: 150,
+                        alignItems: 'center'
+                    }}
+                >
+
+                    <View>
+                        <Text style={{ color: 'white' }}>open</Text>
+                    </View>
+
+                </TouchableOpacity>
 
                 <Text>name: {auth.currentUser?.displayName}</Text>
 

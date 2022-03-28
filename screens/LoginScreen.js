@@ -4,15 +4,18 @@ import { React, useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, KeyboardAvoidingView } from 'react-native';
 import { auth } from '../FireBase/Users/reduce';
 import { LogBox } from 'react-native';
+import LoginForm from '../components/Login/LoginForm'
+import RegisterForm from '../components/Login/RegisterForm';
+import { COLORS } from '../constants';
 
 LogBox.ignoreAllLogs();
 
 
 const LoginScreen = () => {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [userName, setUserName] = useState('')
+
+    const [loginSelcted, setLoginSelcted] = useState(false);
+    const [registerSelcted, setRegiisterSelcted] = useState(false);
 
 
     const navigation = useNavigation()
@@ -28,91 +31,51 @@ const LoginScreen = () => {
     }, [])
 
 
-    const handleSignUp = async () => {
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                
-                //add user name
-                updateProfile(user, {
-                    displayName: userName,
-                    //photoURL: "https://example.com/jane-q-user/profile.jpg"
-                }).then(() => {
-                    // Profile updated!
-                }).catch((error) => {
-                    // An error occurred
-                });
-
-
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
-
-
-    }
-
-    const AddUserFields = () => {
-
-
-    }
-
-    const handleLogin = async () => {
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredentials) => {
-                const user = userCredentials.user;
-            })
-            .catch(error => alert(error.message))
-    }
 
     return (
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior="padding"
-        >
-            <View style={styles.inputContainer}>
-                <TextInput
-                    placeholder="Name"
-                    value={userName}
-                    onChangeText={text => setUserName(text)}
-                    style={styles.input}
-                />
 
-                <TextInput
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={text => setEmail(text)}
-                    style={styles.input}
-                />
+        <View style={styles.container}>
 
-                <TextInput
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={text => setPassword(text)}
-                    style={styles.input}
-                    secureTextEntry
-                />
+            <View style={{ position: 'absolute', paddingBottom: 530 }} >
+
+                <Text
+                    style={{
+                        fontSize: 50,
+                        color: COLORS.primary,
+                        textShadowColor: '#000',
+                        fontWeight: 'bold',
+                        textShadowRadius: 3,
+                        textShadowOffset: { width: 0.4, height: 0.4 }
+                    }}>
+                    Food Tracker
+                </Text>
 
             </View>
 
-
             <View style={styles.buttonContainer}>
+
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={handleLogin}
+                    onPress={() => setLoginSelcted(true)}
                 >
+
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
 
+                <LoginForm setModelSelcted={setLoginSelcted} modelSelcted={loginSelcted} />
+
                 <TouchableOpacity
                     style={[styles.button, styles.buttonOutline]}
-                    onPress={handleSignUp}
+                    onPress={() => setRegiisterSelcted(true)}
                 >
                     <Text style={styles.buttonOutlineText}>Register</Text>
                 </TouchableOpacity>
+
+                <RegisterForm setModelSelcted={setRegiisterSelcted} modelSelcted={registerSelcted} />
+
             </View>
-        </KeyboardAvoidingView>
+        </View >
+
     );
 }
 export default LoginScreen;
@@ -134,23 +97,24 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     buttonContainer: {
-        width: '60%',
+        width: '40%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40,
+        marginTop: 650,
+        flexDirection: 'row',
+
     },
     button: {
-        backgroundColor: '#0782F9',
+        backgroundColor: COLORS.card,
+        borderColor: COLORS.border,
         width: '100%',
         padding: 15,
-        borderRadius: 10,
+        borderRadius: 30,
         alignItems: 'center',
     },
     buttonOutline: {
-        backgroundColor: 'white',
-        marginTop: 5,
-        borderColor: '#0782F9',
-        borderWidth: 2,
+        backgroundColor: COLORS.card,
+        marginLeft: 28,
     },
     buttonText: {
         color: 'white',
@@ -158,7 +122,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     buttonOutlineText: {
-        color: '#0782F9',
+        color: 'white',
         fontWeight: '700',
         fontSize: 16,
     },

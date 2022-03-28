@@ -41,7 +41,7 @@ const HelloHeader = (props) => {
     useEffect(() => {
         var hours = new Date().getHours(); //Current Hours
         getTimeText(hours);
-        
+
 
     }, [timeText]);
 
@@ -66,7 +66,7 @@ const HelloHeader = (props) => {
             setIconName('cloudy-night-outline');
         }
 
-       // console.log(currentHours);
+        // console.log(currentHours);
     }
 
 
