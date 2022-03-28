@@ -6,6 +6,7 @@ import { auth } from '../FireBase/Users/reduce'
 import { icons, SIZES, COLORS, FONTS } from '../constants'
 import { onAuthStateChanged } from 'firebase/auth';
 import UpdateForm from '../components/UserInfo/UpdateForm';
+import FieldInfo from '../components/UserInfo/FieldInfo';
 
 
 
@@ -18,32 +19,36 @@ const UserInfoScreen = () => {
 
             <RenderNavBar />
 
+            <FieldInfo fieldName='name' fieldValue={auth.currentUser?.displayName} />
+            <FieldInfo fieldName='email' fieldValue={auth.currentUser?.email} />
+
             <View style={styles.container} >
+
 
                 <TouchableOpacity
                     onPress={() => setUpdateSelect(true)}
                     style={{
-                        backgroundColor: 'black',
-                        padding: 10,
+                        backgroundColor: COLORS.icons,
+                        padding: 20,
                         borderRadius: 30,
-                        width: 150,
+                        width: '50%',
                         alignItems: 'center'
                     }}
                 >
 
                     <View>
-                        <Text style={{ color: 'white' }}>update</Text>
+                        <Text style={{ color: COLORS.white , fontSize:18, fontWeight:'500'}}>Update Information</Text>
                     </View>
 
                 </TouchableOpacity>
 
-                <UpdateForm setModelSelcted={setUpdateSelect} modelSelcted={updateSelect}/>
-                
-                <Text>name: {auth.currentUser?.displayName}</Text>
+                <UpdateForm setModelSelcted={setUpdateSelect} modelSelcted={updateSelect} />
 
-                <SIGNOUT />
 
             </View>
+
+            <SIGNOUT />
+
         </SafeAreaView>
 
     )
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        justifyContent: 'center',
+        marginTop:80,
         alignItems: 'center'
     },
 

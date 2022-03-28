@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'flex-end',
         paddingHorizontal: SIZES.padding,
-        backgroundColor: COLORS.lightGray,
     },
     shadow: {
         shadowColor: "#000",

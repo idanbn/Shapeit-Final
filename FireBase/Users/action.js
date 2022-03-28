@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
 import { signOut } from 'firebase/auth'
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { auth } from './reduce'
+import Octicons from 'react-native-vector-icons/Octicons'
+import { COLORS } from '../../constants'
 
 const SIGNOUT = () => {
     const navigation = useNavigation()
@@ -16,26 +18,45 @@ const SIGNOUT = () => {
     }
 
     return (
-        <TouchableOpacity
-            style={styles.button}
-            onPress={handleSignOut}
-        >
+        <View
+            style={{
+                flexDirection: 'row-reverse',
+                marginLeft: 14,
+                marginBottom: 20
+            }} >
 
-            <Text style={styles.buttonText}>Sign out</Text>
+            <TouchableOpacity
+                onPress={handleSignOut}
+            >
+                <Octicons
+                    name='sign-out'
+                    style={{
+                        fontSize: 36,
+                        fontWeight: '600',
+                        color: COLORS.icons,
+                    }}
 
-        </TouchableOpacity>
+                />
+
+            </TouchableOpacity>
+
+            <View style={styles.button}>
+                <Text style={styles.buttonText}>Sign out</Text>
+            </View>
+
+        </View>
     )
 }
 
 
 const LOGIN = () => {
-      ///***** Login component *****////
+    ///***** Login component *****////
 
 }
 
 
 const REGISTER = () => {
-      ///***** Register component *****////
+    ///***** Register component *****////
 
 }
 
@@ -43,15 +64,13 @@ export { SIGNOUT, LOGIN, REGISTER }
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#0782F9',
-        width: '60%',
-        padding: 15,
-        borderRadius: 10,
+
+        paddingTop: 6,
         alignItems: 'center',
-        marginTop: 40,
+        marginRight:4,
     },
     buttonText: {
-        color: 'white',
+        color: COLORS.icons,
         fontWeight: '700',
         fontSize: 16,
     },

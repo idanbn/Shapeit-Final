@@ -13,7 +13,7 @@ const SlideModel = (props) => {
             <View
                 style={{
                     flex: 1,
-                    marginTop: Dimensions.get('window').height / 2,
+                    marginTop: Dimensions.get('window').height / 4.4,
                     justifyContent:'space-between',
                     backgroundColor: COLORS.border,
                     opacity: 0.98,
@@ -27,7 +27,8 @@ const SlideModel = (props) => {
                 <View style={{flex:1}}>
                     {props.children}
                 </View>
-                <View style={{alignItems:'center', justifyContent:'center', paddingBottom:120}}>
+                
+                <View style={{alignItems:'center', justifyContent:'center', paddingBottom:74}}>
                     <TouchableOpacity
                         onPress={() => props.setModelSelcted(false)}
                         style={{
