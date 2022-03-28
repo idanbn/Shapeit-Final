@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { View, StyleSheet, SafeAreaView, ScrollView, Modal } from 'react-native';
+import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 
 import DayCalorieCircular from '../components/Statistics/DayCalorieCircular';
 import Daynutritionalvalues from '../components/Statistics/DayNutritionalValues';
@@ -34,10 +34,10 @@ const StatisticsScreen = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.safearea} >
-            <DayCalorieCircular />
+            <DayCalorieCircular navigation={navigation} />
             <Daynutritionalvalues />
 
-            <ScrollView style={{flex:1}} showsVerticalScrollIndicator={false}>
+            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
 
 
                 <MealsListHeader navigation={navigation} name='Breakfast' isSelect={BreakfastSelcted} IsSelectedHandler={setBreakfastSelcted} />

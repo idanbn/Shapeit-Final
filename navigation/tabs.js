@@ -6,13 +6,11 @@ import Foundation from 'react-native-vector-icons/Foundation'
 
 import HomeScreen from '../screens/HomeScreen';
 import StatisticsScreen from '../screens/StatisticsScreen';
-import UserInfoScreen from '../screens/UserInfoScreen';
-
-
-import MealsScreen from '../screens/MealsScreen';
+import CameraScreen from '../screens/CameraScreen';
 
 
 import { COLORS, icons } from '../constants';
+import UserInfoScreen from '../screens/UserInfoScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -106,8 +104,8 @@ const TabsNavigator = () => {
             />
 
             <Tab.Screen
-                name="userInfo"
-                component={UserInfoScreen}
+                name="camera"
+                component={CameraScreen}
                 options={{
                     tabBarShowLabel: false,
 
@@ -122,7 +120,7 @@ const TabsNavigator = () => {
                             }}
                         />
                     ),
-                    tabBarButton: (props) => (
+                    tabBarButton:  (props) => (
                         <TabBarCustomButton
                             {...props}
                         />

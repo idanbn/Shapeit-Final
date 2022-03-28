@@ -1,12 +1,12 @@
 import { React, useState, useEffect } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import { Userdb } from '../../Localdbs';
 
-import { COLORS } from '../../constants';
+import { COLORS, icons } from '../../constants';
 
-const DayCalorieCircular = () => {
+const DayCalorieCircular = ({ navigation }) => {
 
     const [dayCalorie, setDayCalorie] = useState(Userdb[0].calorie);
     const [maxCalorie, setMaxCalorie] = useState(Userdb[0].active_BMR);
@@ -27,7 +27,23 @@ const DayCalorieCircular = () => {
 
     return (
         <View>
-            <Text style={{ alignSelf: 'center', fontSize: 26, fontWeight: '700', marginTop: 10 }} > Activity </Text>
+                <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 10  }}>
+                    <Text style={{ fontSize: 26, fontWeight: '700' }} > Activity </Text>
+                </View>
+
+                <TouchableOpacity
+                    style={{ position:'absolute', alignSelf: 'flex-end', width: 50, marginTop:10 }}
+                    onPress={() => navigation.navigate('userInfo')}
+                >
+                    <Image
+                        source={icons.more}
+                        style={{
+                            width: 32,
+                            height: 32,
+                            tintColor: COLORS.primary
+                        }}
+                    />
+                </TouchableOpacity>
 
             <DraweCircular fill={fill} max_calorie={maxCalorie} >
 

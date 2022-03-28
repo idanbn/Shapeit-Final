@@ -1,24 +1,24 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { COLORS } from '../../constants';
 
 const FieldInfo = (props) => {
     return (
-            <View style={{flexDirection:'row',borderWidth: 1, borderColor: COLORS.border, marginTop:10}}>
+        <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: COLORS.border, marginTop: 10, marginHorizontal: 20, borderRadius: 20 }}>
 
-                <View style={{ borderWidth: 1, borderColor: COLORS.darkgray, padding: 10 }}>
+            <View style={{ borderWidth: 1, borderColor: COLORS.darkgray, padding: 10, borderTopLeftRadius: 20, borderTopRightRadius: 6, borderBottomRightRadius: 6, borderBottomLeftRadius: 20 }}>
 
-                    <Text style={{ color: COLORS.primary, fontSize: 28 }}> {props.fieldName} </Text>
-
-                </View>
-
-                <View style={{  padding: 14 }}>
-
-                    <Text style={{ color: COLORS.darkgray, fontSize: 25 }}> {props.fieldValue} </Text>
-
-                </View>
+                <Text style={{ color: COLORS.primary, fontSize: 28 }}> {props.fieldName} </Text>
 
             </View>
+
+            <View style={{ padding: 14 }}>
+
+                <Text style={{ color: COLORS.darkgray, fontSize: 25 }}> {props.fieldValue} </Text>
+
+            </View>
+
+        </View>
 
     );
 }
