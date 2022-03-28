@@ -5,11 +5,13 @@ import { SIGNOUT } from '../FireBase/Users/action'
 import { auth } from '../FireBase/Users/reduce'
 import { icons, SIZES, COLORS, FONTS } from '../constants'
 import { onAuthStateChanged } from 'firebase/auth';
+import UpdateForm from '../components/UserInfo/UpdateForm';
 
 
 
 const UserInfoScreen = () => {
 
+    const [updateSelect, setUpdateSelect] = useState(false);
     return (
 
         <SafeAreaView style={styles.safearea}>
@@ -19,7 +21,7 @@ const UserInfoScreen = () => {
             <View style={styles.container} >
 
                 <TouchableOpacity
-                    onPress={() => setModelSelcted(true)}
+                    onPress={() => setUpdateSelect(true)}
                     style={{
                         backgroundColor: 'black',
                         padding: 10,
@@ -30,11 +32,13 @@ const UserInfoScreen = () => {
                 >
 
                     <View>
-                        <Text style={{ color: 'white' }}>open</Text>
+                        <Text style={{ color: 'white' }}>update</Text>
                     </View>
 
                 </TouchableOpacity>
 
+                <UpdateForm setModelSelcted={setUpdateSelect} modelSelcted={updateSelect}/>
+                
                 <Text>name: {auth.currentUser?.displayName}</Text>
 
                 <SIGNOUT />
