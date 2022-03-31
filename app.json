@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "new-project",
-    "slug": "new-project",
+    "name": "Shapeit",
+    "slug": "Shapeit",
     "version": "1.0.0",
+    "privacy": "public",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
