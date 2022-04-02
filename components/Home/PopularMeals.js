@@ -12,13 +12,13 @@ const PopularMeals = ({ ...props }) => {
 
                 {props.data.map((item, index) => (
                     <View key={index}>
-                        <MealCard backgroundImage={item.imageUrl} >
+                        <MealCard backgroundImage={{uri:item.image}} >
                             <SecoundCard>
                                 <View style={{ flexDirection: 'row' }}>
                                     <CardTexts
-                                        name={item.m_name}
-                                        calorieValue={item.calorie}
-                                        cookingTimeValue={item.cookingTime}
+                                        name={item.title}
+                                        calorieValue={item.id}
+                                        cookingTimeValue={item.id}
                                     />
                                     <Icon />
                                 </View>
@@ -67,7 +67,7 @@ const RenderTitele = (props) => {
 const CardTexts = (props) => {
     return (
         <View>
-            <Text style={styles.firstText}>{props.name}</Text>
+            <Text style={styles.firstText} numberOfLines={2} >{props.name}</Text>
             <View style={{ position: 'absolute', bottom: -4 }} >
                 <Text style={styles.secondText}>{props.calorieValue} Calories  •  {props.cookingTimeValue} Min </Text>
             </View>
@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
 
     card: {
         marginHorizontal: 25,
-        marginVertical: 3,
         borderRadius: 20,
         shadowOffset: { width: 1, height: 1 },
         shadowColor: '#333',
@@ -111,11 +110,13 @@ const styles = StyleSheet.create({
         width: 280,
         justifyContent: 'flex-end',
         alignItems: 'center',
+        
 
     },
     cardContent: {
         marginVertical: 12,
         marginHorizontal: 12,
+
 
     },
     secoundcard: {
@@ -131,7 +132,7 @@ const styles = StyleSheet.create({
         opacity: 0.92
     },
     firstText: {
-        fontSize: 20,
+        fontSize: 19,
         fontWeight: '700',
         color: COLORS.white,
         opacity: 0.95,
@@ -148,6 +149,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginHorizontal: 22,
         marginVertical: 14,
+        
     },
     categoryText: {
         fontSize: 20,
@@ -159,6 +161,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         color: COLORS.icons,
         marginTop: 5,
+        
     },
     markIcon: {
         fontSize: 28,

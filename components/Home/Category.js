@@ -37,7 +37,7 @@ const RenderCategoryImages = (props) => {
 
                 <View key={index} style={{ flexDirection: 'row' }}>
 
-                    <RenderCategoryImage category={item.text} imageUrl={item.imageUrl} activeCategory={props.selectCategory} setActiveCategory={props.selectCategoryHandler} />
+                    <RenderCategoryImage category={item.name} imageUrl={item.image} activeCategory={props.selectCategory} setActiveCategory={props.selectCategoryHandler} />
 
                 </View>
             ))}
@@ -75,7 +75,7 @@ const RenderCategoryImage = (props) => {
                 />
                 <View style={{
                     marginTop: 4,
-                    marginHorizontal: 40,
+                    marginHorizontal: 5,
                     flex: 1,
                     alignItems: 'center',
                     justifyContent: 'center'
@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     imageText: {
-        flex: 1,
         fontWeight: '700',
         fontSize: 15,
 

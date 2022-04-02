@@ -8,9 +8,12 @@ import HelloHeader from '../components/Home/Hello';
 import DailyiInTake from '../components/Home/DailyiIntake';
 import Category from '../components/Home/Category';
 import PopularMeals from '../components/Home/PopularMeals';
-import { LocalCategorydb, LocalMealsdb } from '../Localdbs';
 
-const HomeScreen = ({navigation}) => {
+
+import { LocalCategorydb, LocalCategorysdb, LocalMealsdb } from '../Localdbs';
+import { IngredientsByID, MealInformation, MealsbyCategory, NutritionByID } from '../API/FoodAPI';
+
+const HomeScreen = ({ navigation }) => {
 
     const SetData = async () => {
         // Add a new document in collection "meals"
@@ -21,37 +24,33 @@ const HomeScreen = ({navigation}) => {
 
     }
 
-    //ScreenShot26
 
-    const [categorysData, setCategoryData] = useState(LocalCategorydb);
+    const [categorysData, setCategoryData] = useState(LocalCategorysdb);
     const [popularMealsData, setPopularMealsData] = useState(LocalMealsdb);
-    const [selectCategory, setSelectCategory] = useState('meat');
+    const [selectCategory, setSelectCategory] = useState('Noodles');
 
 
     useEffect(() => {
-        PopularMealsData();
+        //PopularMealsData(selectCategory);
 
     }, [selectCategory]);
 
 
-    const PopularMealsData = () => {
 
-        let result = categorysData.filter(selectcategory => selectcategory.text === selectCategory)
-        .map((categoryMeals) => {return categoryMeals.categoryMeals});
-
-        setPopularMealsData(result[0]);
-
-
+    const PopularMealsData = async (category) => {
+        const mealsdata = await MealsbyCategory(category);
+        setPopularMealsData(mealsdata);
     }
+
 
 
     return (
         <SafeAreaView style={styles.safearea}>
 
             <HelloHeader />
-            <DailyiInTake navigation={navigation}/>
+            <DailyiInTake navigation={navigation} />
             <Category categoryData={categorysData} selectCategory={selectCategory} selectCategoryHandler={setSelectCategory} />
-            <PopularMeals Category={selectCategory} data={popularMealsData} />
+            <PopularMeals data={popularMealsData} />
 
         </SafeAreaView>
     );
