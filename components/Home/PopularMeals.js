@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { COLORS } from '../../constants';
 import Feather from 'react-native-vector-icons/Feather';
+import MealsDataS from './MealsDataS';
 
 
 const PopularMeals = ({ ...props }) => {
@@ -12,31 +13,35 @@ const PopularMeals = ({ ...props }) => {
 
                 {props.data.map((item, index) => (
                     <View key={index}>
-                        <MealCard backgroundImage={{uri:item.image}} >
+                        <MealCard backgroundImage={{ uri: item.image }} >
                             <SecoundCard>
                                 <View style={{ flexDirection: 'row' }}>
                                     <CardTexts
                                         name={item.title}
-                                        calorieValue={item.id}
-                                        cookingTimeValue={item.id}
+                                        calorieValue={item.nutrition ? item.nutrition.nutrients.filter(obj => obj.name == 'Calories')[0].amount : "50"}
+                                        cookingTimeValue={item.readyInMinutes}
                                     />
-                                    <Icon />
+                                    <Icon Item={item} setModelSelcted={props.setModelSelcted} setSelectMealData={props.setSelectMealData} />
                                 </View>
                             </SecoundCard>
                         </MealCard>
                     </View>
                 ))}
+
             </ScrollView>
         </View>
 
     );
 }
 
-const Icon = () => {
+const Icon = (props) => {
     return (
         <TouchableOpacity
             style={{ justifyContent: 'flex-end', marginLeft: 24, paddingTop: 50 }}
-            onPress={() => { console.log('meal data'); }}
+            onPress={() => {
+                props.setModelSelcted(true);
+                props.setSelectMealData(props.Item);
+            }}
         >
             <Feather
                 name='bookmark'
@@ -110,7 +115,7 @@ const styles = StyleSheet.create({
         width: 280,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        
+
 
     },
     cardContent: {
@@ -149,7 +154,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginHorizontal: 22,
         marginVertical: 14,
-        
+
     },
     categoryText: {
         fontSize: 20,
@@ -161,7 +166,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         color: COLORS.icons,
         marginTop: 5,
-        
+
     },
     markIcon: {
         fontSize: 28,

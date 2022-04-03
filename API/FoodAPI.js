@@ -8,7 +8,7 @@ const apiURL = 'https://api.spoonacular.com/recipes/'
 //--- functions ---//
 
 const MealsbyCategory = async (category = 'pasta') => {
-    const CategoryURL = 'complexSearch?number=5&query='
+    const CategoryURL = 'complexSearch?number=5&addRecipeNutrition=true&fillIngredients=true&query='
 
     const dataURL = apiURL + CategoryURL + category + '&' + config;
 
