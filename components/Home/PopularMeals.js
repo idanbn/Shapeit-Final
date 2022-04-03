@@ -18,7 +18,7 @@ const PopularMeals = ({ ...props }) => {
                                 <View style={{ flexDirection: 'row' }}>
                                     <CardTexts
                                         name={item.title}
-                                        calorieValue={item.nutrition ? item.nutrition.nutrients.filter(obj => obj.name == 'Calories')[0].amount : "50"}
+                                        calorieValue={item.nutrition ? item.nutrition.nutrients.filter(obj => obj.name == 'Calories')[0].amount | 0 : "50"}
                                         cookingTimeValue={item.readyInMinutes}
                                     />
                                     <Icon Item={item} setModelSelcted={props.setModelSelcted} setSelectMealData={props.setSelectMealData} />

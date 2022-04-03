@@ -53,36 +53,38 @@ const RenderTitele = (props) => {
 
 const RenderIngredients = (props) => {
     return (
-        <View style={{ marginTop: 14, }} >
+        <View style={{ marginTop: 14, paddingBottom:100 }} >
             <Text style={{ fontSize: 22, fontWeight: '700', marginHorizontal: 19, marginBottom: 10, }} >Ingredients</Text>
+            
+            <View style={{ height: 180 }}>
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={props.data}
+                    keyExtractor={({ id }, index) => id}
+                    renderItem={({ item }) => (
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Entypo
+                                    name='dot-single'
+                                    style={{
+                                        fontSize: 44,
+                                        color: COLORS.icons,
+                                        fontWeight: '600',
+                                        opacity: 0.98,
+                                        marginLeft: 2,
+                                        marginTop: -8
+                                    }}
+                                />
 
-            <FlatList
-                data={props.data}
-                keyExtractor={({ id }, index) => id}
-                renderItem={({ item }) => (
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View style={{ flexDirection: 'row'}}>
-                            <Entypo
-                                name='dot-single'
-                                style={{
-                                    fontSize: 44,
-                                    color: COLORS.icons,
-                                    fontWeight: '600',
-                                    opacity: 0.98,
-                                    marginLeft: 2,
-                                    marginTop: -8
-                                }}
-                            />
+                                <Text style={{ fontSize: 21, fontWeight: '600', opacity: 0.8 }}>{item.name}</Text>
+                            </View>
 
-                            <Text style={{ fontSize: 21, fontWeight: '600', opacity: 0.8 }}>{item.name}</Text>
+                            <Text style={{ fontSize: 20, fontWeight: '600', opacity: 0.94 }}>{item.amount} {item.unit}</Text>
+
                         </View>
-
-                        <Text style={{ fontSize: 20, fontWeight: '600', opacity: 0.94 }}>{item.amount} {item.unit}</Text>
-
-                    </View>
-                )}
-            />
-
+                    )}
+                />
+            </View>
         </View>
     );
 }
