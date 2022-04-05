@@ -2,13 +2,22 @@ import { React, useState, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { addBreakfast, ADD_MEAL, REMOVE_MEAL } from '../../redux/actions';
+
 import { COLORS, icons, images } from '../../constants';
 
 import { fetchData } from '../../FireBase/FireStore/action';
 
 
 
+
 const MealsList = (props) => {
+
+    const { user_id, date, breakfast, lunch, dinner } = useSelector(state => state.mealsReducer);
+    const dispatch = useDispatch();
+
+    //dispatch(addMeal(value));
 
     const [meals, setMeals] = useState(new Array());
 
@@ -18,7 +27,9 @@ const MealsList = (props) => {
 
     const getMeals = async () => {
         const mealsdata = await fetchData();
-        setMeals(mealsdata.meals)
+        //setMeals(mealsdata.meals)
+        dispatch(addBreakfast(mealsdata.meals));
+
     }
 
 
@@ -28,7 +39,7 @@ const MealsList = (props) => {
             <View style={styles.container}>
                 <FlatList
                     keyExtractor={(item) => item.mealId}
-                    data={meals}
+                    data={breakfast}
                     renderItem={renderMeals}
                     showsVerticalScrollIndicator={false}
                     nestedScrollEnabled={true}
@@ -116,20 +127,20 @@ const AddNewMeal = () => {
                 alignItems: 'center',
             }}
             activeOpacity={0.7}
-            >
+        >
 
             <View
-                style={{ flexDirection: 'row'}}
+                style={{ flexDirection: 'row' }}
             >
                 <Text style={{ paddingTop: 11 }}> Add Meal</Text>
                 <Entypo
                     name='add-to-list'
                     style={{
-                        fontSize:22,
-                        fontWeight:'500',
-                        color:COLORS.icons,
+                        fontSize: 22,
+                        fontWeight: '500',
+                        color: COLORS.icons,
                         paddingTop: 7,
-                        paddingLeft:10
+                        paddingLeft: 10
 
                     }}
                 />
