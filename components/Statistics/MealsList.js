@@ -1,5 +1,7 @@
 import { React, useState, useEffect } from 'react';
-import { View, FlatList, StyleSheet, Text, Image } from 'react-native';
+import { View, FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo'
+
 import { COLORS, icons, images } from '../../constants';
 
 import { fetchData } from '../../FireBase/FireStore/action';
@@ -22,14 +24,18 @@ const MealsList = (props) => {
 
 
     return (
-        <View style={styles.container}>
-            <FlatList
-                keyExtractor={(item) => item.mealId}
-                data={meals}
-                renderItem={renderMeals}
-                showsVerticalScrollIndicator={false}
-                nestedScrollEnabled={true}
-            />
+        <View>
+            <View style={styles.container}>
+                <FlatList
+                    keyExtractor={(item) => item.mealId}
+                    data={meals}
+                    renderItem={renderMeals}
+                    showsVerticalScrollIndicator={false}
+                    nestedScrollEnabled={true}
+                />
+            </View>
+
+            <AddNewMeal />
         </View>
     );
 }
@@ -96,7 +102,42 @@ const MealText = (props) => {
     );
 };
 
+const AddNewMeal = () => {
+    return (
+        <TouchableOpacity
+            style={{
+                backgroundColor: COLORS.border,
+                paddingBottom: 10,
+                marginVertical: 8,
+                marginHorizontal: 24,
+                borderRadius: 14,
+                width: 150,
+                alignSelf: 'center',
+                alignItems: 'center',
+            }}
+            activeOpacity={0.7}
+            >
 
+            <View
+                style={{ flexDirection: 'row'}}
+            >
+                <Text style={{ paddingTop: 11 }}> Add Meal</Text>
+                <Entypo
+                    name='add-to-list'
+                    style={{
+                        fontSize:22,
+                        fontWeight:'500',
+                        color:COLORS.icons,
+                        paddingTop: 7,
+                        paddingLeft:10
+
+                    }}
+                />
+            </View>
+
+        </TouchableOpacity>
+    );
+}
 
 
 export default MealsList;
@@ -104,7 +145,8 @@ export default MealsList;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 10
+        marginTop: 10,
+        height: 250
     },
     mealCard: {
         backgroundColor: COLORS.border,

@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
 
 
     useEffect(() => {
-        PopularMealsData(selectCategory);
+        //PopularMealsData(selectCategory);
 
     }, [selectCategory]);
 

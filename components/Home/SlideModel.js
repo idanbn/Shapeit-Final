@@ -19,8 +19,9 @@ const SlideModel = (props) => {
                         marginTop: Dimensions.get('window').height / 2.82,
                         justifyContent: 'space-between',
                         backgroundColor: COLORS.lightGray,
+                        marginHorizontal: 4,
                         borderRadius: 36,
-                        marginHorizontal: 2,
+
 
                     }}
                 >
@@ -68,9 +69,11 @@ const SlideModel = (props) => {
         >
             <View
                 style={{
-                    height: Dimensions.get('window').height / 2.82,
+                    flex:1,
                     backgroundColor: '#101',
-                    opacity: 0.2
+                    opacity: 0.3,
+                    
+                    
                 }}
             />
 

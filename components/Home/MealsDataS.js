@@ -53,9 +53,9 @@ const RenderTitele = (props) => {
 
 const RenderIngredients = (props) => {
     return (
-        <View style={{ marginTop: 14, paddingBottom:100 }} >
+        <View style={{ marginTop: 14, paddingBottom: 100 }} >
             <Text style={{ fontSize: 22, fontWeight: '700', marginHorizontal: 19, marginBottom: 10, }} >Ingredients</Text>
-            
+
             <View style={{ height: 180 }}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
@@ -76,10 +76,10 @@ const RenderIngredients = (props) => {
                                     }}
                                 />
 
-                                <Text style={{ fontSize: 21, fontWeight: '600', opacity: 0.8 }}>{item.name}</Text>
+                                <Text style={{ fontSize: 21, fontWeight: '600', opacity: 0.9 }}>{item.name}</Text>
                             </View>
 
-                            <Text style={{ fontSize: 20, fontWeight: '600', opacity: 0.94 }}>{item.amount} {item.unit}</Text>
+                            <Text style={{ fontSize: 19, fontWeight: '500', opacity: 0.9 }}>{item.amount} {item.unit}</Text>
 
                         </View>
                     )}
