@@ -3,7 +3,7 @@ import { View, FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { addBreakfast, ADD_MEAL, REMOVE_MEAL } from '../../redux/actions';
+import { addBreakfast, addLunch, addDinner } from '../../redux/actions';
 
 import { COLORS, icons, images } from '../../constants';
 
@@ -17,9 +17,7 @@ const MealsList = (props) => {
     const { user_id, date, breakfast, lunch, dinner } = useSelector(state => state.mealsReducer);
     const dispatch = useDispatch();
 
-    //dispatch(addMeal(value));
 
-    const [meals, setMeals] = useState(new Array());
 
     useEffect(() => {
         getMeals();
@@ -27,11 +25,8 @@ const MealsList = (props) => {
 
     const getMeals = async () => {
         const mealsdata = await fetchData();
-        //setMeals(mealsdata.meals)
-        dispatch(addBreakfast(mealsdata.meals));
-
+        dispatch(props.dataName === 'Breakfast' ? addBreakfast(mealsdata.meals) :  props.dataName  === 'Lunch' ? addLunch(mealsdata.meals) : addDinner(mealsdata.meals))
     }
-
 
 
     return (
@@ -39,7 +34,7 @@ const MealsList = (props) => {
             <View style={styles.container}>
                 <FlatList
                     keyExtractor={(item) => item.mealId}
-                    data={breakfast}
+                    data={props.dataName === 'Breakfast' ? breakfast :  props.dataName  === 'Lunch' ? lunch : dinner }
                     renderItem={renderMeals}
                     showsVerticalScrollIndicator={false}
                     nestedScrollEnabled={true}

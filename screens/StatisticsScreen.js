@@ -1,11 +1,16 @@
 import { React, useState, useEffect } from 'react';
 import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { auth } from '../FireBase/Users/reduce';
 
 
 import DayCalorieCircular from '../components/Statistics/DayCalorieCircular';
 import Daynutritionalvalues from '../components/Statistics/DayNutritionalValues';
 import MealsList from '../components/Statistics/MealsList';
 import MealsListHeader from '../components/Statistics/MealsListHeader';
+
+
+import { readUserData, writeUserData } from '../FireBase/rtdb';
+import { fetchUsers } from '../redux/users/action';
 
 const StatisticsScreen = ({ navigation, route }) => {
 
@@ -15,9 +20,10 @@ const StatisticsScreen = ({ navigation, route }) => {
 
 
     useEffect(() => {
-
-
-
+        writeUserData('ucGu9HSJr1f47FibWNsQazHzY1k1', 'Faruch Ismailov', 'fa@fa.com', true, 1517);
+        writeUserData('ucGngcggcjvjvjh1', 'mapal Ismailov', 'fa@fa.com', true, 1517);
+        readUserData('ucGu9HSJr1f47FibWNsQazHzY1k1');
+        fetchUsers();
     }, [BreakfastSelcted, LunchSelcted, DinnerSelcted]);
 
 
@@ -42,17 +48,17 @@ const StatisticsScreen = ({ navigation, route }) => {
 
                 <View key='1'>
                     <MealsListHeader navigation={navigation} name='Breakfast' isSelect={BreakfastSelcted} IsSelectedHandler={setBreakfastSelcted} />
-                    {BreakfastSelcted ? <MealsList nestedScrollEnabled={true} /> : null}
+                    {BreakfastSelcted ? <MealsList dataName={'Breakfast'} /> : null}
                 </View>
 
                 <View key='2'>
                     <MealsListHeader navigation={navigation} name='Lunch' isSelect={LunchSelcted} IsSelectedHandler={setLunchSelcted} />
-                    {LunchSelcted ? <MealsList /> : null}
+                    {LunchSelcted ? <MealsList dataName={'Lunch'} /> : null}
                 </View>
 
                 <View key='3'>
                     <MealsListHeader navigation={navigation} name='Dinner' isSelect={DinnerSelcted} IsSelectedHandler={setDinnerSelcted} />
-                    {DinnerSelcted ? <MealsList /> : null}
+                    {DinnerSelcted ? <MealsList dataName={'Dinner'} /> : null}
                 </View>
 
 
