@@ -5,7 +5,7 @@ import { auth } from '../../FireBase/Users/reduce';
 
 
 const initialState = {
-    date: moment().utcOffset('+03:00').format('DD/MM/YYYY'),
+    date: moment().utcOffset('+03:00').format('DD/MMYYYY'),
     breakfast: new Array(),
     lunch: new Array(),
     dinner: new Array()
@@ -22,13 +22,16 @@ const mealsReducer = (state = initialState, action) => {
                 return { ...state, dinner: action.payload.data };
 
         case ADD_BREAKFAST:
-            return { ...state, breakfast: action.payload };
+            state.breakfast.push(action.payload)
+            return { ...state };
 
         case ADD_LUNCH:
-            return { ...state, lunch: action.payload };
+            state.lunch.push(action.payload);
+            return { ...state };
 
         case ADD_DINNER:
-            return { ...state, dinner: action.payload };
+            state.dinner.push(action.payload);
+            return { ...state};
 
 
     }

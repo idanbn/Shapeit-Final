@@ -10,16 +10,17 @@ import { COLORS } from '../../constants';
 
 
 const AddNewMeal = (props) => {
-    const mealId = 'mealId';
+
     const dispatch = useDispatch();
+    const data =  { mealid: props.MealId }
 
     const selectDispatch = () => {
         if (props.name == 'Breakfast')
-            dispatch(addBreakfast(mealId));
+            dispatch(addBreakfast(data));
         if (props.name == 'Lunch')
-            dispatch(addLunch(mealId));
+            dispatch(addLunch(data));
         if (props.name == 'Dinner')
-            dispatch(addDinner(mealId));
+            dispatch(addDinner(data));
 
     }
 

@@ -4,15 +4,17 @@ export const ADD_DINNER = 'ADD_DINNER';
 export const REMOVE_MEAL = 'ADD_MEAL';
 export const FETCH_MEALS = 'FETCH_MEALS'
 
-import { fetchData } from '../../FireBase/FireStore/action';
+import { addMeal, fetchData } from '../../FireBase/FireStore/action';
 import { writeMealData } from '../../FireBase/RealTimeDB/MealsRT';
 
 export const fetchMeals = (Name) => async dispatch => {
 
     console.log('hey from FETCH_MEALS action to: ' + Name);
 
-    const mealsdata = await fetchData();
+    const mealsdata = await fetchData(Name);
 
+
+    //console.log(mealsdata.meals);
     dispatch({
         type: FETCH_MEALS,
         payload: { data: mealsdata.meals, name: Name }
@@ -22,7 +24,9 @@ export const fetchMeals = (Name) => async dispatch => {
 export const addBreakfast = meal => dispatch => {
 
     console.log('hey from ADD_BREAKFAST action');
-    writeMealData('Breakfast',meal);
+
+    //writeMealData('Breakfast', meal);
+    addMeal('Breakfast', meal);
 
     dispatch({
         type: ADD_BREAKFAST,
@@ -34,7 +38,9 @@ export const addBreakfast = meal => dispatch => {
 export const addLunch = meal => dispatch => {
 
     console.log('hey from ADD_LUNCH action');
-    writeMealData('Lunch',meal);
+
+    //writeMealData('Lunch', meal);
+    addMeal('Lunch', meal);
 
     dispatch({
         type: ADD_LUNCH,
@@ -45,7 +51,9 @@ export const addLunch = meal => dispatch => {
 export const addDinner = meal => dispatch => {
 
     console.log('hey from ADD_DINNER action');
-    writeMealData('Dinner',meal);
+
+    //writeMealData('Dinner', meal);
+    addMeal('Dinner', meal);
 
     dispatch({
         type: ADD_DINNER,

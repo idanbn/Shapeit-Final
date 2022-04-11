@@ -27,7 +27,7 @@ const MealsList = (props) => {
 
     const getMeals = async () => {
         console.log(date);
-        
+
         dispatch(fetchMeals(props.dataName))
 
         //dispatch(props.dataName === 'Breakfast' ? fetchMeals(mealsdata.meals,props.dataName) :  props.dataName  === 'Lunch' ? addLunch(mealsdata.meals) : addDinner(mealsdata.meals))
@@ -39,14 +39,14 @@ const MealsList = (props) => {
             <View style={styles.container}>
                 <FlatList
                     keyExtractor={(item) => item.mealId}
-                    data={props.dataName === 'Breakfast' ? breakfast :  props.dataName  === 'Lunch' ? lunch : dinner }
+                    data={props.dataName === 'Breakfast' ? breakfast : props.dataName === 'Lunch' ? lunch : dinner}
                     renderItem={renderMeals}
                     showsVerticalScrollIndicator={false}
                     nestedScrollEnabled={true}
                 />
             </View>
 
-            <AddNewMeal name={props.dataName} />
+            <AddNewMeal name={props.dataName} MealId='243143' />
         </View>
     );
 }

@@ -8,9 +8,14 @@ import { v4 as uuidv4 } from 'uuid';
 //uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 function writeMealData(mealTimeName, mealId) {
+
+
+
     if (mealTimeName == 'Breakfast') {
         set(ref(rt_db, 'users/' + auth.currentUser.uid + '/meals/breakfast/' + uuidv4()), {
             mid: mealId,
+            calorie_level: "22",
+            meal_name: "tost",
             //breakfast: { ucGu9HSJsdfsdfsdQazHzsdfs: { mid: '111' } },
 
         });
