@@ -15,4 +15,10 @@ const fetchData = async () => {
 
 }
 
+
+function addMeal(mid) {
+
+
+}
+
 export { fetchData }

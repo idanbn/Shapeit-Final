@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import mealsReducer from './reducers';
+import mealsReducer from './meals/reducer';
 import usersReducer from './users/reducer';
 
 

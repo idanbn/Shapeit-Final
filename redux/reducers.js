@@ -1,6 +1,6 @@
 import { ADD_BREAKFAST, ADD_DINNER, ADD_LUNCH, REMOVE_MEAL } from "./actions";
 
-
+/*
 const initialState = {
     user_id: '',
     date: '',
@@ -28,3 +28,5 @@ const mealsReducer = (state = initialState, action) => {
 }
 
 export default mealsReducer;
+
+*/

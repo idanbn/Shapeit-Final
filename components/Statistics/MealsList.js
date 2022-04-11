@@ -3,11 +3,13 @@ import { View, FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { addBreakfast, addLunch, addDinner } from '../../redux/actions';
+import { addBreakfast, addLunch, addDinner, fetchMeals } from '../../redux/meals/action';
 
 import { COLORS, icons, images } from '../../constants';
 
 import { fetchData } from '../../FireBase/FireStore/action';
+
+import AddNewMeal from './AddNewMeal';
 
 
 
@@ -24,8 +26,11 @@ const MealsList = (props) => {
     }, []);
 
     const getMeals = async () => {
-        const mealsdata = await fetchData();
-        dispatch(props.dataName === 'Breakfast' ? addBreakfast(mealsdata.meals) :  props.dataName  === 'Lunch' ? addLunch(mealsdata.meals) : addDinner(mealsdata.meals))
+        console.log(date);
+        
+        dispatch(fetchMeals(props.dataName))
+
+        //dispatch(props.dataName === 'Breakfast' ? fetchMeals(mealsdata.meals,props.dataName) :  props.dataName  === 'Lunch' ? addLunch(mealsdata.meals) : addDinner(mealsdata.meals))
     }
 
 
@@ -41,7 +46,7 @@ const MealsList = (props) => {
                 />
             </View>
 
-            <AddNewMeal />
+            <AddNewMeal name={props.dataName} />
         </View>
     );
 }
@@ -108,42 +113,6 @@ const MealText = (props) => {
     );
 };
 
-const AddNewMeal = () => {
-    return (
-        <TouchableOpacity
-            style={{
-                backgroundColor: COLORS.border,
-                paddingBottom: 10,
-                marginVertical: 8,
-                marginHorizontal: 24,
-                borderRadius: 14,
-                width: 150,
-                alignSelf: 'center',
-                alignItems: 'center',
-            }}
-            activeOpacity={0.7}
-        >
-
-            <View
-                style={{ flexDirection: 'row' }}
-            >
-                <Text style={{ paddingTop: 11 }}> Add Meal</Text>
-                <Entypo
-                    name='add-to-list'
-                    style={{
-                        fontSize: 22,
-                        fontWeight: '500',
-                        color: COLORS.icons,
-                        paddingTop: 7,
-                        paddingLeft: 10
-
-                    }}
-                />
-            </View>
-
-        </TouchableOpacity>
-    );
-}
 
 
 export default MealsList;

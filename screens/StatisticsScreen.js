@@ -10,7 +10,6 @@ import MealsListHeader from '../components/Statistics/MealsListHeader';
 
 
 import { readUserData, writeUserData } from '../FireBase/rtdb';
-import { fetchUsers } from '../redux/users/action';
 
 const StatisticsScreen = ({ navigation, route }) => {
 
@@ -23,7 +22,7 @@ const StatisticsScreen = ({ navigation, route }) => {
         writeUserData('ucGu9HSJr1f47FibWNsQazHzY1k1', 'Faruch Ismailov', 'fa@fa.com', true, 1517);
         writeUserData('ucGngcggcjvjvjh1', 'mapal Ismailov', 'fa@fa.com', true, 1517);
         readUserData('ucGu9HSJr1f47FibWNsQazHzY1k1');
-        fetchUsers();
+
     }, [BreakfastSelcted, LunchSelcted, DinnerSelcted]);
 
 
