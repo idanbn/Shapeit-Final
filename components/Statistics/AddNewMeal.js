@@ -1,9 +1,12 @@
 import { React } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo'
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 
-import { useSelector, useDispatch } from 'react-redux'
-import { addBreakfast, addLunch, addDinner, fetchMeals } from '../../redux/meals/action';
+
+import { useDispatch } from 'react-redux'
+import { addBreakfast, addLunch, addDinner } from '../../redux/meals/action';
 
 import { COLORS } from '../../constants';
 
@@ -12,17 +15,26 @@ import { COLORS } from '../../constants';
 const AddNewMeal = (props) => {
 
     const dispatch = useDispatch();
-    const data =  { mealid: props.MealId }
+    const data = {
+        mid: props.MealId,
+        calorie_level: "22",
+        meal_name: "tost",
+    }
 
     const selectDispatch = () => {
+        const random_key = uuidv4();
+
         if (props.name == 'Breakfast')
-            dispatch(addBreakfast(data));
+            dispatch(addBreakfast({...data,  mealId:random_key}));
         if (props.name == 'Lunch')
-            dispatch(addLunch(data));
+            dispatch(addLunch({...data,  mealId:random_key}));
         if (props.name == 'Dinner')
-            dispatch(addDinner(data));
+            dispatch(addDinner({...data,  mealId:random_key}));
 
     }
+
+
+
 
     return (
         <TouchableOpacity

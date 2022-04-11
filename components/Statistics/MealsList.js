@@ -3,11 +3,9 @@ import { View, FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react
 import Entypo from 'react-native-vector-icons/Entypo'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { addBreakfast, addLunch, addDinner, fetchMeals } from '../../redux/meals/action';
+import { fetchMeals, removeMeal } from '../../redux/meals/action';
 
 import { COLORS, icons, images } from '../../constants';
-
-import { fetchData } from '../../FireBase/FireStore/action';
 
 import AddNewMeal from './AddNewMeal';
 
@@ -20,18 +18,49 @@ const MealsList = (props) => {
     const dispatch = useDispatch();
 
 
-
     useEffect(() => {
-        getMeals();
+        dispatch(fetchMeals(props.dataName))
     }, []);
 
-    const getMeals = async () => {
-        console.log(date);
 
-        dispatch(fetchMeals(props.dataName))
+    const renderMeals = ({ item }) => (
+        <MealCard >
+            <Image
+                source={images.sushi}
+                resizeMode='cover'
+                style={{
+                    height: 55,
+                    width: 55,
+                    marginTop: 6,
+                    borderRadius: 14
 
-        //dispatch(props.dataName === 'Breakfast' ? fetchMeals(mealsdata.meals,props.dataName) :  props.dataName  === 'Lunch' ? addLunch(mealsdata.meals) : addDinner(mealsdata.meals))
-    }
+                }}
+
+            />
+
+            <MealText name={item.meal_name} />
+            <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => dispatch(removeMeal(props.dataName, item.mealId))}
+            >
+                <Image
+                    source={icons.down_arrow}
+                    resizeMode='contain'
+                    style={{
+                        height: 20,
+                        width: 20,
+                        tintColor: COLORS.icons,
+                        marginTop: 25,
+                        marginRight: 12
+
+                    }}
+
+                />
+            </TouchableOpacity>
+
+
+        </MealCard>
+    );
 
 
     return (
@@ -50,44 +79,6 @@ const MealsList = (props) => {
         </View>
     );
 }
-
-
-
-const renderMeals = ({ item }) => (
-    <MealCard >
-
-        <Image
-            source={images.sushi}
-            resizeMode='cover'
-            style={{
-                height: 55,
-                width: 55,
-                marginTop: 6,
-                borderRadius: 14
-
-            }}
-
-        />
-
-        <MealText name={item.meal_name} />
-
-        <Image
-            source={icons.down_arrow}
-            resizeMode='contain'
-            style={{
-                height: 20,
-                width: 20,
-                tintColor: COLORS.icons,
-                marginTop: 25,
-                marginRight: 12
-
-            }}
-
-        />
-
-
-    </MealCard>
-);
 
 
 const MealCard = (props) => (

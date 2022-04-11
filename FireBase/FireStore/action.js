@@ -1,7 +1,7 @@
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./reduce";
 import { auth } from '../Users/reduce';
 
@@ -25,14 +25,29 @@ const addMeal = async (mealTimeName, meal) => {
     const random_key = uuidv4();
     if (mealTimeName == 'Breakfast') {
         // Add a new document in collection "users => current user id => breakfast => random key => meal data"
-        await setDoc(doc(db, "users", auth.currentUser.uid, 'breakfast', random_key), meal);
+        await setDoc(doc(db, "users", auth.currentUser.uid, 'breakfast', meal.mealId), meal );
     }
     if (mealTimeName == 'Lunch') {
-        await setDoc(doc(db, "users", auth.currentUser.uid, 'lunch', random_key), meal);
+        await setDoc(doc(db, "users", auth.currentUser.uid, 'lunch', meal.mealId), meal);
     }
     if (mealTimeName == 'Dinner') {
-        await setDoc(doc(db, "users", auth.currentUser.uid, 'dinner', random_key),meal);
+        await setDoc(doc(db, "users", auth.currentUser.uid, 'dinner', meal.mealId), meal);
     }
 }
 
-export { fetchData, addMeal }
+
+const deleteMeal = async (mealTimeName, meal_doc_id) => {
+    if (mealTimeName == 'Breakfast') {
+        // delete a document in collection "users => current user id => breakfast => meal docoment key"
+        await deleteDoc(doc(db, "users", auth.currentUser.uid, 'breakfast', meal_doc_id));
+
+    }
+    if (mealTimeName == 'Lunch') {
+        await deleteDoc(doc(db, "users", auth.currentUser.uid, 'lunch', meal_doc_id));
+    }
+    if (mealTimeName == 'Dinner') {
+        await deleteDoc(doc(db, "users", auth.currentUser.uid, 'dinner', meal_doc_id));
+    }
+}
+
+export { fetchData, addMeal, deleteMeal }
