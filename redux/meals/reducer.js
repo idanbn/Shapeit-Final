@@ -1,7 +1,6 @@
 import moment from 'moment';
 
 import { ADD_BREAKFAST, ADD_DINNER, ADD_LUNCH, REMOVE_MEAL, FETCH_MEALS } from '../meals/action';
-import { auth } from '../../FireBase/Users/reduce';
 
 
 const initialState = {

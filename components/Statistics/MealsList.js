@@ -1,11 +1,10 @@
-import { React, useState, useEffect } from 'react';
+import { React, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchMeals, removeMeal } from '../../redux/meals/action';
 
-import { COLORS, icons, images } from '../../constants';
+import { COLORS, icons } from '../../constants';
 
 import AddNewMeal from './AddNewMeal';
 
@@ -26,7 +25,7 @@ const MealsList = (props) => {
     const renderMeals = ({ item }) => (
         <MealCard >
             <Image
-                source={images.sushi}
+                source={{ uri: item.image }}
                 resizeMode='cover'
                 style={{
                     height: 55,
@@ -38,13 +37,13 @@ const MealsList = (props) => {
 
             />
 
-            <MealText name={item.meal_name} />
+            <MealText data={item} />
             <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() => dispatch(removeMeal(props.dataName, item.mealId))}
             >
                 <Image
-                    source={icons.down_arrow}
+                    source={icons.like}
                     resizeMode='contain'
                     style={{
                         height: 20,
@@ -96,8 +95,8 @@ const MealText = (props) => {
     return (
 
         <View style={{ position: 'absolute', marginLeft: 66, marginTop: 10 }} >
-            <Text style={styles.mealName}>{props.name}</Text>
-            <Text style={styles.mealDetiels}>120 Protein • 140 Calories</Text>
+            <Text numberOfLines={1} style={styles.mealName}>{props.data.meal_name}</Text>
+            <Text style={styles.mealDetiels}>{props.data.protein | 0}g Protein • {props.data.calories | 0} Calories</Text>
         </View>
 
 
@@ -128,9 +127,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     mealName: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: '600',
-        opacity: 0.8
+        opacity: 0.8,
+        width: '60%',
+
     },
     mealDetiels: {
         fontSize: 16,

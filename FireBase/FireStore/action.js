@@ -1,6 +1,3 @@
-import 'react-native-get-random-values';
-import { v4 as uuidv4 } from 'uuid';
-
 import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./reduce";
 import { auth } from '../Users/reduce';
@@ -22,7 +19,6 @@ const fetchData = async (mealTimeName) => {
 
 
 const addMeal = async (mealTimeName, meal) => {
-    const random_key = uuidv4();
     if (mealTimeName == 'Breakfast') {
         // Add a new document in collection "users => current user id => breakfast => random key => meal data"
         await setDoc(doc(db, "users", auth.currentUser.uid, 'breakfast', meal.mealId), meal );

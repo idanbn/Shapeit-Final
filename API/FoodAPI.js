@@ -36,8 +36,6 @@ const MealInformation = async (id) => {
         const response = await fetch(dataURL);
         const respoJsondata = await response.json();
 
-        console.log(respoJsondata)
-
         return respoJsondata;
 
     } catch (error) {
