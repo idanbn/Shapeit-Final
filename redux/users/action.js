@@ -31,12 +31,30 @@ export const addUser = (userId, name, bmr) => async dispatch => {
         activeBMR: bmr,
         dailyCalorie: 0,
         isAdmin: false,
+        nutrionalvalues: {
+            protein: 0,
+            carbs: 0,
+            fat: 0,
+            sugar: 0
+        }
     }
     createUser(userId, userData);
 
     dispatch({
         type: ADD_USER,
         payload: userData
+    });
+
+};
+
+
+export const setUserdailyCalorie = (calorie, nutrionalValues) => async dispatch => {
+
+    updatedailyCalorie(calorie, nutrionalValues);
+
+    dispatch({
+        type: GET_USER_BY_ID,
+        payload: userInfo
     });
 
 };

@@ -3,34 +3,61 @@ import { auth } from "../../Users/reduce";
 import { firestore_db } from "../../Users/reduce";
 
 const getUserById = async (userId) => {
-    let userInfo = '';
+    let userInfo = null;
+    let nutrionalvalues = null;
 
-    const mealsSnapshot = await getDocs(collection(firestore_db, "users"));
+    const userSnapshot = await getDocs(collection(firestore_db, "users"));
+    const nutrionSnapshot = await getDocs(collection(firestore_db, "users", userId, "nutrionalvalues"));
 
-    mealsSnapshot.forEach((doc) => {
+    userSnapshot.forEach((doc) => {
         if (doc.id == userId) {
 
-            let userData = {
+            nutrionSnapshot.forEach((docc) => {
+                nutrionalvalues = docc.data()
+
+            });
+
+            const userData = {
                 uid: doc.id,
                 name: doc.data().name,
                 activeBMR: doc.data().activeBMR,
                 dailyCalorie: doc.data().dailyCalorie,
                 isAdmin: doc.data().isAdmin,
-            }
-            userInfo = userData;
-        }
+                nutrionalvalues: nutrionalvalues
 
-    })
+            };
+
+            userInfo = userData;
+
+        };
+
+    });
 
     return { userInfo }
 
-}
+};
 
 const createUser = async (userId, userData) => {
 
-    console.log(userData)
+    console.log(userData);
 
     await setDoc(doc(firestore_db, "users", userId), userData);
-}
+};
 
-export { getUserById, createUser }
+const updatedailyCalorie = async (calorie, nutrionalValues) => {
+
+    console.log(userData)
+
+    await setDoc(doc(firestore_db, "users", userId), {
+        dailyCalorie: calorie,
+        nutrionalvalues: {
+            protein: nutrionalValues.protein,
+            carbs: nutrionalValues.carbs,
+            fat: nutrionalValues.fat,
+            sugar: nutrionalValues.sugar,
+        },
+    });
+};
+
+
+export { getUserById, createUser };

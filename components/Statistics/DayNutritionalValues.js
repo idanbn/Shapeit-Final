@@ -1,21 +1,22 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
+import {useSelector } from 'react-redux';
+
 import { COLORS, icons } from '../../constants';
 
 import { Userdb } from '../../Localdbs';
 
 const DayNutritionalValues = () => {
+
+    const { currentUser } = useSelector(state => state.usersReducer);
+
     return (
         <View style={{ marginTop: 26, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginLeft: 14, marginRight: 14 }}>
 
-            <NutritionalValuesCard iconName={icons.protein} nutritionalValue={Userdb[0].nutritionalValues.protein} nutritionalName='Protein' />
-            <NutritionalValuesCard iconName={icons.carbs} nutritionalValue={Userdb[0].nutritionalValues.carbs} nutritionalName='Carbs' />
-            <NutritionalValuesCard iconName={icons.food} nutritionalValue={Userdb[0].nutritionalValues.fat} nutritionalName='Fat' />
-            <NutritionalValuesCard iconName={icons.sugar} nutritionalValue={Userdb[0].nutritionalValues.sugar} nutritionalName='Sugar' />
-
-
-
-
+            <NutritionalValuesCard iconName={icons.protein} nutritionalValue={currentUser.userInfo.nutrionalvalues.protein} nutritionalName='Protein' />
+            <NutritionalValuesCard iconName={icons.carbs} nutritionalValue={currentUser.userInfo.nutrionalvalues.carbs} nutritionalName='Carbs' />
+            <NutritionalValuesCard iconName={icons.food} nutritionalValue={currentUser.userInfo.nutrionalvalues.fat} nutritionalName='Fat' />
+            <NutritionalValuesCard iconName={icons.sugar} nutritionalValue={currentUser.userInfo.nutrionalvalues.sugar} nutritionalName='Sugar' />
 
         </View>
     );

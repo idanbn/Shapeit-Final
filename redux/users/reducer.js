@@ -4,15 +4,21 @@ import { fetchUsers } from './action';
 
 const initialState = {
     availableUsers: '',
+    
     currentUser: {
         uid: '',
         name: '',
         activeBMR: '',
         dailyCalorie: 0,
         isAdmin: false,
-    },
 
-
+        nutrionalvalues: {
+            protein: 0,
+            carbs: 0,
+            fat: 0,
+            sugar: 0
+        }
+    }
 }
 
 const usersReducer = (state = initialState, action) => {
