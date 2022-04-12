@@ -4,7 +4,7 @@ export const ADD_DINNER = 'ADD_DINNER';
 export const REMOVE_MEAL = 'ADD_MEAL';
 export const FETCH_MEALS = 'FETCH_MEALS'
 
-import { addMeal, fetchData, deleteMeal } from '../../FireBase/FireStore/action';
+import { addMeal, fetchData, deleteMeal } from '../../FireBase/FireStore/Meals/action';
 
 export const fetchMeals = (Name) => async dispatch => {
 

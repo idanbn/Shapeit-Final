@@ -1,6 +1,6 @@
 import { collection, deleteDoc, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./reduce";
-import { auth } from '../Users/reduce';
+import { auth } from '../../Users/reduce';
 
 const fetchData = async (mealTimeName) => {
     const meals = new Array();

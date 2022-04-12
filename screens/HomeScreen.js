@@ -1,8 +1,5 @@
 import { React, useEffect, useState } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
-import { doc, setDoc } from "firebase/firestore";
-import { db } from '../FireBase/FireStore/reduce';
-import { async } from '@firebase/util';
 
 import HelloHeader from '../components/Home/Hello';
 import DailyiInTake from '../components/Home/DailyiIntake';
@@ -11,20 +8,10 @@ import PopularMeals from '../components/Home/PopularMeals';
 import MealsDataS from '../components/Home/MealsDataS';
 
 
-import { LocalCategorydb, LocalCategorysdb, LocalMealsdb } from '../Localdbs';
-import { IngredientsByID, MealInformation, MealsbyCategory, NutritionByID } from '../API/FoodAPI';
+import { LocalCategorysdb, LocalMealsdb } from '../Localdbs';
+import { MealsbyCategory } from '../API/FoodAPI';
 
 const HomeScreen = ({ navigation }) => {
-
-    const SetData = async () => {
-        // Add a new document in collection "meals"
-        await setDoc(doc(db, "meals", "random_doc"), {
-            meal_name: "steak",
-            calorie_level: "0",
-        });
-
-    }
-
 
     const [categorysData, setCategoryData] = useState(LocalCategorysdb);
     const [popularMealsData, setPopularMealsData] = useState(LocalMealsdb);
@@ -45,7 +32,6 @@ const HomeScreen = ({ navigation }) => {
         const mealsdata = await MealsbyCategory(category);
         setPopularMealsData(mealsdata);
     }
-
 
 
     return (
