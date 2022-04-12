@@ -3,33 +3,34 @@ import { auth } from "../../Users/reduce";
 import { db } from "../reduce";
 
 const getUserById = async (userId) => {
-    const userInfo = new Array();
+    let userInfo = '';
 
     const mealsSnapshot = await getDocs(collection(db, "users"));
 
     mealsSnapshot.forEach((doc) => {
         if (doc.id == userId) {
 
-
-            console.log(doc.data());
-            console.log(doc.id);
-
             let userData = {
-                uid: userId,
-                activeBMR: doc.data().bmr,
+                uid: doc.id,
+                name: doc.data().name,
+                activeBMR: doc.data().activeBMR,
                 dailyCalorie: doc.data().dailyCalorie,
                 isAdmin: doc.data().isAdmin,
             }
-
+            userInfo = userData;
         }
 
-        //let mealdata = doc.data();
-        //mealdata.mealId = doc.id;
-        //meals.push(mealdata);
     })
 
     return { userInfo }
 
 }
 
-export {getUserById}
+const createUser = async (userId, userData) => {
+
+    console.log(userData)
+
+    await setDoc(doc(db, "users", userId), userData);
+}
+
+export { getUserById, createUser }

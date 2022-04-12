@@ -3,28 +3,29 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import { Userdb } from '../../Localdbs';
-import { useSelector } from 'react-redux';
+import {useSelector } from 'react-redux';
 
 import { COLORS, icons } from '../../constants';
-
-import { getUserById } from '../../FireBase/FireStore/Users/action';
 import { auth } from '../../FireBase/Users/reduce';
+import { fill } from '@tensorflow/tfjs';
+
 
 const DayCalorieCircular = ({ navigation }) => {
-    const { date, breakfast, lunch, dinner } = useSelector(state => state.mealsReducer);
+    const { currentUser } = useSelector(state => state.usersReducer);
 
     const [dayCalorie, setDayCalorie] = useState(Userdb[0].calorie);
     const [maxCalorie, setMaxCalorie] = useState(Userdb[0].active_BMR);
     const [fill, setFill] = useState(2052);
 
     useEffect(() => {
-        CalcFill()
-       // getUserById(auth.currentUser.uid);
-
+        CalcFill();
+        
     }, [dayCalorie]);
 
-
+ 
     const CalcFill = () => {
+        setDayCalorie(currentUser.userInfo.dailyCalorie);
+        setMaxCalorie(currentUser.userInfo.activeBMR);
         setFill(Math.round((100 * dayCalorie) / maxCalorie))
     }
 
@@ -73,7 +74,6 @@ const DraweCircular = (props) => {
             <View style={styles.circularContent} >
                 {props.children}
             </View>
-
             <AnimatedCircularProgress
                 size={200}
                 width={18}

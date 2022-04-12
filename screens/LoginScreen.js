@@ -7,11 +7,15 @@ import { LogBox } from 'react-native';
 import LoginForm from '../components/Login/LoginForm'
 import RegisterForm from '../components/Login/RegisterForm';
 import { COLORS } from '../constants';
+import { useDispatch } from 'react-redux';
+import { addUser, getUser } from '../redux/users/action';
 
 LogBox.ignoreAllLogs();
 
 
 const LoginScreen = () => {
+
+    const dispatch = useDispatch();
 
 
     const [loginSelcted, setLoginSelcted] = useState(false);
@@ -23,6 +27,8 @@ const LoginScreen = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
+                dispatch(getUser(user.uid));
+
                 navigation.replace("tabs")
             }
         })

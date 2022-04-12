@@ -3,40 +3,40 @@ export const ADD_USER = 'ADD_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_ADMIN = 'UPDATE_USER_ADMIN';
-export const GET_USER_BY_ID= 'GET_USER_BY_ID';
+export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 
 
 import { ref, set, onValue } from "firebase/database";
+import { createUser, getUserById } from "../../FireBase/FireStore/Users/action";
 import { auth, rt_db } from "../../FireBase/Users/reduce";
 
 
-export const fetchUsers = () => {
+export const getUser = (uid) => async dispatch => {
 
-    console.log(auth.currentUser.displayName);
+    const userInfo = await getUserById(uid);
 
-    dispatch => {
-        dispatch({
-            type: FETCH_USERS,
-            payload: 'users'
-        });
-    }
+    dispatch({
+        type: GET_USER_BY_ID,
+        payload: userInfo
+    });
+
 };
 
-export function addUser(userId, name, email, isadmin, bmr) {
 
-    set(ref(rt_db, 'users/' + userId), {
+export const addUser = (userId, name, bmr) => async dispatch => {
+
+    let userData = {
         uid: userId,
-        username: name,
-        email: email,
-        isadmin: isadmin,
-        bmr: bmr,
-        breakfast: { ucGu9HSJsdfsdfsdQazHzsdfs: { mid: '111' } },
-        lunch: { ucGu9HSJsdfsdfsdQazHzsdfs: { mid: '111' } },
-        dinner: { ucGu9HSJsdfsdfsdQazHzsdfs: { mid: '111' } }
-    });
+        name: name,
+        activeBMR: bmr,
+        dailyCalorie: 0,
+        isAdmin: false,
+    }
+    createUser(userId, userData);
 
     dispatch({
         type: ADD_USER,
-        payload: userId
+        payload: userData
     });
+
 };

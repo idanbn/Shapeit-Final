@@ -6,9 +6,10 @@ const initialState = {
     availableUsers: '',
     currentUser: {
         uid: '',
+        name: '',
         activeBMR: '',
-        dailyCalorie: '',
-        isAdmin: '',
+        dailyCalorie: 0,
+        isAdmin: false,
     },
 
 
@@ -17,10 +18,11 @@ const initialState = {
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USER_BY_ID:
-            return { ...state, availableUsers: action.payload };
+            //console.log(action.payload);
+            return { ...state, currentUser: action.payload };
 
         case ADD_USER:
-            return { ...state };
+            return { ...state ,currentUser: action.payload};
 
 
     }
