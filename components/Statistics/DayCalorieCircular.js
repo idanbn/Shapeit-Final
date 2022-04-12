@@ -3,10 +3,15 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import { Userdb } from '../../Localdbs';
+import { useSelector } from 'react-redux';
 
 import { COLORS, icons } from '../../constants';
 
+import { getUserById } from '../../FireBase/FireStore/Users/action';
+import { auth } from '../../FireBase/Users/reduce';
+
 const DayCalorieCircular = ({ navigation }) => {
+    const { date, breakfast, lunch, dinner } = useSelector(state => state.mealsReducer);
 
     const [dayCalorie, setDayCalorie] = useState(Userdb[0].calorie);
     const [maxCalorie, setMaxCalorie] = useState(Userdb[0].active_BMR);
@@ -14,6 +19,7 @@ const DayCalorieCircular = ({ navigation }) => {
 
     useEffect(() => {
         CalcFill()
+       // getUserById(auth.currentUser.uid);
 
     }, [dayCalorie]);
 

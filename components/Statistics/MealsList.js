@@ -13,7 +13,7 @@ import AddNewMeal from './AddNewMeal';
 
 const MealsList = (props) => {
 
-    const { user_id, date, breakfast, lunch, dinner } = useSelector(state => state.mealsReducer);
+    const { date, breakfast, lunch, dinner } = useSelector(state => state.mealsReducer);
     const dispatch = useDispatch();
 
 

@@ -3,6 +3,7 @@ export const ADD_USER = 'ADD_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_ADMIN = 'UPDATE_USER_ADMIN';
+export const GET_USER_BY_ID= 'GET_USER_BY_ID';
 
 
 import { ref, set, onValue } from "firebase/database";

@@ -10,6 +10,8 @@ const initialState = {
     dinner: new Array()
 }
 
+
+
 const mealsReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_MEALS:

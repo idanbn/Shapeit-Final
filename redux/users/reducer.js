@@ -1,16 +1,23 @@
-import { FETCH_USERS, ADD_USER, DELETE_USER, UPDATE_USER } from './action';
+import { FETCH_USERS, ADD_USER, DELETE_USER, UPDATE_USER, GET_USER_BY_ID } from './action';
 import { fetchUsers } from './action';
 
 
 const initialState = {
-    current_user: '',
-    availableUsers: new Array(),
+    availableUsers: '',
+    currentUser: {
+        uid: '',
+        activeBMR: '',
+        dailyCalorie: '',
+        isAdmin: '',
+    },
+
+
 }
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_USERS:
-            return { ...state , availableUsers: action.payload};
+        case GET_USER_BY_ID:
+            return { ...state, availableUsers: action.payload };
 
         case ADD_USER:
             return { ...state };
