@@ -6,12 +6,10 @@ export const UPDATE_USER_ADMIN = 'UPDATE_USER_ADMIN';
 
 
 import { ref, set, onValue } from "firebase/database";
-import { ttid } from "../../FireBase/adminSDK/admin";
 import { auth, rt_db } from "../../FireBase/Users/reduce";
 
 
 export const fetchUsers = () => {
-    ttid();
 
     console.log(auth.currentUser.displayName);
 

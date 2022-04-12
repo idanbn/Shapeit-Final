@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from 'react';
 import { View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-import { auth } from '../FireBase/Users/reduce';
 
 
 import DayCalorieCircular from '../components/Statistics/DayCalorieCircular';
@@ -8,8 +7,6 @@ import Daynutritionalvalues from '../components/Statistics/DayNutritionalValues'
 import MealsList from '../components/Statistics/MealsList';
 import MealsListHeader from '../components/Statistics/MealsListHeader';
 
-
-import { readUserData, writeUserData } from '../FireBase/rtdb';
 
 const StatisticsScreen = ({ navigation, route }) => {
 
@@ -19,9 +16,6 @@ const StatisticsScreen = ({ navigation, route }) => {
 
 
     useEffect(() => {
-        writeUserData('ucGu9HSJr1f47FibWNsQazHzY1k1', 'Faruch Ismailov', 'fa@fa.com', true, 1517);
-        writeUserData('ucGngcggcjvjvjh1', 'mapal Ismailov', 'fa@fa.com', true, 1517);
-        readUserData('ucGu9HSJr1f47FibWNsQazHzY1k1');
 
     }, [BreakfastSelcted, LunchSelcted, DinnerSelcted]);
 
