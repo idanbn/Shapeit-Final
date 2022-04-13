@@ -3,14 +3,18 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import { Userdb } from '../../Localdbs';
-import {useSelector } from 'react-redux';
+import {useSelector, useDispatch } from 'react-redux';
 
 import { COLORS, icons } from '../../constants';
 import { auth } from '../../FireBase/Users/reduce';
 import { fill } from '@tensorflow/tfjs';
+import { updateUserDailyCalorie } from '../../redux/users/action';
 
 
 const DayCalorieCircular = ({ navigation }) => {
+
+    const dispatch = useDispatch();
+
     const { currentUser } = useSelector(state => state.usersReducer);
 
     const [dayCalorie, setDayCalorie] = useState(Userdb[0].calorie);
@@ -18,6 +22,12 @@ const DayCalorieCircular = ({ navigation }) => {
     const [fill, setFill] = useState(2052);
 
     useEffect(() => {
+        /*dispatch(updateUserDailyCalorie(currentUser.userInfo.uid,50, {
+            protein: 3,
+            carbs: 3,
+            fat: 3,
+            sugar: 3,
+        }));*/
         CalcFill();
         
     }, [dayCalorie]);

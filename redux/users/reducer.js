@@ -4,7 +4,7 @@ import { fetchUsers } from './action';
 
 const initialState = {
     availableUsers: '',
-    
+
     currentUser: {
         uid: '',
         name: '',
@@ -28,7 +28,10 @@ const usersReducer = (state = initialState, action) => {
             return { ...state, currentUser: action.payload };
 
         case ADD_USER:
-            return { ...state ,currentUser: action.payload};
+            return { ...state, currentUser: action.payload };
+
+        case UPDATE_USER:
+            return { ...state , currentUser: action.payload };
 
 
     }

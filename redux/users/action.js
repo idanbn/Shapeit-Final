@@ -7,7 +7,7 @@ export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 
 
 import { ref, set, onValue } from "firebase/database";
-import { createUser, getUserById } from "../../FireBase/FireStore/Users/action";
+import { createUser, getUserById, updateDailyCalorie } from "../../FireBase/FireStore/Users/action";
 import { auth, rt_db } from "../../FireBase/Users/reduce";
 
 
@@ -25,18 +25,20 @@ export const getUser = (uid) => async dispatch => {
 
 export const addUser = (userId, name, bmr) => async dispatch => {
 
+    let nutrionalvalues = {
+        protein: 0,
+        carbs: 0,
+        fat: 0,
+        sugar: 0
+    };
+
     let userData = {
         uid: userId,
         name: name,
         activeBMR: bmr,
         dailyCalorie: 0,
         isAdmin: false,
-        nutrionalvalues: {
-            protein: 0,
-            carbs: 0,
-            fat: 0,
-            sugar: 0
-        }
+        nutrionalvalues: nutrionalvalues
     }
     createUser(userId, userData);
 
@@ -48,12 +50,12 @@ export const addUser = (userId, name, bmr) => async dispatch => {
 };
 
 
-export const setUserdailyCalorie = (calorie, nutrionalValues) => async dispatch => {
+export const updateUserDailyCalorie = (userId, calorie, nutrionalValues) => async dispatch => {
 
-    updatedailyCalorie(calorie, nutrionalValues);
+    const userInfo = await updateDailyCalorie(userId, calorie, nutrionalValues);
 
     dispatch({
-        type: GET_USER_BY_ID,
+        type: UPDATE_USER,
         payload: userInfo
     });
 
