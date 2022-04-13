@@ -48,7 +48,7 @@ const NutritionalValuesCard = (props) => {
             <BorderCard >
 
                 <Icon name={props.iconName} />
-                <Text style={styles.borderText}>{props.nutritionalValue}g</Text>
+                <Text style={styles.borderText}>{props.nutritionalValue | 0}g</Text>
 
             </BorderCard>
             <Text style={styles.nutritionalNameText}>{props.nutritionalName}</Text>

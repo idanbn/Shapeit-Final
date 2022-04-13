@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import { Userdb } from '../../Localdbs';
-import {useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { COLORS, icons } from '../../constants';
 import { auth } from '../../FireBase/Users/reduce';
@@ -22,17 +22,12 @@ const DayCalorieCircular = ({ navigation }) => {
     const [fill, setFill] = useState(2052);
 
     useEffect(() => {
-        /*dispatch(updateUserDailyCalorie(currentUser.userInfo.uid,50, {
-            protein: 3,
-            carbs: 3,
-            fat: 3,
-            sugar: 3,
-        }));*/
-        CalcFill();
-        
-    }, [dayCalorie]);
 
- 
+        CalcFill();
+
+    }, [dayCalorie, currentUser]);
+
+
     const CalcFill = () => {
         setDayCalorie(currentUser.userInfo.dailyCalorie);
         setMaxCalorie(currentUser.userInfo.activeBMR);
@@ -111,7 +106,7 @@ const TextCircular = (props) => {
 
             <View>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.calorieText}>{props.day_calorie}</Text>
+                    <Text style={styles.calorieText}>{props.day_calorie | 0}</Text>
                     <Text style={styles.kcalText}> Kcal </Text>
                 </View>
                 <View style={{ alignItems: 'center' }}>

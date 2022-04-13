@@ -4,10 +4,12 @@ export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_ADMIN = 'UPDATE_USER_ADMIN';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+export const UPDATE_USER_DAILY = 'UPDATE_USER_DAILY';
+export const UPDATE_USER_DAILY_NEGATIVE = 'UPDATE_USER_DAILY_NEGATIVE';
 
 
 import { ref, set, onValue } from "firebase/database";
-import { createUser, getUserById, updateDailyCalorie } from "../../FireBase/FireStore/Users/action";
+import { createUser, getUserById, updateDailyCalorie, updateNegativeDailyCalorie } from "../../FireBase/FireStore/Users/action";
 import { auth, rt_db } from "../../FireBase/Users/reduce";
 
 
@@ -55,7 +57,18 @@ export const updateUserDailyCalorie = (userId, calorie, nutrionalValues) => asyn
     const userInfo = await updateDailyCalorie(userId, calorie, nutrionalValues);
 
     dispatch({
-        type: UPDATE_USER,
+        type: UPDATE_USER_DAILY,
+        payload: userInfo
+    });
+
+};
+
+export const updateNegativeUserDailyCalorie = (userId, calorie, nutrionalValues) => async dispatch => {
+
+    const userInfo = await updateNegativeDailyCalorie(userId, calorie, nutrionalValues);
+
+    dispatch({
+        type: UPDATE_USER_DAILY_NEGATIVE,
         payload: userInfo
     });
 

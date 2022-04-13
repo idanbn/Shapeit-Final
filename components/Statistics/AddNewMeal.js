@@ -10,6 +10,8 @@ import { addBreakfast, addLunch, addDinner } from '../../redux/meals/action';
 
 import { COLORS } from '../../constants';
 import { MealInformation } from '../../API/FoodAPI';
+import { auth } from '../../FireBase/Users/reduce';
+import { updateUserDailyCalorie } from '../../redux/users/action';
 
 
 
@@ -38,12 +40,21 @@ const AddNewMeal = (props) => {
             calories: mealInfo.nutrition.nutrients.filter(obj => obj.name == 'Calories')[0].amount,
 
         }
+
+        dispatch(updateUserDailyCalorie(auth.currentUser.uid, data.calories, {
+            protein: data.protein,
+            carbs: data.carbs,
+            fat: data.fat,
+            sugar: data.sugar,
+        }));
+
         if (props.name == 'Breakfast')
             dispatch(addBreakfast({ ...data, mealId: random_key }));
         if (props.name == 'Lunch')
             dispatch(addLunch({ ...data, mealId: random_key }));
         if (props.name == 'Dinner')
             dispatch(addDinner({ ...data, mealId: random_key }));
+
 
     }
 

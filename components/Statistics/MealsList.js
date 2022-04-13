@@ -7,6 +7,7 @@ import { fetchMeals, removeMeal } from '../../redux/meals/action';
 import { COLORS, icons } from '../../constants';
 
 import AddNewMeal from './AddNewMeal';
+import { updateNegativeUserDailyCalorie } from '../../redux/users/action';
 
 
 
@@ -14,6 +15,8 @@ import AddNewMeal from './AddNewMeal';
 const MealsList = (props) => {
 
     const { date, breakfast, lunch, dinner } = useSelector(state => state.mealsReducer);
+    const { currentUser } = useSelector(state => state.usersReducer);
+
     const dispatch = useDispatch();
 
 
@@ -40,7 +43,16 @@ const MealsList = (props) => {
             <MealText data={item} />
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => dispatch(removeMeal(props.dataName, item.mealId))}
+                onPress={() => {
+                    let nutrionalvalues = {
+                        protein: item.protein,
+                        carbs: item.carbs,
+                        fat: item.fat,
+                        sugar: item.sugar
+                    }
+                    dispatch(updateNegativeUserDailyCalorie(currentUser.userInfo.uid, item.calories, nutrionalvalues))
+                    dispatch(removeMeal(props.dataName, item.mealId))
+                }}
             >
                 <Image
                     source={icons.like}

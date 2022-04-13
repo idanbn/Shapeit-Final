@@ -50,9 +50,26 @@ const updateDailyCalorie = async (userId, calorie, nutrionalValues) => {
             sugar: nutrionalValues.sugar + userdata.userInfo.nutrionalvalues.sugar,
         },
     });
-    
-    return await getUserById(userId) 
+
+    return await getUserById(userId)
 };
 
 
-export { getUserById, createUser, updateDailyCalorie };
+const updateNegativeDailyCalorie = async (userId, calorie, nutrionalValues) => {
+
+    const userdata = await getUserById(userId);
+
+    await updateDoc(doc(firestore_db, "users", userId), {
+        dailyCalorie: userdata.userInfo.dailyCalorie - calorie,
+        nutrionalvalues: {
+            protein: userdata.userInfo.nutrionalvalues.protein - nutrionalValues.protein,
+            carbs: userdata.userInfo.nutrionalvalues.carbs - nutrionalValues.carbs,
+            fat: userdata.userInfo.nutrionalvalues.fat - nutrionalValues.fat,
+            sugar: userdata.userInfo.nutrionalvalues.sugar - nutrionalValues.sugar,
+        },
+    });
+
+    return await getUserById(userId)
+};
+
+export { getUserById, createUser, updateDailyCalorie, updateNegativeDailyCalorie };
