@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { useSelector } from 'react-redux';
 import { COLORS, images } from '../../constants';
 
 import { Userdb } from '../../Localdbs';
@@ -46,6 +47,8 @@ const ValueAndName = (props) => {
 };
 
 const CardTexts = (props) => {
+    const { currentUser } = useSelector(state => state.usersReducer);
+
     return (
         <View>
             <Text style={styles.firstText}> Feeling Better! </Text>
@@ -53,8 +56,9 @@ const CardTexts = (props) => {
             <Text style={styles.secondText}> healty food </Text>
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: 190 }}>
-                <ValueAndName name='Protein' value={Userdb[0].nutritionalValues.protein} g_cal='g' />
-                <ValueAndName name='Calories' value={Userdb[0].calorie} g_cal='kcal' />
+
+                <ValueAndName name='Protein' value={currentUser.userInfo ? currentUser.userInfo.nutrionalvalues.protein | 0 : 40} g_cal='g' />
+                <ValueAndName name='Calories' value={currentUser.userInfo ? currentUser.userInfo.dailyCalorie | 0 : 40} g_cal='kcal' />
 
             </View>
         </View>

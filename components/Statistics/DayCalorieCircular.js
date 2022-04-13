@@ -29,8 +29,8 @@ const DayCalorieCircular = ({ navigation }) => {
 
 
     const CalcFill = () => {
-        setDayCalorie(currentUser.userInfo.dailyCalorie);
-        setMaxCalorie(currentUser.userInfo.activeBMR);
+        setDayCalorie(currentUser.userInfo ? currentUser.userInfo.dailyCalorie : 40);
+        setMaxCalorie(currentUser.userInfo ? currentUser.userInfo.activeBMR : 80);
         setFill(Math.round((100 * dayCalorie) / maxCalorie))
     }
 

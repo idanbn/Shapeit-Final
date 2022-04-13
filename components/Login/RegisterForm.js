@@ -5,20 +5,40 @@ import { Formik } from 'formik'
 import { auth } from '../../FireBase/Users/reduce';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { COLORS } from '../../constants';
+import { addUser } from '../../redux/users/action';
+import { useDispatch } from 'react-redux';
 
 const RegisterForm = (props) => {
+    const dispatch = useDispatch();
+
+    const calcBMR = (sex, weight, height, age) => {
+        const s = 0;
+        /////////// where s is +5 for males and -161 for females.
+        if (sex == 'females')
+            s = -161;
+        else if (sex == 'males')
+            s = 5;
+
+        /////////// BMR (kcal / day) = 10 * weight (kg) + 6.25 * height (cm) – 5 * age (y) + s (kcal / day),
+        const BMR = (10 * weight) + (6.25 * height) - (5 * age) + s
+
+        return BMR;
+
+    }
 
     const handleSignUp = async (userName, email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-
                 //add user name
                 updateProfile(user, {
                     displayName: userName,
                     //photoURL: "https://example.com/jane-q-user/profile.jpg"
                 }).then(() => {
                     // Profile updated!
+                    // calcBMR(sex, weight, height, age)
+                    dispatch(addUser(user.uid, user.displayName, 1517));
+
                 }).catch((error) => {
                     // An error occurred
                 });
