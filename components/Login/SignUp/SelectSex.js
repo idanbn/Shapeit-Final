@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
   import { StyleSheet } from 'react-native';
   import { SelectCountry } from 'react-native-element-dropdown';
+import { COLORS } from '../../../constants';
 
   const local_data = [
     {

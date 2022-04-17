@@ -9,7 +9,11 @@ import { addUser } from '../../redux/users/action';
 import { useDispatch } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import SelectSex from './SignUp/SelectSex';
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 const RegisterForm = (props) => {
     const dispatch = useDispatch();
@@ -34,7 +38,7 @@ const RegisterForm = (props) => {
             else
                 alert('height must to be between 120 - 220');
         }
-        
+
 
         return false;
 
@@ -49,7 +53,7 @@ const RegisterForm = (props) => {
             s = 5;
 
 
-            console.log(s);
+        console.log(s);
 
         /////////// BMR (kcal / day) = 10 * weight (kg) + 6.25 * height (cm) – 5 * age (y) + s (kcal / day),
         const BMR = (10 * weight) + (6.25 * height) - (5 * age) + s
@@ -111,10 +115,9 @@ const RegisterForm = (props) => {
 
 
                                 if (isNullish) {
-                                    if (validValue(values.age, 'age') && validValue(values.weight, 'weight') && validValue(values.height, 'height') ) {
-                                        console.log('222')
+                                    if (validValue(values.age, 'age') && validValue(values.weight, 'weight') && validValue(values.height, 'height')) {
                                         const BMR = calcBMR(values.sex, values.weight, values.height, values.age);
-                                       // handleSignUp(TemporaryValues.userName, TemporaryValues.email, TemporaryValues.password, BMR);
+                                        handleSignUp(TemporaryValues.userName, TemporaryValues.email, TemporaryValues.password, BMR);
                                     }
 
                                 }
@@ -135,7 +138,7 @@ const RegisterForm = (props) => {
                                     >
 
                                         <TouchableOpacity
-                                            style={{ marginLeft: 40 }}
+                                            style={{ marginLeft: 46 }}
                                             onPress={() => setNextSelected(false)}
                                         >
                                             <MaterialIcons
@@ -149,43 +152,65 @@ const RegisterForm = (props) => {
 
                                             <Text style={styles.inputText}> Age </Text>
 
-                                            <TextInput
-                                                placeholder="Age"
-                                                value={props.values.age}
-                                                onChangeText={props.handleChange('age')}
-                                                style={styles.input}
-                                                keyboardType="numeric"
-                                                maxLength={2}
+                                            <View style={styles.inputcont}>
+                                                <MaterialCommunityIcons
+                                                    name='calendar-month-outline'
+                                                    size={22}
+                                                    color={COLORS.icons}
+                                                    style={{ position: 'absolute', zIndex: 200, alignSelf: 'center', marginLeft: 12 }}
+                                                />
+                                                <TextInput
+                                                    placeholder="Age"
+                                                    value={props.values.age}
+                                                    onChangeText={props.handleChange('age')}
+                                                    style={styles.input}
+                                                    keyboardType="numeric"
+                                                    maxLength={2}
 
-                                            />
+                                                />
+                                            </View>
 
                                             <Text style={styles.inputText}> Weight </Text>
 
-                                            <TextInput
-                                                placeholder="Weight"
-                                                value={props.values.weight}
-                                                onChangeText={props.handleChange('weight')}
-                                                style={styles.input}
-                                                keyboardType="numeric"
-                                                maxLength={3}
+                                            <View style={styles.inputcont}>
+                                                <MaterialCommunityIcons
+                                                    name='weight-kilogram'
+                                                    size={22}
+                                                    color={COLORS.icons}
+                                                    style={{ position: 'absolute', zIndex: 200, alignSelf: 'center', marginLeft: 12 }}
+                                                />
+                                                <TextInput
+                                                    placeholder="Weight"
+                                                    value={props.values.weight}
+                                                    onChangeText={props.handleChange('weight')}
+                                                    style={styles.input}
+                                                    keyboardType="numeric"
+                                                    maxLength={3}
 
 
-                                            />
-
+                                                />
+                                            </View>
                                             <Text style={styles.inputText}> Height </Text>
 
+                                            <View style={styles.inputcont}>
+                                                <MaterialCommunityIcons
+                                                    name='human-male-height'
+                                                    size={22}
+                                                    color={COLORS.icons}
+                                                    style={{ position: 'absolute', zIndex: 200, alignSelf: 'center', marginLeft: 12 }}
+                                                />
+                                                <TextInput
+                                                    placeholder="Height"
+                                                    value={props.values.height}
+                                                    onChangeText={props.handleChange('height')}
+                                                    style={styles.input}
+                                                    keyboardType="numeric"
+                                                    maxLength={3}
+                                                    onBlur={() => validValue(props.values, 'Height')}
 
-                                            <TextInput
-                                                placeholder="Height"
-                                                value={props.values.height}
-                                                onChangeText={props.handleChange('height')}
-                                                style={styles.input}
-                                                keyboardType="numeric"
-                                                maxLength={3}
-                                                onBlur={() => validValue(props.values, 'Height')}
 
-
-                                            />
+                                                />
+                                            </View>
 
                                             <Text style={styles.inputText}> Sex </Text>
 
@@ -245,34 +270,58 @@ const RegisterForm = (props) => {
 
                                             <Text style={styles.inputText}> Name </Text>
 
-                                            <TextInput
-                                                placeholder="Name"
-                                                value={props.values.userName}
-                                                onChangeText={props.handleChange('userName')}
-                                                style={styles.input}
-                                            />
+                                            <View style={styles.inputcont}>
+                                                <FontAwesome
+                                                    name='user'
+                                                    size={22}
+                                                    color={COLORS.icons}
+                                                    style={{ position: 'absolute', zIndex: 200, alignSelf: 'center', marginLeft: 12 }}
+                                                />
+                                                <TextInput
+                                                    placeholder="Name"
+                                                    value={props.values.userName}
+                                                    onChangeText={props.handleChange('userName')}
+                                                    style={styles.input}
+                                                />
+                                            </View>
 
                                             <Text style={styles.inputText}> Email </Text>
 
-                                            <TextInput
-                                                placeholder="Email"
-                                                value={props.values.email}
-                                                onChangeText={props.handleChange('email')}
-                                                style={styles.input}
+                                            <View style={styles.inputcont}>
+                                                <MaterialIcons
+                                                    name='email'
+                                                    size={22}
+                                                    color={COLORS.icons}
+                                                    style={{ position: 'absolute', zIndex: 200, alignSelf: 'center', marginLeft: 10 }}
+                                                />
+                                                <TextInput
+                                                    placeholder="Email"
+                                                    value={props.values.email}
+                                                    onChangeText={props.handleChange('email')}
+                                                    style={styles.input}
 
-                                            />
+                                                />
+                                            </View>
 
                                             <Text style={styles.inputText}> Password </Text>
 
-                                            <TextInput
-                                                placeholder="Password"
-                                                value={props.values.password}
-                                                onChangeText={props.handleChange('password')}
-                                                style={styles.input}
-                                                secureTextEntry
+                                            <View style={styles.inputcont}>
+                                                <MaterialIcons
+                                                    name='lock-outline'
+                                                    size={22}
+                                                    color={COLORS.icons}
+                                                    style={{ position: 'absolute', zIndex: 200, alignSelf: 'center', marginLeft: 10 }}
+                                                />
+                                                <TextInput
+                                                    placeholder="Password"
+                                                    value={props.values.password}
+                                                    onChangeText={props.handleChange('password')}
+                                                    style={styles.input}
+                                                    secureTextEntry
 
-                                            />
+                                                />
 
+                                            </View>
                                         </View>
                                         {
                                             Object.values(props.values).every(value => { if (value === '') { return false; } return true; }) ?
@@ -303,14 +352,19 @@ const CostumBottom = (props) => (
     >
         <TouchableOpacity
             onPress={() => props.handleSubmit()}
-            style={styles.bottom}
-        >
+            style={{ width: '50%' }}
+            activeOpacity={0.7}
 
-            <View>
-                <Text style={styles.bottomText}>{props.name}</Text>
-            </View>
+        >
+            <LinearGradient colors={[COLORS.border, COLORS.icons, COLORS.card,]} style={styles.linearGradient}>
+
+                <View>
+                    <Text style={styles.bottomText}>{props.name}</Text>
+                </View>
+            </LinearGradient>
 
         </TouchableOpacity>
+
     </Animatable.View>
 );
 
@@ -323,29 +377,33 @@ const styles = StyleSheet.create({
         width: '80%',
         marginLeft: 40,
     },
+    inputcont: {
+        flexDirection: 'row',
+    },
     input: {
         backgroundColor: 'white',
-        paddingHorizontal: 15,
-        paddingVertical: 16,
+        paddingHorizontal: 26,
+        paddingVertical: 20,
         borderRadius: 6,
+        width: '100%',
+        marginLeft: 8,
         marginTop: 4,
-
     },
     inputText: {
         color: COLORS.primary,
-        marginTop: 16
+        marginTop: 12
     },
-    bottom: {
-        marginTop: 30,
-        backgroundColor: COLORS.icons,
-        padding: 12,
-        borderRadius: 30,
-        width: 150,
-        alignItems: 'center',
-    },
+
     bottomText: {
         color: 'white',
         fontWeight: '600'
+    },
+    linearGradient: {
+        marginTop: 21,
+        backgroundColor: COLORS.icons,
+        padding: 18,
+        borderRadius: 22,
+        alignItems: 'center',
     },
 })
 

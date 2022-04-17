@@ -70,8 +70,8 @@ const SlideModel = (props) => {
             onRequestClose={() => props.setModelSelcted(false)}
 
         >
-            <TouchableWithoutFeedback onPress={() => props.setModelSelcted(false)}>
-                <View style={{flex:1}}>
+            <TouchableWithoutFeedback onPress={() => { props.setModelSelcted(false); props.setNextSelected ? props.setNextSelected(false) : null; }}>
+                <View style={{ flex: 1 }}>
                     <ModelContant setModelSelcted={props.setModelSelcted} setNextSelected={props.setNextSelected} >
                         {props.children}
                     </ModelContant>

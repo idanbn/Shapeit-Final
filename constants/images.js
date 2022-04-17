@@ -28,6 +28,8 @@ const sarawak_laksa = require("../assets/images/sarawak-laksa.jpg");
 const sushi = require("../assets/images/sushi.jpg");
 const teh_c_peng = require("../assets/images/teh-c-peng.jpg");
 const tomato_pasta = require("../assets/images/tomato-pasta.jpg");
+const applogo = require("../assets/images/applogo.png");
+
 
 export default {
     avatar_1,
@@ -46,7 +48,7 @@ export default {
     honey_mustard_chicken_burger,
     hot_dog_restaurant,
     ice_kacang,
-
+    applogo,
     japanese_restaurant,
     kek_lapis_shop,
     kek_lapis,

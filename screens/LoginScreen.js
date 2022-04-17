@@ -6,15 +6,20 @@ import { auth } from '../FireBase/Users/reduce';
 import { LogBox } from 'react-native';
 import LoginForm from '../components/Login/LoginForm'
 import RegisterForm from '../components/Login/RegisterForm';
-import { COLORS } from '../constants';
+import { COLORS, images } from '../constants';
 import { useDispatch } from 'react-redux';
 import { addUser, getUser } from '../redux/users/action';
 import * as Animatable from 'react-native-animatable';
+import { LinearGradient } from 'expo-linear-gradient';
+import * as Font from 'expo-font';
+import { useFonts } from 'expo-font';
+
 
 LogBox.ignoreAllLogs();
 
 
 const LoginScreen = () => {
+
 
     const dispatch = useDispatch();
 
@@ -26,6 +31,7 @@ const LoginScreen = () => {
     const navigation = useNavigation()
 
     useEffect(() => {
+
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 dispatch(getUser(user.uid));
@@ -43,45 +49,75 @@ const LoginScreen = () => {
 
         <View style={styles.container}>
 
-            <View style={{ position: 'absolute', paddingBottom: 530 }} >
+            <View style={{ position: 'absolute' }} >
+                <View style={{ marginBottom: Dimensions.get('window').height / 2.9 }}>
+                    <Animatable.Text
+                        animation="bounceIn"
+                        duration={2000}
+                        style={{
+                            padding: 14,
+                            fontSize: 70,
+                            color: COLORS.primary,
+                            textShadowColor: '#000',
+                            fontWeight: 'bold',
+                            textShadowRadius: 10,
+                            textShadowOffset: { width: 0.4, height: 0.4 },
+                            fontFamily: 'Lobster-Regular'
 
-                <Animatable.Text
-                    animation="bounceIn"
-                    duration={2000}
-                    style={{
-                        fontSize: 50,
-                        color: COLORS.primary,
-                        textShadowColor: '#000',
-                        fontWeight: 'bold',
-                        textShadowRadius: 3,
-                        textShadowOffset: { width: 0.4, height: 0.4 }
-                    }}>
-                    Food Tracker
-                </Animatable.Text>
+                        }}>
+                        Food Tracker
+                    </Animatable.Text>
 
+                    <Animatable.Image
+                        animation="bounceIn"
+                        duration={2000}
+                        delay={1000}
+                        source={images.applogo}
+                        resizeMode='contain'
+                        style={{
+                            width: 180,
+                            height: 250,
+                            alignSelf: 'center',
+                            marginTop: 50
+                        }}
+                    >
+                    </Animatable.Image>
+
+                </View>
             </View>
+
+
 
             <Animatable.View
                 animation="bounceIn"
                 duration={6000}
                 style={styles.buttonContainer}
             >
-
                 <TouchableOpacity
-                    style={styles.button}
                     onPress={() => setLoginSelcted(true)}
-                >
+                    style={{ width: '100%' }}
+                    activeOpacity={0.7}
 
-                    <Text style={styles.buttonText}>Login</Text>
+
+                >
+                    <LinearGradient colors={[COLORS.border, COLORS.icons, COLORS.card,]} style={styles.linearGradient}>
+
+                        <Text style={styles.buttonText}>Login</Text>
+                    </LinearGradient>
+
                 </TouchableOpacity>
 
-                    <LoginForm setModelSelcted={setLoginSelcted} modelSelcted={loginSelcted} />
+                <LoginForm setModelSelcted={setLoginSelcted} modelSelcted={loginSelcted} />
 
                 <TouchableOpacity
-                    style={[styles.button, styles.buttonOutline]}
                     onPress={() => setRegiisterSelcted(true)}
+                    style={{ width: '100%' }}
+                    activeOpacity={0.7}
                 >
-                    <Text style={styles.buttonOutlineText}>Register</Text>
+                    <LinearGradient colors={[COLORS.border, COLORS.card, COLORS.icons]} style={[styles.linearGradient, { marginTop: 16, }]}>
+                        <Text style={styles.buttonOutlineText}>Register</Text>
+                    </LinearGradient>
+
                 </TouchableOpacity>
 
                 <RegisterForm setModelSelcted={setRegiisterSelcted} modelSelcted={registerSelcted} />
@@ -97,8 +133,9 @@ const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: COLORS.darkgray
     },
     inputContainer: {
         width: '80%'
@@ -116,17 +153,10 @@ const styles = StyleSheet.create({
         marginTop: windowHeight / 1.5,
 
     },
-    button: {
-        backgroundColor: COLORS.card,
-        borderColor: COLORS.border,
-        width: '100%',
+    linearGradient: {
         padding: 22,
         borderRadius: 30,
         alignItems: 'center',
-    },
-    buttonOutline: {
-        backgroundColor: COLORS.border,
-        marginTop: 16,
     },
     buttonText: {
         color: 'white',
