@@ -9,6 +9,7 @@ import RegisterForm from '../components/Login/RegisterForm';
 import { COLORS } from '../constants';
 import { useDispatch } from 'react-redux';
 import { addUser, getUser } from '../redux/users/action';
+import * as Animatable from 'react-native-animatable';
 
 LogBox.ignoreAllLogs();
 
@@ -44,7 +45,9 @@ const LoginScreen = () => {
 
             <View style={{ position: 'absolute', paddingBottom: 530 }} >
 
-                <Text
+                <Animatable.Text
+                    animation="bounceIn"
+                    duration={2000}
                     style={{
                         fontSize: 50,
                         color: COLORS.primary,
@@ -54,11 +57,15 @@ const LoginScreen = () => {
                         textShadowOffset: { width: 0.4, height: 0.4 }
                     }}>
                     Food Tracker
-                </Text>
+                </Animatable.Text>
 
             </View>
 
-            <View style={styles.buttonContainer}>
+            <Animatable.View
+                animation="bounceIn"
+                duration={6000}
+                style={styles.buttonContainer}
+            >
 
                 <TouchableOpacity
                     style={styles.button}
@@ -79,7 +86,7 @@ const LoginScreen = () => {
 
                 <RegisterForm setModelSelcted={setRegiisterSelcted} modelSelcted={registerSelcted} />
 
-            </View>
+            </Animatable.View>
         </View >
 
     );
