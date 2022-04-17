@@ -82,7 +82,7 @@ const CardTexts = (props) => {
 
 const MealCard = (props) => {
     return (
-        <ImageBackground source={props.backgroundImage} borderRadius={20} style={styles.card}>
+        <ImageBackground source={props.backgroundImage} resizeMode='cover' borderRadius={20} style={styles.card}>
             {props.children}
         </ImageBackground>
     );

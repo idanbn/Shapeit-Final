@@ -396,7 +396,9 @@ const styles = StyleSheet.create({
 
     bottomText: {
         color: 'white',
-        fontWeight: '600'
+        fontWeight: '600',
+        fontSize: 16,
+        fontFamily: 'Lobster-Regular'
     },
     linearGradient: {
         marginTop: 21,

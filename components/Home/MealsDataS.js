@@ -1,26 +1,34 @@
-import React from 'react';
-import { View, StyleSheet, Text, FlatList, Image } from 'react-native';
+import { React, useState } from 'react';
+import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import Entypo from 'react-native-vector-icons/Entypo'
+import * as Animatable from 'react-native-animatable';
 
 import { COLORS } from '../../constants';
 
 import NutritionalValues from './NutritionalValues';
 import SlideModel from './SlideModel';
+import AddNewMeal from '../Statistics/AddNewMeal';
+import appTheme from '../../constants/theme';
 
 const MealsDataS = ({ ...props }) => {
-    return (
-        <SlideModel setModelSelcted={props.setModelSelcted} modelSelcted={props.modelSelcted} >
+    const [addMeal, setAddMeal] = useState(false);
 
-            <RenderTitele data={props.data} />
+    return (
+        <SlideModel setModelSelcted={props.setModelSelcted} modelSelcted={props.modelSelcted} setAddMealselected={setAddMeal} >
+            {addMeal ?
+                <SelectMealTime data={props.data} setAddMealselected={setAddMeal} />
+                : null
+            }
+            <RenderTitele data={props.data} setAddMealselected={setAddMeal} />
             <NutritionalValues data={props.data.nutrition ? props.data.nutrition.nutrients : null} />
             <RenderIngredients data={props.data.extendedIngredients ? props.data.extendedIngredients : null} />
-
 
         </SlideModel>
 
     );
 }
+
 
 const RenderTitele = (props) => {
     return (
@@ -28,18 +36,55 @@ const RenderTitele = (props) => {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 14, }}>
                 <Text numberOfLines={2} style={{ fontSize: 28, fontWeight: '700', width: 300 }} >{props.data.title}</Text>
 
-                <View style={{ flexDirection: 'row', marginTop: 6 }}>
+                <View key={props.data.id}>
+                    <View style={{ flexDirection: 'row', marginTop: 6 }}>
 
-                    <Fontisto
-                        name='clock'
-                        style={{
-                            fontSize: 23,
-                            color: COLORS.darkgray,
-                            fontWeight: '600',
-                            opacity: 0.92
-                        }}
-                    />
-                    <Text style={{ fontSize: 19, fontWeight: '600', color: COLORS.darkgray, opacity: 0.92 }} >  {props.data.readyInMinutes} Min</Text>
+                        <Fontisto
+                            name='clock'
+                            style={{
+                                fontSize: 23,
+                                color: COLORS.darkgray,
+                                fontWeight: '600',
+                                opacity: 0.92
+                            }}
+                        />
+                        <Text style={{ fontSize: 19, fontWeight: '600', color: COLORS.darkgray, opacity: 0.92 }} >  {props.data.readyInMinutes} Min</Text>
+                    </View>
+
+                    <View>
+                        <TouchableOpacity
+                            style={{
+                                backgroundColor: COLORS.border,
+                                paddingBottom: 10,
+                                marginVertical: 8,
+                                borderRadius: 14,
+                                width: 100,
+                                alignSelf: 'center',
+                                alignItems: 'center',
+                            }}
+                            activeOpacity={0.7}
+                            onPress={() => props.setAddMealselected(true)}
+                        >
+
+                            <View
+                                style={{ flexDirection: 'row' }}
+                            >
+                                <Text style={{ paddingTop: 11 }}> Add Meal</Text>
+                                <Entypo
+                                    name='add-to-list'
+                                    style={{
+                                        fontSize: 22,
+                                        fontWeight: '500',
+                                        color: COLORS.icons,
+                                        paddingTop: 7,
+                                        paddingLeft: 8
+
+                                    }}
+                                />
+                            </View>
+
+                        </TouchableOpacity>
+                    </View>
 
                 </View>
 
@@ -49,6 +94,37 @@ const RenderTitele = (props) => {
         </View>
     );
 
+};
+
+const SelectMealTime = (props) => {
+    return (
+        <Animatable.View
+            animation="bounceIn"
+            duration={2000}
+            style={{
+                position: 'absolute',
+                marginTop: appTheme.SIZES.height / 6.5,
+                zIndex: 999,
+                backgroundColor: COLORS.card,
+                borderRadius: 10,
+                alignSelf: 'center',
+
+            }}>
+            <View
+                style={{
+                    padding: 20,
+                    paddingHorizontal: 40,
+                    alignItems: 'center',
+                }}
+            >
+                <AddNewMeal MealId={props.data} name='Breakfast' setAddMealselected={props.setAddMealselected} />
+                <AddNewMeal MealId={props.data} name='Lunch' setAddMealselected={props.setAddMealselected} />
+                <AddNewMeal MealId={props.data} name='Dinner' setAddMealselected={props.setAddMealselected} />
+
+            </View>
+        </Animatable.View>
+
+    );
 };
 
 const RenderIngredients = (props) => {

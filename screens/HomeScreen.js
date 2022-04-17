@@ -15,14 +15,14 @@ const HomeScreen = ({ navigation }) => {
 
     const [categorysData, setCategoryData] = useState(LocalCategorysdb);
     const [popularMealsData, setPopularMealsData] = useState(LocalMealsdb);
-    const [selectCategory, setSelectCategory] = useState('Noodles');
+    const [selectCategory, setSelectCategory] = useState('Rice');
 
     const [isSelcted, setIsSelcted] = useState(false);
     const [selectMealData, setSelectMealData] = useState('');
 
 
     useEffect(() => {
-        //PopularMealsData(selectCategory);
+        PopularMealsData(selectCategory);
 
     }, [selectCategory]);
 

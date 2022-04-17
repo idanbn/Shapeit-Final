@@ -1,12 +1,12 @@
 import { React, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchMeals, removeMeal } from '../../redux/meals/action';
 
 import { COLORS, icons } from '../../constants';
 
-import AddNewMeal from './AddNewMeal';
 import { updateNegativeUserDailyCalorie } from '../../redux/users/action';
 
 
@@ -54,19 +54,17 @@ const MealsList = (props) => {
                     dispatch(removeMeal(props.dataName, item.mealId))
                 }}
             >
-                <Image
-                    source={icons.like}
-                    resizeMode='contain'
+
+                <MaterialCommunityIcons
+                    name='delete'
+                    size={26}
+                    color={COLORS.icons}
                     style={{
-                        height: 20,
-                        width: 20,
-                        tintColor: COLORS.icons,
                         marginTop: 25,
                         marginRight: 12
-
                     }}
-
                 />
+
             </TouchableOpacity>
 
 
@@ -86,7 +84,6 @@ const MealsList = (props) => {
                 />
             </View>
 
-            <AddNewMeal name={props.dataName} MealId='243143' />
         </View>
     );
 }

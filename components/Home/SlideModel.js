@@ -29,7 +29,10 @@ const SlideModel = (props) => {
 
                     <View style={{ alignItems: 'center', marginTop: -40 }}>
                         <TouchableOpacity
-                            onPress={() => props.setModelSelcted(false)}
+                            onPress={() => {
+                                props.setModelSelcted(false);
+                                props.setAddMealselected(false);
+                            }}
                         >
 
                             <Ionicons
@@ -69,11 +72,11 @@ const SlideModel = (props) => {
         >
             <View
                 style={{
-                    flex:1,
+                    flex: 1,
                     backgroundColor: '#101',
                     opacity: 0.3,
-                    
-                    
+
+
                 }}
             />
 
@@ -85,7 +88,7 @@ const SlideModel = (props) => {
                 onRequestClose={() => props.setModelSelcted(false)}
 
             >
-                <ModelContant setModelSelcted={props.setModelSelcted} >
+                <ModelContant setModelSelcted={props.setModelSelcted} setAddMealselected={props.setAddMealselected} >
                     {props.children}
                 </ModelContant>
 

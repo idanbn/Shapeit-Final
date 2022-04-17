@@ -11,8 +11,6 @@ import { useDispatch } from 'react-redux';
 import { addUser, getUser } from '../redux/users/action';
 import * as Animatable from 'react-native-animatable';
 import { LinearGradient } from 'expo-linear-gradient';
-import * as Font from 'expo-font';
-import { useFonts } from 'expo-font';
 
 
 LogBox.ignoreAllLogs();
@@ -56,13 +54,13 @@ const LoginScreen = () => {
                         duration={2000}
                         style={{
                             padding: 14,
-                            fontSize: 70,
+                            fontSize: 86,
                             color: COLORS.primary,
                             textShadowColor: '#000',
                             fontWeight: 'bold',
-                            textShadowRadius: 10,
+                            textShadowRadius: 5,
                             textShadowOffset: { width: 0.4, height: 0.4 },
-                            fontFamily: 'Lobster-Regular'
+                            fontFamily: 'MsMadi-Regular'
 
                         }}>
                         Food Tracker
@@ -75,10 +73,11 @@ const LoginScreen = () => {
                         source={images.applogo}
                         resizeMode='contain'
                         style={{
-                            width: 180,
-                            height: 250,
+                            width: 200,
+                            height: 300,
                             alignSelf: 'center',
-                            marginTop: 50
+                            tintColor: COLORS.primary,
+                            
                         }}
                     >
                     </Animatable.Image>
@@ -135,13 +134,12 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: COLORS.darkgray
+        backgroundColor:'#e9f5f9'
     },
     inputContainer: {
         width: '80%'
     },
     input: {
-        backgroundColor: 'white',
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 10,
@@ -161,11 +159,15 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
         fontWeight: '700',
-        fontSize: 16,
+        fontSize: 18,
+        fontFamily: 'Lobster-Regular'
+
     },
     buttonOutlineText: {
         color: COLORS.icons,
         fontWeight: '700',
-        fontSize: 16,
+        fontSize: 18,
+        fontFamily: 'Lobster-Regular'
+
     },
 });

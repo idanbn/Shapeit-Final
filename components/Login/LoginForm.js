@@ -93,7 +93,7 @@ const LoginForm = (props) => {
                                     <LinearGradient colors={[COLORS.border, COLORS.icons, COLORS.card,]} style={styles.linearGradient}>
 
                                         <View>
-                                            <Text style={{ color: 'white', fontWeight: '600' }}>Login</Text>
+                                            <Text style={{ color: 'white', fontWeight: '700', fontSize: 17, fontFamily: 'Lobster-Regular' }}>Login</Text>
                                         </View>
                                     </LinearGradient>
 
