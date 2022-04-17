@@ -28,9 +28,13 @@ const SlideModel = (props) => {
                     <View style={{ flex: 1 }}>
                         {props.children}
                     </View>
-                    <View style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: 60 }}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: 10 }}>
                         <TouchableOpacity
-                            onPress={() => props.setModelSelcted(false)}
+                            onPress={() => {
+                                props.setModelSelcted(false);
+                                props.setNextSelected ? props.setNextSelected(false) : null;
+
+                            }}
                             style={{
                                 padding: 10,
                                 borderRadius: 30,
@@ -66,9 +70,13 @@ const SlideModel = (props) => {
             onRequestClose={() => props.setModelSelcted(false)}
 
         >
-            <ModelContant setModelSelcted={props.setModelSelcted} >
-                {props.children}
-            </ModelContant>
+            <TouchableWithoutFeedback onPress={() => props.setModelSelcted(false)}>
+                <View style={{flex:1}}>
+                    <ModelContant setModelSelcted={props.setModelSelcted} setNextSelected={props.setNextSelected} >
+                        {props.children}
+                    </ModelContant>
+                </View>
+            </TouchableWithoutFeedback>
 
         </Modal>
 

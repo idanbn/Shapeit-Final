@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { onAuthStateChanged } from 'firebase/auth';
 import { React, useEffect, useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Dimensions } from 'react-native';
 import { auth } from '../FireBase/Users/reduce';
 import { LogBox } from 'react-native';
 import LoginForm from '../components/Login/LoginForm'
@@ -75,7 +75,7 @@ const LoginScreen = () => {
                     <Text style={styles.buttonText}>Login</Text>
                 </TouchableOpacity>
 
-                <LoginForm setModelSelcted={setLoginSelcted} modelSelcted={loginSelcted} />
+                    <LoginForm setModelSelcted={setLoginSelcted} modelSelcted={loginSelcted} />
 
                 <TouchableOpacity
                     style={[styles.button, styles.buttonOutline]}
@@ -92,6 +92,7 @@ const LoginScreen = () => {
     );
 }
 export default LoginScreen;
+const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     container: {
@@ -110,24 +111,22 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     buttonContainer: {
-        width: '40%',
-        justifyContent: 'center',
+        width: '80%',
         alignItems: 'center',
-        marginTop: 650,
-        flexDirection: 'row',
+        marginTop: windowHeight / 1.5,
 
     },
     button: {
         backgroundColor: COLORS.card,
         borderColor: COLORS.border,
         width: '100%',
-        padding: 15,
+        padding: 22,
         borderRadius: 30,
         alignItems: 'center',
     },
     buttonOutline: {
-        backgroundColor: COLORS.card,
-        marginLeft: 28,
+        backgroundColor: COLORS.border,
+        marginTop: 16,
     },
     buttonText: {
         color: 'white',
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     buttonOutlineText: {
-        color: 'white',
+        color: COLORS.icons,
         fontWeight: '700',
         fontSize: 16,
     },

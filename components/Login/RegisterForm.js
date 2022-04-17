@@ -9,17 +9,47 @@ import { addUser } from '../../redux/users/action';
 import { useDispatch } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import SelectSex from './SignUp/SelectSex';
 
 const RegisterForm = (props) => {
     const dispatch = useDispatch();
 
+    const validValue = (values, parmeterName) => {
+        if (parmeterName === 'age') {
+            if (values > 15 && values < 100)
+                return true;
+            else
+                alert('age must to be between 16 - 99')
+
+        }
+        if (parmeterName === 'weight') {
+            if (values > 40 && values < 240)
+                return true;
+            else
+                alert('weight must to be between 40 - 240');
+        }
+        if (parmeterName === 'height') {
+            if (values > 120 && values < 220)
+                return true;
+            else
+                alert('height must to be between 120 - 220');
+        }
+        
+
+        return false;
+
+    }
+
     const calcBMR = (sex, weight, height, age) => {
         var s = 0;
         /////////// where s is +5 for males and -161 for females.
-        if (sex == 'female')
+        if (sex == '2')
             s = -161;
-        else if (sex == 'male')
+        else if (sex == '1')
             s = 5;
+
+
+            console.log(s);
 
         /////////// BMR (kcal / day) = 10 * weight (kg) + 6.25 * height (cm) – 5 * age (y) + s (kcal / day),
         const BMR = (10 * weight) + (6.25 * height) - (5 * age) + s
@@ -60,7 +90,7 @@ const RegisterForm = (props) => {
     const [nextSelected, setNextSelected] = useState(false);
 
     return (
-        <SlideModel setModelSelcted={props.setModelSelcted} modelSelcted={props.modelSelcted} >
+        <SlideModel setModelSelcted={props.setModelSelcted} modelSelcted={props.modelSelcted} setNextSelected={setNextSelected} >
 
             <View>
 
@@ -70,12 +100,26 @@ const RegisterForm = (props) => {
                         <Formik
                             initialValues={{ height: '', weight: '', age: '', sex: '' }}
                             onSubmit={(values) => {
-                                try {
-                                    const BMR = calcBMR(values.sex, values.weight, values.height, values.age);
-                                    handleSignUp(TemporaryValues.userName, TemporaryValues.email, TemporaryValues.password, BMR)
+
+                                const isNullish = Object.values(values).every(value => {
+                                    if (value === '') {
+                                        return false;
+                                    }
+
+                                    return true;
+                                });
+
+
+                                if (isNullish) {
+                                    if (validValue(values.age, 'age') && validValue(values.weight, 'weight') && validValue(values.height, 'height') ) {
+                                        console.log('222')
+                                        const BMR = calcBMR(values.sex, values.weight, values.height, values.age);
+                                       // handleSignUp(TemporaryValues.userName, TemporaryValues.email, TemporaryValues.password, BMR);
+                                    }
+
                                 }
-                                catch (error) {
-                                    console.log(error);
+                                else {
+                                    alert('Fill all fields')
                                 }
 
                             }}
@@ -97,47 +141,64 @@ const RegisterForm = (props) => {
                                             <MaterialIcons
                                                 name='arrow-back-ios'
                                                 size={24}
-                                                color='red'
+                                                color={COLORS.icons}
                                             />
                                         </TouchableOpacity>
 
                                         <View style={styles.inputContainer}>
+
+                                            <Text style={styles.inputText}> Age </Text>
 
                                             <TextInput
                                                 placeholder="Age"
                                                 value={props.values.age}
                                                 onChangeText={props.handleChange('age')}
                                                 style={styles.input}
+                                                keyboardType="numeric"
+                                                maxLength={2}
+
                                             />
+
+                                            <Text style={styles.inputText}> Weight </Text>
 
                                             <TextInput
                                                 placeholder="Weight"
                                                 value={props.values.weight}
                                                 onChangeText={props.handleChange('weight')}
                                                 style={styles.input}
+                                                keyboardType="numeric"
+                                                maxLength={3}
+
 
                                             />
+
+                                            <Text style={styles.inputText}> Height </Text>
+
 
                                             <TextInput
                                                 placeholder="Height"
                                                 value={props.values.height}
                                                 onChangeText={props.handleChange('height')}
                                                 style={styles.input}
+                                                keyboardType="numeric"
+                                                maxLength={3}
+                                                onBlur={() => validValue(props.values, 'Height')}
+
 
                                             />
 
-                                            <TextInput
-                                                placeholder="Sex"
-                                                value={props.values.sex}
-                                                onChangeText={props.handleChange('sex')}
-                                                style={styles.input}
-                                            />
+                                            <Text style={styles.inputText}> Sex </Text>
+
+
+                                            <SelectSex setValue={props.handleChange('sex')} value={props.values.sex} />
 
 
                                         </View>
+                                        {
+                                            Object.values(props.values).every(value => { if (value === '') { return false; } return true; }) ?
 
-                                        <CostumBottom handleSubmit={props.handleSubmit} name='Register' />
-
+                                                <CostumBottom handleSubmit={props.handleSubmit} name='Register' /> : null
+                                        }
                                     </Animatable.View>
 
                                 </View>
@@ -148,12 +209,23 @@ const RegisterForm = (props) => {
                         <Formik
                             initialValues={{ userName: '', email: '', password: '' }}
                             onSubmit={(values) => {
-                                //handleSignUp(values.userName, values.email, values.password)
 
-                                setNextSelected(nextSelected ? false : true);
-                                setTemporaryValues(values);
+                                const isNullish = Object.values(values).every(value => {
+                                    if (value === '') {
+                                        return false;
+                                    }
+
+                                    return true;
+                                });
 
 
+                                if (isNullish) {
+                                    setNextSelected(nextSelected ? false : true);
+                                    setTemporaryValues(values);
+                                }
+                                else {
+                                    alert('Fill all fields')
+                                }
                             }}
                         >
                             {(props) => (
@@ -171,12 +243,16 @@ const RegisterForm = (props) => {
 
                                         <View style={styles.inputContainer}>
 
+                                            <Text style={styles.inputText}> Name </Text>
+
                                             <TextInput
                                                 placeholder="Name"
                                                 value={props.values.userName}
                                                 onChangeText={props.handleChange('userName')}
                                                 style={styles.input}
                                             />
+
+                                            <Text style={styles.inputText}> Email </Text>
 
                                             <TextInput
                                                 placeholder="Email"
@@ -185,6 +261,8 @@ const RegisterForm = (props) => {
                                                 style={styles.input}
 
                                             />
+
+                                            <Text style={styles.inputText}> Password </Text>
 
                                             <TextInput
                                                 placeholder="Password"
@@ -195,11 +273,11 @@ const RegisterForm = (props) => {
 
                                             />
 
-
                                         </View>
-
-                                        <CostumBottom handleSubmit={props.handleSubmit} name='NEXT' />
-
+                                        {
+                                            Object.values(props.values).every(value => { if (value === '') { return false; } return true; }) ?
+                                                <CostumBottom handleSubmit={props.handleSubmit} name='NEXT' /> : null
+                                        }
                                     </Animatable.View>
 
                                 </View>
@@ -218,7 +296,11 @@ const RegisterForm = (props) => {
 
 const CostumBottom = (props) => (
 
-    <View style={{ alignItems: 'center' }}>
+    <Animatable.View
+        animation="bounceIn"
+        duration={1600}
+        style={{ alignItems: 'center' }}
+    >
         <TouchableOpacity
             onPress={() => props.handleSubmit()}
             style={styles.bottom}
@@ -229,13 +311,13 @@ const CostumBottom = (props) => (
             </View>
 
         </TouchableOpacity>
-    </View>
+    </Animatable.View>
 );
 
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 30,
+        marginTop: 14,
     },
     inputContainer: {
         width: '80%',
@@ -246,13 +328,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 16,
         borderRadius: 6,
-        marginTop: 10,
+        marginTop: 4,
 
     },
+    inputText: {
+        color: COLORS.primary,
+        marginTop: 16
+    },
     bottom: {
-        marginTop: 40,
+        marginTop: 30,
         backgroundColor: COLORS.icons,
-        padding: 10,
+        padding: 12,
         borderRadius: 30,
         width: 150,
         alignItems: 'center',

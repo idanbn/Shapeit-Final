@@ -5,6 +5,7 @@ import { Formik } from 'formik'
 import { auth } from '../../FireBase/Users/reduce';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { COLORS } from '../../constants';
+import * as Animatable from 'react-native-animatable';
 
 const LoginForm = (props) => {
 
@@ -30,7 +31,9 @@ const LoginForm = (props) => {
                     }}
                 >
                     {(props) => (
-                        <View>
+                        <Animatable.View
+                            animation="lightSpeedIn"
+                            duration={1600}>
 
                             <View style={styles.inputContainer}>
 
@@ -54,7 +57,14 @@ const LoginForm = (props) => {
                             </View>
 
 
-                            <View style={{ alignItems: 'center' }}>
+                            <Animatable.View
+                                animation="bounceIn"
+                                duration={1400}
+                                delay={900}
+                                style={{ alignItems: 'center' }}
+                            >
+
+
                                 <TouchableOpacity
                                     onPress={() => props.handleSubmit()}
                                     style={{
@@ -72,9 +82,9 @@ const LoginForm = (props) => {
                                     </View>
 
                                 </TouchableOpacity>
-                            </View>
+                            </Animatable.View>
 
-                        </View>
+                        </Animatable.View>
 
                     )}
                 </Formik>
