@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image } from 'react-native'
+import { useSelector } from 'react-redux';
 
 import { SIGNOUT } from '../FireBase/Users/action'
 import { auth } from '../FireBase/Users/reduce'
@@ -12,8 +13,9 @@ import FieldInfo from '../components/UserInfo/FieldInfo';
 
 
 const UserInfoScreen = ({ navigation }) => {
-
+    const { currentUser } = useSelector(state => state.usersReducer);
     const [updateSelect, setUpdateSelect] = useState(false);
+
     return (
 
         <SafeAreaView style={styles.safearea}>
@@ -36,22 +38,23 @@ const UserInfoScreen = ({ navigation }) => {
 
             <FieldInfo fieldName='name' fieldValue={auth.currentUser?.displayName} />
             <FieldInfo fieldName='email' fieldValue={auth.currentUser?.email} />
+            <FieldInfo fieldName='BMR' fieldValue={currentUser.userInfo?.activeBMR} />
+
 
             <View style={styles.container} >
+                {
+                    currentUser.userInfo.isAdmin ?
+                        <AdminButton navigation={navigation} />
+                        : null
+                }
 
                 <TouchableOpacity
                     onPress={() => setUpdateSelect(true)}
-                    style={{
-                        backgroundColor: COLORS.icons,
-                        padding: 20,
-                        borderRadius: 30,
-                        width: '50%',
-                        alignItems: 'center'
-                    }}ß
+                    style={[styles.button, { marginTop: 10 }]}
                 >
 
                     <View>
-                        <Text style={{ color: COLORS.white, fontSize: 18, fontWeight: '500' }}>Update Information</Text>
+                        <Text style={styles.buttonText}>Update Information</Text>
                     </View>
 
                 </TouchableOpacity>
@@ -69,6 +72,17 @@ const UserInfoScreen = ({ navigation }) => {
 
 
 }
+
+const AdminButton = ({ navigation, ...props }) => {
+    return (
+        <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('Admin')}
+        >
+            <Text style={styles.buttonText} >Go to Admin Screen</Text>
+        </TouchableOpacity>
+    );
+}
 export default UserInfoScreen
 
 const styles = StyleSheet.create({
@@ -81,5 +95,17 @@ const styles = StyleSheet.create({
         marginTop: 80,
         alignItems: 'center',
     },
+    button: {
+        backgroundColor: COLORS.icons,
+        padding: 20,
+        borderRadius: 30,
+        width: '50%',
+        alignItems: 'center'
+    },
+    buttonText: {
+        color: COLORS.white,
+        fontSize: 18,
+        fontWeight: '500'
+    }
 
 })
