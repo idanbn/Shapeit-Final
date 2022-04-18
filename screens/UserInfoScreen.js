@@ -44,7 +44,7 @@ const UserInfoScreen = ({ navigation }) => {
             <View style={styles.container} >
                 {
                     currentUser.userInfo.isAdmin ?
-                        <AdminButton navigation={navigation} />
+                        <AdminButton navigation={navigation} userInfo={currentUser?.userInfo} />
                         : null
                 }
 
@@ -77,7 +77,7 @@ const AdminButton = ({ navigation, ...props }) => {
     return (
         <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Admin')}
+            onPress={() => navigation.navigate('Admin', props.userInfo)}
         >
             <Text style={styles.buttonText} >Go to Admin Screen</Text>
         </TouchableOpacity>
