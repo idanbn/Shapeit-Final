@@ -1,6 +1,7 @@
 import { React, useEffect } from 'react';
 import { View, FlatList, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import * as Animatable from 'react-native-animatable';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchMeals, removeMeal } from '../../redux/meals/action';
@@ -73,7 +74,10 @@ const MealsList = (props) => {
 
 
     return (
-        <View>
+        <Animatable.View
+            animation="flipInX"
+            duration={1600}
+        >
             <View style={styles.container}>
                 <FlatList
                     keyExtractor={(item) => item.mealId}
@@ -84,7 +88,7 @@ const MealsList = (props) => {
                 />
             </View>
 
-        </View>
+        </Animatable.View>
     );
 }
 
