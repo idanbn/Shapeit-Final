@@ -7,6 +7,8 @@ import Daynutritionalvalues from '../components/Statistics/DayNutritionalValues'
 import MealsList from '../components/Statistics/MealsList';
 import MealsListHeader from '../components/Statistics/MealsListHeader';
 
+import { useSelector } from 'react-redux';
+import DrawerNavigator from '../navigation/DrawerNavigator';
 
 const StatisticsScreen = ({ navigation, route }) => {
 
@@ -31,35 +33,43 @@ const StatisticsScreen = ({ navigation, route }) => {
             setDinnerSelcted(true);
 
     }
+    const { drawerOpen } = useSelector(state => state.drawerReducer);
+
+    console.log(drawerOpen);
 
     return (
-        <SafeAreaView style={styles.safearea} >
-            <DayCalorieCircular navigation={navigation} />
-            <Daynutritionalvalues />
+        <View style={{ flex: 1 }}>
+            {drawerOpen ?
 
-            <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} >
+                <DrawerNavigator navigation={navigation} drawerOpen={drawerOpen} />
+                : null
+            }
 
-                <View key='1'>
-                    <MealsListHeader navigation={navigation} name='Breakfast' isSelect={BreakfastSelcted} IsSelectedHandler={setBreakfastSelcted} />
-                    {BreakfastSelcted ? <MealsList dataName={'Breakfast'} /> : null}
-                </View>
+            <SafeAreaView style={styles.safearea} >
+                <DayCalorieCircular navigation={navigation} />
+                <Daynutritionalvalues />
 
-                <View key='2'>
-                    <MealsListHeader navigation={navigation} name='Lunch' isSelect={LunchSelcted} IsSelectedHandler={setLunchSelcted} />
-                    {LunchSelcted ? <MealsList dataName={'Lunch'} /> : null}
-                </View>
+                <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false} >
 
-                <View key='3'>
-                    <MealsListHeader navigation={navigation} name='Dinner' isSelect={DinnerSelcted} IsSelectedHandler={setDinnerSelcted} />
-                    {DinnerSelcted ? <MealsList dataName={'Dinner'} /> : null}
-                </View>
+                    <View key='1'>
+                        <MealsListHeader navigation={navigation} name='Breakfast' isSelect={BreakfastSelcted} IsSelectedHandler={setBreakfastSelcted} />
+                        {BreakfastSelcted ? <MealsList dataName={'Breakfast'} /> : null}
+                    </View>
 
+                    <View key='2'>
+                        <MealsListHeader navigation={navigation} name='Lunch' isSelect={LunchSelcted} IsSelectedHandler={setLunchSelcted} />
+                        {LunchSelcted ? <MealsList dataName={'Lunch'} /> : null}
+                    </View>
 
+                    <View key='3'>
+                        <MealsListHeader navigation={navigation} name='Dinner' isSelect={DinnerSelcted} IsSelectedHandler={setDinnerSelcted} />
+                        {DinnerSelcted ? <MealsList dataName={'Dinner'} /> : null}
+                    </View>
 
-            </ScrollView>
+                </ScrollView>
 
-
-        </SafeAreaView>
+            </SafeAreaView>
+        </View>
     );
 }
 

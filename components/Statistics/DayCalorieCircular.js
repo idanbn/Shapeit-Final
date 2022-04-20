@@ -1,14 +1,13 @@
 import { React, useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { Userdb } from '../../Localdbs';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { COLORS, icons } from '../../constants';
-import { auth } from '../../FireBase/Users/reduce';
-import { fill } from '@tensorflow/tfjs';
-import { updateUserDailyCalorie } from '../../redux/users/action';
+import { setDrawerVisabilty } from '../../redux/DrawerNavigator';
 
 
 const DayCalorieCircular = ({ navigation }) => {
@@ -25,7 +24,7 @@ const DayCalorieCircular = ({ navigation }) => {
 
         CalcFill();
 
-    }, [dayCalorie, currentUser]);
+    }, [ dayCalorie, currentUser]);
 
 
     const CalcFill = () => {
@@ -44,15 +43,15 @@ const DayCalorieCircular = ({ navigation }) => {
             </View>
 
             <TouchableOpacity
-                style={{ position: 'absolute', alignSelf: 'flex-end', width: 50, marginTop: 10 }}
-                onPress={() => navigation.navigate('userInfo')}
+                style={{ position: 'absolute', alignSelf: 'flex-end', marginTop: 6, }}
+                onPress={() => dispatch(setDrawerVisabilty())}
             >
-                <Image
-                    source={icons.more}
+                <Ionicons name='ios-menu'
+                    color={COLORS.primary}
+                    size={36}
                     style={{
-                        width: 32,
-                        height: 32,
-                        tintColor: COLORS.primary
+                        marginRight: 16,
+
                     }}
                 />
             </TouchableOpacity>

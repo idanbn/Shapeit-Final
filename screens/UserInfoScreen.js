@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image } from 'react-native'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { SIGNOUT } from '../FireBase/Users/action'
 import { auth } from '../FireBase/Users/reduce'
@@ -9,7 +10,9 @@ import { icons, COLORS } from '../constants'
 
 import UpdateForm from '../components/UserInfo/UpdateForm';
 import FieldInfo from '../components/UserInfo/FieldInfo';
-import AdminButton from '../components/UserInfo/AdminButton';
+import Header from '../components/UserInfo/Header';
+import DrawerNavigator from '../navigation/DrawerNavigator';
+import { setDrawerVisabilty } from '../redux/DrawerNavigator';
 
 
 
@@ -17,65 +20,70 @@ const UserInfoScreen = ({ navigation }) => {
     const { currentUser } = useSelector(state => state.usersReducer);
     const [updateSelect, setUpdateSelect] = useState(false);
 
+    const { drawerOpen } = useSelector(state => state.drawerReducer);
+
+    const dispatch = useDispatch();
     return (
+        <View style={{ flex: 1 }}>
 
-        <SafeAreaView style={styles.safearea}>
+            <SafeAreaView style={styles.safearea}>
 
-            <View style={{ padding: 8, marginLeft: 4 }} >
-                <TouchableOpacity
-                    style={{ justifyContent: 'center', width: 50, }}
-                    onPress={() => navigation.navigate('Statistics')}
-                >
-                    <Image
-                        source={icons.back_arrow}
-                        style={{
-                            width: 32,
-                            height: 32,
-                            tintColor: COLORS.primary
-                        }}
-                    />
-                </TouchableOpacity>
-            </View>
+                <Header navigation={navigation} />
 
-            <FieldInfo fieldName='name' fieldValue={auth.currentUser?.displayName} />
-            <FieldInfo fieldName='email' fieldValue={auth.currentUser?.email} />
-            <FieldInfo fieldName='BMR' fieldValue={currentUser.userInfo?.activeBMR} />
+                <FieldInfo fieldName='name' fieldValue={auth.currentUser?.displayName} />
+                <FieldInfo fieldName='email' fieldValue={auth.currentUser?.email} />
+                <FieldInfo fieldName='BMR' fieldValue={currentUser.userInfo?.activeBMR} />
+
+                <UpdateInfoButton updateSelect={updateSelect} setUpdateSelect={setUpdateSelect} />
 
 
-            <View style={styles.container} >
+                <View style={styles.adminButton} >
 
-                <TouchableOpacity
-                    onPress={() => setUpdateSelect(true)}
-                    style={[styles.button, { marginTop: 10 }]}
-                >
+                    <TouchableOpacity
+                        onPress={() => dispatch(setDrawerVisabilty())}
+                    >
+                        <Ionicons
+                            name='ios-menu'
+                            color={COLORS.primary}
+                            style={{
+                                fontSize: 32,
 
-                    <View>
-                        <Text style={styles.buttonText}>Update Information</Text>
-                    </View>
+                            }}
+                        />
+                    </TouchableOpacity>
+                </View>
 
-                </TouchableOpacity>
+            </SafeAreaView>
+            {drawerOpen ?
 
-                <UpdateForm setModelSelcted={setUpdateSelect} modelSelcted={updateSelect} />
-
-
-            </View>
-            <View style={styles.adminButton} >
-                {
-                    currentUser.userInfo?.isAdmin ?
-                        <AdminButton navigation={navigation} adminInfo={currentUser?.userInfo} />
-                        : null
-                }
-
-                <SIGNOUT navigation={navigation} />
-            </View>
-
-        </SafeAreaView>
+                <DrawerNavigator navigation={navigation} drawerOpen={drawerOpen} setDrawerOpen={dispatch(setDrawerVisabilty())} />
+                : null
+            }
+        </View>
 
     )
 
 
 }
 
+const UpdateInfoButton = (props) => {
+    return (
+        <View style={styles.container} >
+            <TouchableOpacity
+                onPress={() => props.setUpdateSelect(true)}
+                style={[styles.button, { marginTop: 10 }]}
+            >
+
+                <View>
+                    <Text style={styles.buttonText}>Update Information</Text>
+                </View>
+
+            </TouchableOpacity>
+
+            <UpdateForm setModelSelcted={props.setUpdateSelect} modelSelcted={props.updateSelect} />
+        </View>
+    );
+};
 export default UserInfoScreen
 
 const styles = StyleSheet.create({

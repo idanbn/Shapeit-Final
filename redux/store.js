@@ -2,9 +2,10 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import mealsReducer from './meals/reducer';
 import usersReducer from './users/reducer';
+import drawerReducer from './DrawerNavigator'
 
 
-const rootReducer = combineReducers({mealsReducer, usersReducer});
+const rootReducer = combineReducers({mealsReducer, usersReducer, drawerReducer });
 
 export const Store = createStore(rootReducer, applyMiddleware(thunk));
 

@@ -159,35 +159,6 @@ const TabsNavigator = () => {
                 }}
             />
 
-
-
-            <Tab.Screen
-                name="drawer"
-                component={DrawerNavigator}
-                options={{
-                    tabBarShowLabel: false,
-
-                    tabBarIcon: ({ focused }) => (
-
-                        <Ionicons
-                            name='ios-menu'
-                            color={focused ? COLORS.primary : COLORS.secondary}
-                            style={{
-                                fontSize: 32,
-
-
-                            }}
-                        />
-
-                    ),
-                    tabBarButton: (props) => (
-                        <TabBarCustomButton
-                            {...props}
-                        />
-                    )
-                }}
-            />
-
         </Tab.Navigator>
     )
 
