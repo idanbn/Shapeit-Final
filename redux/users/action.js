@@ -8,13 +8,13 @@ export const UPDATE_USER_DAILY = 'UPDATE_USER_DAILY';
 export const UPDATE_USER_DAILY_NEGATIVE = 'UPDATE_USER_DAILY_NEGATIVE';
 
 
-import { ref, set, onValue } from "firebase/database";
-import { createUser, getUserById, updateDailyCalorie, updateNegativeDailyCalorie } from "../../FireBase/FireStore/Users/action";
+import { createUser, getUserById, updateDailyCalorie, updateLastSignin, updateNegativeDailyCalorie } from "../../FireBase/FireStore/Users/action";
 import { auth, rt_db } from "../../FireBase/Users/reduce";
 
 
-export const getUser = (uid) => async dispatch => {
+export const getUser = (uid, lastSignIn) => async dispatch => {
 
+    updateLastSignin(uid, lastSignIn);
     const userInfo = await getUserById(uid);
 
     dispatch({
@@ -33,6 +33,9 @@ export const addUser = (userId, name, bmr) => async dispatch => {
         fat: 0,
         sugar: 0
     };
+    var today = new Date();
+   // const date = new Date(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`)
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
     let userData = {
         uid: userId,
@@ -40,7 +43,9 @@ export const addUser = (userId, name, bmr) => async dispatch => {
         activeBMR: bmr,
         dailyCalorie: 0,
         isAdmin: false,
-        nutrionalvalues: nutrionalvalues
+        nutrionalvalues: nutrionalvalues,
+        lastSignIn: date,
+
     }
     createUser(userId, userData);
 

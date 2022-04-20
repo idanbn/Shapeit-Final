@@ -3,35 +3,24 @@ import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-nati
 import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import appTheme from '../../constants/theme';
 import { COLORS } from '../../constants';
 
-import { auth } from '../../FireBase/Users/reduce';
+
 import { deleteUserById } from '../../FireBase/Admin/action';
 
 const UserList = (props) => {
 
-    const getlastSignIn = (lastSignIn) => {
-        let date = new Date(lastSignIn);
-        let day = date.getDate();
-        let month = date.getMonth() + 1;
-        let year = date.getFullYear();
-
-        return `${day}/${month}/${year}`;
-    }
 
     return (
         <View>
             <Header />
-            <ScrollView>
-                <UserCard name={auth.currentUser.displayName} uid='YeHgfYu4a8htpEjodtCVa4EZHBx1' lastSignIn={getlastSignIn(auth.currentUser.metadata.lastSignInTime)} />
-                <UserCard name='avi cohen' lastSignIn='10/12/22' />
-                <UserCard name='faruch ismailov' lastSignIn='19/4/22' />
-                <UserCard name='avi cohen' lastSignIn='10/12/22' />
-                <UserCard name='faruch ismailov' lastSignIn='19/4/22' />
-                <UserCard name='avi cohen' lastSignIn='10/12/22' />
-                <UserCard name='faruch ismailov' lastSignIn='19/4/22' />
-                <UserCard name='avi cohen' lastSignIn='10/12/22' />
+            <ScrollView showsVerticalScrollIndicator={false}>
+                {props.data.map((item, index) => (
+                    <View key={index}>
+                        <UserCard name={item.name} uid={item.uid} lastSignIn={item.lastSignIn} />
+                    </View>
+                ))}
+
             </ScrollView>
         </View>
     );
@@ -89,6 +78,7 @@ const UserCard = (props) => {
         </View>
     );
 }
+
 
 export default UserList;
 

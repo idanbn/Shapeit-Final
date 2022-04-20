@@ -32,7 +32,7 @@ const LoginScreen = () => {
 
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                dispatch(getUser(user.uid));
+                dispatch(getUser(user.uid, user.metadata.lastSignInTime));
 
                 navigation.replace("tabs")
             }

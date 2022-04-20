@@ -43,7 +43,7 @@ const UserInfoScreen = ({ navigation }) => {
 
             <View style={styles.container} >
                 {
-                    currentUser.userInfo.isAdmin ?
+                    currentUser.userInfo?.isAdmin ?
                         <AdminButton navigation={navigation} userInfo={currentUser?.userInfo} />
                         : null
                 }

@@ -20,7 +20,7 @@ const deleteUserById = async (id) => {
     }).catch((error) => {
         console.log("error deleted from auth");
 
-    });;    
+    });;
 
 
     deleteCollection(id, 'breakfast');
@@ -33,5 +33,17 @@ const deleteUserById = async (id) => {
 
 }
 
+const getAllUsers = async () => {
 
-export { deleteUserById };
+    const usersSnapshot = await getDocs(collection(firestore_db, "users"));
+    var usersData = [];
+
+    usersSnapshot.forEach((docc) => {
+
+        usersData.push(docc.data());
+    });
+    return usersData;
+
+};
+
+export { deleteUserById, getAllUsers };

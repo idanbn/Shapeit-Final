@@ -2,7 +2,23 @@ import { collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from "firebase
 import { auth } from "../../Users/reduce";
 import { firestore_db } from "../../Users/reduce";
 
+const updateLastSignin = async (userId, lastSignin) => {
+    const date = new Date(lastSignin);
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    let dateString = `${day}/${month}/${year}`;
+
+    await updateDoc(doc(firestore_db, "users", userId), {
+        lastSignIn: dateString
+    });
+
+};
+
+
 const getUserById = async (userId) => {
+
     let userInfo = null;
 
     const userSnapshot = await getDocs(collection(firestore_db, "users"));
@@ -10,13 +26,17 @@ const getUserById = async (userId) => {
     userSnapshot.forEach((doc) => {
         if (doc.id == userId) {
 
+
+
+
             const userData = {
                 uid: doc.id,
                 name: doc.data().name,
                 activeBMR: doc.data().activeBMR,
                 dailyCalorie: doc.data().dailyCalorie,
                 isAdmin: doc.data().isAdmin,
-                nutrionalvalues: doc.data().nutrionalvalues
+                nutrionalvalues: doc.data().nutrionalvalues,
+                lastSignIn: doc.data().lastSignIn,
 
             };
 
@@ -31,8 +51,6 @@ const getUserById = async (userId) => {
 };
 
 const createUser = async (userId, userData) => {
-
-    console.log(userData);
 
     await setDoc(doc(firestore_db, "users", userId), userData);
 };
@@ -72,4 +90,4 @@ const updateNegativeDailyCalorie = async (userId, calorie, nutrionalValues) => {
     return await getUserById(userId)
 };
 
-export { getUserById, createUser, updateDailyCalorie, updateNegativeDailyCalorie };
+export { getUserById, createUser, updateDailyCalorie, updateNegativeDailyCalorie, updateLastSignin };

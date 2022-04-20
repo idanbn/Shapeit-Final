@@ -1,5 +1,4 @@
 import { FETCH_USERS, ADD_USER, DELETE_USER, UPDATE_USER, GET_USER_BY_ID, UPDATE_USER_DAILY, UPDATE_USER_DAILY_NEGATIVE } from './action';
-import { fetchUsers } from './action';
 
 
 const initialState = {
@@ -24,7 +23,6 @@ const initialState = {
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USER_BY_ID:
-            //console.log(action.payload);
             return { ...state, currentUser: action.payload };
 
         case ADD_USER:
@@ -32,10 +30,12 @@ const usersReducer = (state = initialState, action) => {
 
         case UPDATE_USER_DAILY:
             return { ...state, currentUser: action.payload };
-            
+
         case UPDATE_USER_DAILY_NEGATIVE:
             return { ...state, currentUser: action.payload };
-
+        ///admin
+        case FETCH_USERS:
+            return { ...state, availableUsers: action.payload };
 
 
     }
