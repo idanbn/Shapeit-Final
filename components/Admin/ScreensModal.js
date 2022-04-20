@@ -13,17 +13,20 @@ const ScreensModal = (props) => {
                 props.ModalVisible ?
                     <Animatable.View
                         animation="fadeInUp"
-                        duration={1600}
+                        duration={1500}
                         style={{ flex: 1, justifyContent: 'flex-end' }}
                     >
                         <View style={styles.container} >
 
+                            {props.children}
 
                             <TouchableOpacity
                                 onPress={() => props.setModalVisible(false)}
+                                style={styles.closeButton}
                             >
                                 <Text>Close</Text>
                             </TouchableOpacity>
+                            
                         </View>
                     </Animatable.View>
                     : null
@@ -37,9 +40,11 @@ export default ScreensModal;
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
-        justifyContent: 'center',
         height: appTheme.SIZES.height / 1.5,
         backgroundColor: COLORS.lightGray3,
+    },
+    closeButton: {
+        alignSelf: 'center',
+        marginTop: 20,
     },
 })

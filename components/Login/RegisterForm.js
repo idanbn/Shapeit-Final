@@ -52,9 +52,6 @@ const RegisterForm = (props) => {
         else if (sex == '1')
             s = 5;
 
-
-        console.log(s);
-
         /////////// BMR (kcal / day) = 10 * weight (kg) + 6.25 * height (cm) – 5 * age (y) + s (kcal / day),
         const BMR = (10 * weight) + (6.25 * height) - (5 * age) + s
 
@@ -63,8 +60,6 @@ const RegisterForm = (props) => {
     }
 
     const handleSignUp = async (userName, email, password, BMR) => {
-
-
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {

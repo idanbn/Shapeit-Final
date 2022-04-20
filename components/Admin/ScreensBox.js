@@ -26,6 +26,7 @@ const ScreenCard = (props) => {
         <TouchableOpacity
             style={styles.card}
             onPress={() => { props.setModalVisible(true); props.setModalInVisible(false) }}
+            activeOpacity={0.8}
         >
             <View style={styles.cardContant}>
                 <Text style={styles.cardText}>Management {props.name}</Text>
