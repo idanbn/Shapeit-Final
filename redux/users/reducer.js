@@ -37,6 +37,9 @@ const usersReducer = (state = initialState, action) => {
         case FETCH_USERS:
             return { ...state, availableUsers: action.payload };
 
+        case DELETE_USER:
+            return { ...state, availableUsers: action.payload };
+
 
     }
     return state;

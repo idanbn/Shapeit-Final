@@ -2,11 +2,12 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, ScrollView } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useDispatch } from 'react-redux';
 
 import { COLORS } from '../../constants';
+import { deleteUserById } from '../../redux/Admin/action';
 
 
-import { deleteUserById } from '../../FireBase/Admin/action';
 
 const UserList = (props) => {
 
@@ -51,6 +52,7 @@ const Header = (props) => {
 }
 
 const UserCard = (props) => {
+    const dispatch = useDispatch();
     return (
         <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: COLORS.border, borderRadius: 6, marginTop: 1, paddingVertical: 8, marginHorizontal: 14 }}>
 
@@ -62,7 +64,7 @@ const UserCard = (props) => {
 
             <View style={{ flex: 1, marginRight: 26, alignItems: 'flex-end' }}>
                 <TouchableOpacity
-                    onPress={() => { deleteUserById(props.uid) }}
+                    onPress={() => { dispatch(deleteUserById(props.uid)) }}
                 >
 
                     <MaterialCommunityIcons

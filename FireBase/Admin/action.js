@@ -5,7 +5,7 @@ import { doc, deleteDoc, getDocs, collection } from "firebase/firestore";
 import { firestore_db } from "../Users/reduce";
 
 
-const deleteUserById = async (id) => {
+const DeleteUserById = async (id) => {
     const deleteCollection = async (uid, C_name) => {
         const usersRef = await getDocs(collection(firestore_db, "users", uid, C_name));
         usersRef.forEach(async (docc) => {
@@ -30,7 +30,6 @@ const deleteUserById = async (id) => {
     await deleteDoc(doc(firestore_db, "users", id));
 
 
-
 }
 
 const getAllUsers = async () => {
@@ -46,4 +45,4 @@ const getAllUsers = async () => {
 
 };
 
-export { deleteUserById, getAllUsers };
+export { DeleteUserById, getAllUsers };
