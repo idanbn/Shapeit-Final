@@ -9,6 +9,7 @@ import { icons, COLORS } from '../constants'
 
 import UpdateForm from '../components/UserInfo/UpdateForm';
 import FieldInfo from '../components/UserInfo/FieldInfo';
+import AdminButton from '../components/UserInfo/AdminButton';
 
 
 
@@ -42,11 +43,6 @@ const UserInfoScreen = ({ navigation }) => {
 
 
             <View style={styles.container} >
-                {
-                    currentUser.userInfo?.isAdmin ?
-                        <AdminButton navigation={navigation} userInfo={currentUser?.userInfo} />
-                        : null
-                }
 
                 <TouchableOpacity
                     onPress={() => setUpdateSelect(true)}
@@ -63,8 +59,15 @@ const UserInfoScreen = ({ navigation }) => {
 
 
             </View>
+            <View style={styles.adminButton} >
+                {
+                    currentUser.userInfo?.isAdmin ?
+                        <AdminButton navigation={navigation} adminInfo={currentUser?.userInfo} />
+                        : null
+                }
 
-            <SIGNOUT />
+                <SIGNOUT navigation={navigation} />
+            </View>
 
         </SafeAreaView>
 
@@ -73,16 +76,6 @@ const UserInfoScreen = ({ navigation }) => {
 
 }
 
-const AdminButton = ({ navigation, ...props }) => {
-    return (
-        <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Admin', props.userInfo)}
-        >
-            <Text style={styles.buttonText} >Go to Admin Screen</Text>
-        </TouchableOpacity>
-    );
-}
 export default UserInfoScreen
 
 const styles = StyleSheet.create({
@@ -100,12 +93,15 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 30,
         width: '50%',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     buttonText: {
         color: COLORS.white,
         fontSize: 18,
         fontWeight: '500'
-    }
+    },
+    adminButton: {
+        alignItems: 'flex-end',
 
+    },
 })

@@ -3,6 +3,7 @@ import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 import Svg, { Path } from 'react-native-svg';
 import Foundation from 'react-native-vector-icons/Foundation'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from '../screens/HomeScreen';
 import StatisticsScreen from '../screens/StatisticsScreen';
@@ -11,6 +12,7 @@ import CameraScreen from '../screens/CameraScreen';
 
 import { COLORS, icons } from '../constants';
 import UserInfoScreen from '../screens/UserInfoScreen';
+import DrawerNavigator from './DrawerNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -120,7 +122,7 @@ const TabsNavigator = () => {
                             }}
                         />
                     ),
-                    tabBarButton:  (props) => (
+                    tabBarButton: (props) => (
                         <TabBarCustomButton
                             {...props}
                         />
@@ -157,6 +159,34 @@ const TabsNavigator = () => {
                 }}
             />
 
+
+
+            <Tab.Screen
+                name="drawer"
+                component={DrawerNavigator}
+                options={{
+                    tabBarShowLabel: false,
+
+                    tabBarIcon: ({ focused }) => (
+
+                        <Ionicons
+                            name='ios-menu'
+                            color={focused ? COLORS.primary : COLORS.secondary}
+                            style={{
+                                fontSize: 32,
+
+
+                            }}
+                        />
+
+                    ),
+                    tabBarButton: (props) => (
+                        <TabBarCustomButton
+                            {...props}
+                        />
+                    )
+                }}
+            />
 
         </Tab.Navigator>
     )

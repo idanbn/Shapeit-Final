@@ -1,13 +1,12 @@
-import { useNavigation } from '@react-navigation/native'
-import { signOut } from 'firebase/auth'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { auth } from './reduce'
+import { signOut } from 'firebase/auth'
 import Octicons from 'react-native-vector-icons/Octicons'
+
+import { auth } from './reduce'
 import { COLORS } from '../../constants'
 
-const SIGNOUT = () => {
-    const navigation = useNavigation()
+const SIGNOUT = ({ navigation }) => {
 
     const handleSignOut = () => {
         signOut(auth)
@@ -18,33 +17,22 @@ const SIGNOUT = () => {
     }
 
     return (
-        <View
-            style={{
-                flexDirection: 'row-reverse',
-                marginLeft: 14,
-                marginBottom: 20
-            }} >
+        <TouchableOpacity
+            onPress={handleSignOut}
+            style={styles.button}
+            activeOpacity={0.5}
+        >
+            <Text style={styles.buttonText}>Sign out</Text>
 
-            <TouchableOpacity
-                onPress={handleSignOut}
-            >
-                <Octicons
-                    name='sign-out'
-                    style={{
-                        fontSize: 36,
-                        fontWeight: '600',
-                        color: COLORS.icons,
-                    }}
+            <Octicons
+                name='sign-out'
+                style={{
+                    fontSize: 36,
+                    color: COLORS.icons,
+                }}
 
-                />
-
-            </TouchableOpacity>
-
-            <View style={styles.button}>
-                <Text style={styles.buttonText}>Sign out</Text>
-            </View>
-
-        </View>
+            />
+        </TouchableOpacity>
     )
 }
 
@@ -64,14 +52,24 @@ export { SIGNOUT, LOGIN, REGISTER }
 
 const styles = StyleSheet.create({
     button: {
-
-        paddingTop: 6,
         alignItems: 'center',
-        marginRight: 4,
+        flexDirection: 'row',
+        width: '90%',
+        justifyContent: 'space-between',
+        paddingRight: 4,
+        marginBottom: 38,
+        borderBottomWidth: 1,
+        borderColor: COLORS.secondary,
+        shadowOffset: { width: 0.5, height: 0.5 },
+        shadowColor: COLORS.shadow,
+        shadowOpacity: 0.23,
+        elevation: 2,
+
     },
     buttonText: {
-        color: COLORS.icons,
-        fontWeight: '700',
-        fontSize: 16,
-    },
+        color: COLORS.primary,
+        fontSize: 18,
+        fontWeight: '600',
+
+    }
 })

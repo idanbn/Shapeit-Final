@@ -12,7 +12,7 @@ const Header = (props) => {
 
             <TouchableOpacity
                 style={{ marginTop: 8 }}
-                onPress={() => props.navigation.navigate('userInfo')}
+                onPress={() => props.navigation.goBack()}
             >
                 <Image
                     source={icons.back_arrow}
