@@ -1,11 +1,9 @@
-export const FETCH_USERS = 'FETCH_USERS';
 export const ADD_USER = 'ADD_USER';
-export const DELETE_USER = 'DELETE_USER';
-export const UPDATE_USER = 'UPDATE_USER';
-export const UPDATE_USER_ADMIN = 'UPDATE_USER_ADMIN';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 export const UPDATE_USER_DAILY = 'UPDATE_USER_DAILY';
 export const UPDATE_USER_DAILY_NEGATIVE = 'UPDATE_USER_DAILY_NEGATIVE';
+
+export const UPDATE_USER = 'UPDATE_USER';
 
 
 import { createUser, getUserById, updateDailyCalorie, updateLastSignin, updateNegativeDailyCalorie } from "../../FireBase/FireStore/Users/action";

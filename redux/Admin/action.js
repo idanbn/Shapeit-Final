@@ -1,10 +1,8 @@
-import { DeleteUserById, getAllUsers } from "../../FireBase/Admin/action";
+import { DeleteUserById, getAllUsers, updatePermission } from "../../FireBase/Admin/action";
 
 export const FETCH_USERS = 'FETCH_USERS';
 export const DELETE_USER = 'DELETE_USER';
-
-export const ADD_USER = 'ADD_USER';
-export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+export const UPDATE_PERMISSION = 'UPDATE_PERMISSION';
 
 
 
@@ -36,4 +34,16 @@ export const fetchUsers = () => async dispatch => {
     });
 
 };
+
+export const updateUserPermission = (id, Permission) => async dispatch => {
+
+    updatePermission(id, Permission);
+    const usersData = await getAllUsers();
+
+    dispatch({
+        type: UPDATE_PERMISSION,
+        payload: usersData
+    });
+}
+
 

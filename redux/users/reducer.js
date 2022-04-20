@@ -1,4 +1,5 @@
-import { FETCH_USERS, ADD_USER, DELETE_USER, UPDATE_USER, GET_USER_BY_ID, UPDATE_USER_DAILY, UPDATE_USER_DAILY_NEGATIVE } from './action';
+import { UPDATE_PERMISSION, FETCH_USERS, DELETE_USER } from '../Admin/action';
+import { ADD_USER, GET_USER_BY_ID, UPDATE_USER_DAILY, UPDATE_USER_DAILY_NEGATIVE, UPDATE_USER } from './action';
 
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        //current user
         case GET_USER_BY_ID:
             return { ...state, currentUser: action.payload };
 
@@ -33,6 +35,7 @@ const usersReducer = (state = initialState, action) => {
 
         case UPDATE_USER_DAILY_NEGATIVE:
             return { ...state, currentUser: action.payload };
+
         ///admin
         case FETCH_USERS:
             return { ...state, availableUsers: action.payload };
@@ -40,6 +43,8 @@ const usersReducer = (state = initialState, action) => {
         case DELETE_USER:
             return { ...state, availableUsers: action.payload };
 
+        case UPDATE_PERMISSION:
+            return { ...state, availableUsers: action.payload };
 
     }
     return state;

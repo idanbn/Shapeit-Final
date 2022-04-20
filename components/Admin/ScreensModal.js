@@ -20,13 +20,8 @@ const ScreensModal = (props) => {
 
                             {props.children}
 
-                            <TouchableOpacity
-                                onPress={() => props.setModalVisible(false)}
-                                style={styles.closeButton}
-                            >
-                                <Text>Close</Text>
-                            </TouchableOpacity>
-                            
+                            {/*<CloseButton setModalVisible={props.setModalVisible} />*/}
+
                         </View>
                     </Animatable.View>
                     : null
@@ -34,6 +29,15 @@ const ScreensModal = (props) => {
         </>
     );
 };
+
+const CloseButton = (props) => (
+    <TouchableOpacity
+        onPress={() => props.setModalVisible(false)}
+        style={styles.closeButton}
+    >
+        <Text>Close</Text>
+    </TouchableOpacity>
+);
 
 export default ScreensModal;
 

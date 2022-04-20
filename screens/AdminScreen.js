@@ -35,6 +35,7 @@ const AdminScreen = ({ navigation, route, ...props }) => {
             </ScreensModal>
 
             <ScreensModal ModalVisible={premModalVisible} setModalVisible={setPremModalVisible} >
+                <UserList modalName='Permission' data={availableUsers} />
             </ScreensModal>
 
         </View>

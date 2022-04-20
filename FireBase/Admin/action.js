@@ -1,8 +1,8 @@
 import { deleteUser } from "firebase/auth";
-import { doc, deleteDoc, getDocs, collection } from "firebase/firestore";
+import { doc, deleteDoc, getDocs, collection, updateDoc } from "firebase/firestore";
 //import { adminAuth } from "../../NodeJS/adminConfiguration";
 
-import { firestore_db } from "../Users/reduce";
+import { auth, firestore_db } from "../Users/reduce";
 
 
 const DeleteUserById = async (id) => {
@@ -38,11 +38,18 @@ const getAllUsers = async () => {
     var usersData = [];
 
     usersSnapshot.forEach((docc) => {
-
-        usersData.push(docc.data());
+        if (docc.id !== auth.currentUser.uid) {
+            usersData.push(docc.data());
+        }
     });
     return usersData;
 
 };
 
-export { DeleteUserById, getAllUsers };
+const updatePermission = async (id, Permission) => {
+    await updateDoc(doc(firestore_db, "users", id), {
+        isAdmin: !Permission,
+    });
+}
+
+export { DeleteUserById, getAllUsers, updatePermission };
