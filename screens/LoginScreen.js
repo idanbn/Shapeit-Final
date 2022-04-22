@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { onAuthStateChanged } from 'firebase/auth';
 import { React, useEffect, useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text, Dimensions } from 'react-native';
-import { auth } from '../FireBase/Users/reduce';
+import { auth } from '../FireBase/GetDBs/reduce';
 import { LogBox } from 'react-native';
 import LoginForm from '../components/Login/LoginForm'
 import RegisterForm from '../components/Login/RegisterForm';

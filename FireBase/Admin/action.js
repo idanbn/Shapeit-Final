@@ -2,7 +2,7 @@ import { deleteUser } from "firebase/auth";
 import { doc, deleteDoc, getDocs, collection, updateDoc } from "firebase/firestore";
 //import { adminAuth } from "../../NodeJS/adminConfiguration";
 
-import { auth, firestore_db } from "../Users/reduce";
+import { auth, firestore_db } from "../GetDBs/reduce";
 
 
 const DeleteUserById = async (id) => {

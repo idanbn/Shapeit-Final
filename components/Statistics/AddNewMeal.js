@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo'
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
-import * as Animatable from 'react-native-animatable';
 
 
 import { useDispatch } from 'react-redux'
@@ -11,7 +10,7 @@ import { addBreakfast, addLunch, addDinner } from '../../redux/meals/action';
 
 import { COLORS } from '../../constants';
 import { MealInformation } from '../../API/FoodAPI';
-import { auth } from '../../FireBase/Users/reduce';
+import { auth } from '../../FireBase/GetDBs/reduce';
 import { updateUserDailyCalorie } from '../../redux/users/action';
 
 

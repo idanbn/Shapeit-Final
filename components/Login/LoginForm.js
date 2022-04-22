@@ -2,7 +2,7 @@ import { React } from 'react';
 import { View, StyleSheet, TouchableOpacity, TextInput, Text } from 'react-native';
 import SlideModel from './SlideModel';
 import { Formik } from 'formik'
-import { auth } from '../../FireBase/Users/reduce';
+import { auth } from '../../FireBase/GetDBs/reduce';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { COLORS } from '../../constants';
 import * as Animatable from 'react-native-animatable';

@@ -7,10 +7,9 @@ import Daynutritionalvalues from '../components/Statistics/DayNutritionalValues'
 import MealsList from '../components/Statistics/MealsList';
 import MealsListHeader from '../components/Statistics/MealsListHeader';
 
-import { useSelector } from 'react-redux';
 import DrawerNavigator from '../navigation/DrawerNavigator';
 
-const StatisticsScreen = ({ navigation, route }) => {
+const StatisticsScreen = ({ navigation }) => {
 
     const [BreakfastSelcted, setBreakfastSelcted] = useState(false);
     const [LunchSelcted, setLunchSelcted] = useState(false);
@@ -21,29 +20,11 @@ const StatisticsScreen = ({ navigation, route }) => {
 
     }, [BreakfastSelcted, LunchSelcted, DinnerSelcted]);
 
-
-    const selcetByTime = () => {
-        var hours = new Date().getHours(); //Current Hours
-
-        if (hours >= 6 || hours < 13)
-            setBreakfastSelcted(true);
-        else if (hours >= 13 || hours < 18)
-            setLunchSelcted(true);
-        else if (hours >= 18 || hours < 23)
-            setDinnerSelcted(true);
-
-    }
-    const { drawerOpen } = useSelector(state => state.drawerReducer);
-
-    console.log(drawerOpen);
-
     return (
         <View style={{ flex: 1 }}>
-            {drawerOpen ?
 
-                <DrawerNavigator navigation={navigation} drawerOpen={drawerOpen} />
-                : null
-            }
+            <DrawerNavigator navigation={navigation} />
+
 
             <SafeAreaView style={styles.safearea} >
                 <DayCalorieCircular navigation={navigation} />

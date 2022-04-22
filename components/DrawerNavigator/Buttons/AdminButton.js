@@ -1,17 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { COLORS } from '../../constants';
+import { COLORS } from '../../../constants';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { setDrawerVisabilty } from '../../../redux/DrawerNavigator';
 
 
 
 
 ///props [object : adminInfo]
 const AdminButton = ({ navigation, ...props }) => {
+
     return (
         <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Admin', props.adminInfo)}
+            onPress={() => {navigation.navigate('Admin', props.adminInfo); props.dispatch(setDrawerVisabilty())}}
             activeOpacity={0.5}
         >
             <Text style={styles.buttonText} >Admin Screen </Text>

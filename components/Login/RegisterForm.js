@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, TextInput, Text, Modal } from 'react-native';
 import SlideModel from './SlideModel';
 import { Formik } from 'formik'
-import { auth } from '../../FireBase/Users/reduce';
+import { auth } from '../../FireBase/GetDBs/reduce';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { COLORS } from '../../constants';
 import { addUser } from '../../redux/users/action';

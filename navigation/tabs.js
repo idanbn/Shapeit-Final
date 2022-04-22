@@ -3,16 +3,15 @@ import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 import Svg, { Path } from 'react-native-svg';
 import Foundation from 'react-native-vector-icons/Foundation'
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useDispatch } from 'react-redux';
 
 import HomeScreen from '../screens/HomeScreen';
 import StatisticsScreen from '../screens/StatisticsScreen';
 import CameraScreen from '../screens/CameraScreen';
 
 
-import { COLORS, icons } from '../constants';
-import UserInfoScreen from '../screens/UserInfoScreen';
-import DrawerNavigator from './DrawerNavigator';
+import { COLORS } from '../constants';
+import { closeIfOpen } from '../redux/DrawerNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,6 +19,8 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
     var isSelected = accessibilityState.selected
 
     if (isSelected) {
+        const dispatc = useDispatch();
+        dispatc(closeIfOpen());
         return (
             <View style={{ flex: 1, alignItems: "center" }}>
                 <View style={{ flexDirection: 'row', position: 'absolute', top: 0 }}>
@@ -45,7 +46,8 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
                         width: 50,
                         height: 50,
                         borderRadius: 25,
-                        backgroundColor: COLORS.white
+                        backgroundColor: COLORS.border,
+                        opacity: 0.8
                     }}
                     onPress={onPress}
                 >
@@ -59,7 +61,8 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
                 style={{
                     flex: 1,
                     height: 60,
-                    backgroundColor: COLORS.white
+                    backgroundColor: COLORS.white,
+                    opacity: 0.8
                 }}
                 activeOpacity={1}
                 onPress={onPress}
@@ -137,6 +140,7 @@ const TabsNavigator = () => {
                 component={StatisticsScreen}
                 options={{
                     tabBarShowLabel: false,
+
 
                     tabBarIcon: ({ focused }) => (
 

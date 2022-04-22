@@ -3,10 +3,9 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image } from 'r
 import { useDispatch, useSelector } from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import { SIGNOUT } from '../FireBase/Users/action'
-import { auth } from '../FireBase/Users/reduce'
+import { auth } from '../FireBase/GetDBs/reduce'
 
-import { icons, COLORS } from '../constants'
+import { COLORS } from '../constants'
 
 import UpdateForm from '../components/UserInfo/UpdateForm';
 import FieldInfo from '../components/UserInfo/FieldInfo';

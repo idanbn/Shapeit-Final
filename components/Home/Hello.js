@@ -4,8 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { COLORS, images } from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { async } from '@firebase/util';
-import { auth } from '../../FireBase/Users/reduce';
+import { auth } from '../../FireBase/GetDBs/reduce';
 
 const Userdb = [
 

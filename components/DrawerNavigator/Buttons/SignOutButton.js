@@ -1,12 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { signOut } from 'firebase/auth'
 import Octicons from 'react-native-vector-icons/Octicons'
 
-import { auth } from './reduce'
-import { COLORS } from '../../constants'
 
-const SIGNOUT = ({ navigation }) => {
+import { auth } from '../../../FireBase/GetDBs/reduce'
+import { COLORS } from '../../../constants'
+
+const SignOutButton = ({ navigation }) => {
 
     const handleSignOut = () => {
         signOut(auth)
@@ -36,19 +37,7 @@ const SIGNOUT = ({ navigation }) => {
     )
 }
 
-
-const LOGIN = () => {
-    ///***** Login component *****////
-
-}
-
-
-const REGISTER = () => {
-    ///***** Register component *****////
-
-}
-
-export { SIGNOUT, LOGIN, REGISTER }
+export default SignOutButton;
 
 const styles = StyleSheet.create({
     button: {

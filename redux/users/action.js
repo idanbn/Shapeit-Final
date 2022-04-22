@@ -7,7 +7,6 @@ export const UPDATE_USER = 'UPDATE_USER';
 
 
 import { createUser, getUserById, updateDailyCalorie, updateLastSignin, updateNegativeDailyCalorie } from "../../FireBase/FireStore/Users/action";
-import { auth, rt_db } from "../../FireBase/Users/reduce";
 
 
 export const getUser = (uid, lastSignIn) => async dispatch => {

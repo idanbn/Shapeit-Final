@@ -1,43 +1,58 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { useSelector } from 'react-redux';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 
 import { COLORS } from '../constants';
-import appTheme from '../constants/theme';
 
-import { SIGNOUT } from '../FireBase/Users/action';
-import AdminButton from '../components/UserInfo/AdminButton';
 import CloseBottom from '../components/DrawerNavigator/CloseBottom';
 import NavigatScreensBottons from '../components/DrawerNavigator/NavigatScreensBottons';
+import { setDrawerVisabilty } from '../redux/DrawerNavigator';
 
 
 const DrawerNavigator = ({ navigation, ...props }) => {
 
+    const { drawerOpen } = useSelector(state => state.drawerReducer);
     return (
-        <View style={{ flex: 1, flexDirection: 'row', backgroundColor: '#0000', position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 ,zIndex:700}}>
+        <>
+            {drawerOpen ?
 
-            <LeftSideShadow />
-            <RightSideMenu navigation={navigation}  />
+                <View style={{ flex: 1, flexDirection: 'row', backgroundColor: '#0000', position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, zIndex: 700 }}>
 
-        </View>
+                    <LeftSideShadow />
+                    <RightSideMenu navigation={navigation} />
+
+                </View>
+
+                : null
+            }
+        </>
     );
 }
 
-const LeftSideShadow = (props) => (
-    <Animatable.View
-        style={{ flex: 1, }}
-        animation="fadeInLeft"
-        duration={950}
+const LeftSideShadow = (props) => {
+    const dispatch = useDispatch();
+    return (
 
-    >
-        <View style={{ flex: 1, backgroundColor: '#ababab', opacity: 0.3 }}
-        >
-        </View>
-    </Animatable.View>
-);
+        <TouchableWithoutFeedback onPress={() => dispatch(setDrawerVisabilty())}>
 
+            <Animatable.View
+                style={{ flex: 1, }}
+                animation="fadeInLeft"
+                duration={950}
+
+            >
+                <View style={{ flex: 1, backgroundColor: '#ababab', opacity: 0.3 }}
+                >
+                </View>
+            </Animatable.View>
+        </TouchableWithoutFeedback>
+
+
+    );
+};
 const RightSideMenu = ({ navigation, ...props }) => {
+
     return (
         <View style={{ flex: 2, alignSelf: 'flex-end', opacity: 0.97 }}>
 
@@ -53,7 +68,6 @@ const RightSideMenu = ({ navigation, ...props }) => {
 
             </Animatable.View>
         </View >
-
     );
 };
 

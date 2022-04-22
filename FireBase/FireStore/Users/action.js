@@ -1,6 +1,6 @@
 import { collection, deleteDoc, doc, getDocs, setDoc, updateDoc } from "firebase/firestore";
-import { auth } from "../../Users/reduce";
-import { firestore_db } from "../../Users/reduce";
+import { auth } from "../../GetDBs/reduce";
+import { firestore_db } from "../../GetDBs/reduce";
 
 const updateLastSignin = async (userId, lastSignin) => {
     const date = new Date(lastSignin);

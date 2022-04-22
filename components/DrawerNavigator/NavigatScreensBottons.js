@@ -1,16 +1,19 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
-import { SIGNOUT } from '../../FireBase/Users/action';
-import AdminButton from '../UserInfo/AdminButton';
+
+
+import AdminButton from './Buttons/AdminButton';
+import SignOutButton from './Buttons/SignOutButton';
 
 
 
 
 const NavigatScreensBottons = ({ navigation, ...props }) => {
     const { currentUser } = useSelector(state => state.usersReducer);
-    
+    const dispatch = useDispatch();
+
     return (
         <Animatable.View
             animation="fadeInRight"
@@ -20,11 +23,11 @@ const NavigatScreensBottons = ({ navigation, ...props }) => {
         >
             {
                 // currentUser.userInfo?.isAdmin ?
-                <AdminButton navigation={navigation} adminInfo={currentUser?.userInfo} />
+                <AdminButton navigation={navigation} dispatch={dispatch} adminInfo={currentUser?.userInfo} />
                 // : null
             }
 
-            <SIGNOUT navigation={navigation} />
+            <SignOutButton navigation={navigation} dispatch={dispatch} />
 
         </Animatable.View>
 
