@@ -10,10 +10,7 @@ const CloseBottom = (props) => {
     //const { drawerOpen } = useSelector(state => state.drawerReducer);
     const dispatch = useDispatch();
     return (
-        <SafeAreaView style={{
-            position: 'absolute',
-            bottom: 0, left: 0, right: 0, top: 0,
-        }}>
+        <SafeAreaView >
             <TouchableOpacity
                 onPress={() => dispatch(setDrawerVisabilty())}
                 style={{

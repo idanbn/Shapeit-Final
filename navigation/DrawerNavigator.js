@@ -8,6 +8,7 @@ import { COLORS } from '../constants';
 import CloseBottom from '../components/DrawerNavigator/CloseBottom';
 import NavigatScreensBottons from '../components/DrawerNavigator/NavigatScreensBottons';
 import { setDrawerVisabilty } from '../redux/DrawerNavigator';
+import ProfileInfo from '../components/DrawerNavigator/ProfileInfo';
 
 
 const DrawerNavigator = ({ navigation, ...props }) => {
@@ -61,11 +62,14 @@ const RightSideMenu = ({ navigation, ...props }) => {
                 duration={800}
                 style={styles.drawerCard}
             >
+                <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1 }}>
+                        <CloseBottom />
+                        <ProfileInfo />
+                    </View>
 
-                <CloseBottom />
-
-                <NavigatScreensBottons navigation={navigation} />
-
+                    <NavigatScreensBottons navigation={navigation} />
+                </View>
             </Animatable.View>
         </View >
     );
