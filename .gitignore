@@ -1,6 +1,5 @@
 API/configuration.js
 FireBase/configuration/
-node_modules/
 .expo/
 dist/
 npm-debug.*
