@@ -6,9 +6,7 @@ import { COLORS } from '../../../constants';
 import appTheme from '../../../constants/theme';
 
 const UpdateImage = (props) => {
-    useEffect(() => {
 
-    }, [props.chooseGallery]);
     return (
         <>
             {props.firstRender ?
