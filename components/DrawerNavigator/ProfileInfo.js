@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 
@@ -7,7 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import { COLORS, images } from '../../constants';
 import { auth } from '../../FireBase/GetDBs/reduce';
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
     const { currentUser } = useSelector(state => state.usersReducer);
     return (
         <Animatable.View
@@ -19,7 +19,10 @@ const ProfileInfo = () => {
                 <View>
                     <Text style={styles.name}>{auth.currentUser.displayName}</Text>
                 </View>
-                <View style={styles.image}>
+                <TouchableOpacity
+                    onPress={() => { props.setChooseFromGallery(true); props.setFirstRender(false); }}
+                    style={styles.image}
+                >
 
                     <Image
                         source={images.burger_restaurant_2}
@@ -27,7 +30,7 @@ const ProfileInfo = () => {
                         style={{ width: 120, height: 120, borderRadius: 60 }}
                     />
 
-                </View>
+                </TouchableOpacity>
             </View>
 
             <View style={styles.fields}>
@@ -87,8 +90,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderBottomWidth: 1,
         borderColor: COLORS.border,
-        justifyContent:'space-between',
-        paddingHorizontal:20
+        justifyContent: 'space-between',
+        paddingHorizontal: 20
     },
 })
 

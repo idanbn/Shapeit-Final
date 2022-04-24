@@ -9,6 +9,7 @@ import CloseBottom from '../components/DrawerNavigator/CloseBottom';
 import NavigatScreensBottons from '../components/DrawerNavigator/NavigatScreensBottons';
 import { setDrawerVisabilty } from '../redux/DrawerNavigator';
 import ProfileInfo from '../components/DrawerNavigator/ProfileInfo';
+import UpdateImage from '../components/DrawerNavigator/Buttons/UpdateImage';
 
 
 const DrawerNavigator = ({ navigation, ...props }) => {
@@ -61,6 +62,9 @@ const LeftSideShadow = (props) => {
 };
 const RightSideMenu = ({ navigation, ...props }) => {
 
+    const [chooseGallery, setChooseFromGallery] = React.useState(false);
+    const [firstRender, setFirstRender] = React.useState(true);
+
     return (
         <View style={{ flex: 2, alignSelf: 'flex-end', opacity: 0.97 }}>
 
@@ -72,11 +76,13 @@ const RightSideMenu = ({ navigation, ...props }) => {
                 <View style={{ flex: 1 }}>
                     <View style={{ flex: 1 }}>
                         <CloseBottom />
-                        <ProfileInfo />
+                        <ProfileInfo setChooseFromGallery={setChooseFromGallery} setFirstRender={setFirstRender} />
                     </View>
 
                     <NavigatScreensBottons navigation={navigation} />
                 </View>
+                <UpdateImage setChooseFromGallery={setChooseFromGallery} chooseGallery={chooseGallery} firstRender={firstRender} />
+
             </Animatable.View>
         </View >
     );
