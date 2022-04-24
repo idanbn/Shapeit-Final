@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useEffect } from 'react';
 import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs'
 import Svg, { Path } from 'react-native-svg';
@@ -20,7 +20,12 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
 
     if (isSelected) {
         const dispatc = useDispatch();
-        dispatc(closeIfOpen());
+
+        useEffect(() => {
+            dispatc(closeIfOpen());
+
+        }, [])
+        
         return (
             <View style={{ flex: 1, alignItems: "center" }}>
                 <View style={{ flexDirection: 'row', position: 'absolute', top: 0 }}>

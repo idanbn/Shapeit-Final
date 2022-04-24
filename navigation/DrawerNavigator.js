@@ -14,21 +14,28 @@ import ProfileInfo from '../components/DrawerNavigator/ProfileInfo';
 const DrawerNavigator = ({ navigation, ...props }) => {
 
     const { drawerOpen } = useSelector(state => state.drawerReducer);
-    return (
-        <>
-            {drawerOpen ?
+    if (drawerOpen) {
+        return (
+            <>
+                {drawerOpen ?
 
-                <View style={{ flex: 1, flexDirection: 'row', backgroundColor: '#0000', position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, zIndex: 700 }}>
+                    <View style={{ flex: 1, flexDirection: 'row', backgroundColor: '#0000', position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, zIndex: 700 }}>
 
-                    <LeftSideShadow />
-                    <RightSideMenu navigation={navigation} />
+                        <LeftSideShadow />
+                        <RightSideMenu navigation={navigation} />
 
-                </View>
+                    </View>
 
-                : null
-            }
-        </>
-    );
+                    : null
+                }
+            </>
+        );
+    }
+    else {
+        return null;
+    }
+
+
 }
 
 const LeftSideShadow = (props) => {
