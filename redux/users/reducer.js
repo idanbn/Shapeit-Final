@@ -1,5 +1,5 @@
 import { UPDATE_PERMISSION, FETCH_USERS, DELETE_USER } from '../Admin/action';
-import { ADD_USER, GET_USER_BY_ID, UPDATE_USER_DAILY, UPDATE_USER_DAILY_NEGATIVE, UPDATE_USER } from './action';
+import { ADD_USER, GET_USER_BY_ID, UPDATE_USER_DAILY, UPDATE_USER_DAILY_NEGATIVE, UPDATE_IMAGE, UPDATE_USER } from './action';
 
 
 const initialState = {
@@ -11,6 +11,9 @@ const initialState = {
         activeBMR: '',
         dailyCalorie: 0,
         isAdmin: false,
+        lastSignIn: '',
+        displayPicture: '',
+
 
         nutrionalvalues: {
             protein: 0,
@@ -36,6 +39,10 @@ const usersReducer = (state = initialState, action) => {
         case UPDATE_USER_DAILY_NEGATIVE:
             return { ...state, currentUser: action.payload };
 
+        case UPDATE_IMAGE:
+            // return { ...state, currentUser: {displayPicture: action.payload} };
+            return { ...state, currentUser: action.payload };
+
         ///admin
         case FETCH_USERS:
             return { ...state, availableUsers: action.payload };
@@ -45,6 +52,7 @@ const usersReducer = (state = initialState, action) => {
 
         case UPDATE_PERMISSION:
             return { ...state, availableUsers: action.payload };
+
 
     }
     return state;

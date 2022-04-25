@@ -26,9 +26,6 @@ const getUserById = async (userId) => {
     userSnapshot.forEach((doc) => {
         if (doc.id == userId) {
 
-
-
-
             const userData = {
                 uid: doc.id,
                 name: doc.data().name,
@@ -37,6 +34,7 @@ const getUserById = async (userId) => {
                 isAdmin: doc.data().isAdmin,
                 nutrionalvalues: doc.data().nutrionalvalues,
                 lastSignIn: doc.data().lastSignIn,
+                displayPicture: doc.data().displayPicture,
 
             };
 
@@ -90,4 +88,13 @@ const updateNegativeDailyCalorie = async (userId, calorie, nutrionalValues) => {
     return await getUserById(userId)
 };
 
-export { getUserById, createUser, updateDailyCalorie, updateNegativeDailyCalorie, updateLastSignin };
+const updateUserPhoto = async (userId, photoURL) => {
+
+    await updateDoc(doc(firestore_db, "users", userId), {
+        displayPicture: photoURL
+    });
+
+    return await getUserById(userId)
+};
+
+export { getUserById, createUser, updateDailyCalorie, updateNegativeDailyCalorie, updateLastSignin, updateUserPhoto };

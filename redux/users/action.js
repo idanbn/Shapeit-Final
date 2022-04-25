@@ -2,11 +2,12 @@ export const ADD_USER = 'ADD_USER';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 export const UPDATE_USER_DAILY = 'UPDATE_USER_DAILY';
 export const UPDATE_USER_DAILY_NEGATIVE = 'UPDATE_USER_DAILY_NEGATIVE';
+export const UPDATE_IMAGE = 'UPDATE_IMAGE';
 
 export const UPDATE_USER = 'UPDATE_USER';
 
 
-import { createUser, getUserById, updateDailyCalorie, updateLastSignin, updateNegativeDailyCalorie } from "../../FireBase/FireStore/Users/action";
+import { createUser, getUserById, updateDailyCalorie, updateLastSignin, updateNegativeDailyCalorie, updateUserPhoto } from "../../FireBase/FireStore/Users/action";
 
 
 export const getUser = (uid, lastSignIn) => async dispatch => {
@@ -31,7 +32,7 @@ export const addUser = (userId, name, bmr) => async dispatch => {
         sugar: 0
     };
     var today = new Date();
-   // const date = new Date(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`)
+    // const date = new Date(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`)
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
     let userData = {
@@ -71,6 +72,16 @@ export const updateNegativeUserDailyCalorie = (userId, calorie, nutrionalValues)
 
     dispatch({
         type: UPDATE_USER_DAILY_NEGATIVE,
+        payload: userInfo
+    });
+
+};
+
+export const updateUserImg = (uid, photoURL) => async dispatch => {
+    const userInfo = await updateUserPhoto(uid, photoURL);
+
+    dispatch({
+        type: UPDATE_IMAGE,
         payload: userInfo
     });
 

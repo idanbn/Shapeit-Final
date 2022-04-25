@@ -15,8 +15,11 @@ import { COLORS } from '../../../constants';
 import appTheme from '../../../constants/theme';
 import { auth, storage_db } from '../../../FireBase/GetDBs/reduce';
 import { async } from '@firebase/util';
+import { updateUserImg } from '../../../redux/users/action';
+import { useDispatch } from 'react-redux';
 
 const UpdateImage = (props) => {
+    const dispatch = useDispatch();
 
     return (
         <>
@@ -31,7 +34,7 @@ const UpdateImage = (props) => {
                     <CloseB setChooseFromGallery={props.setChooseFromGallery} />
 
                     <View style={{ top: 36, alignItems: 'center' }}>
-                        <ChooseFromGallery setChooseFromGallery={props.setChooseFromGallery} />
+                        <ChooseFromGallery setChooseFromGallery={props.setChooseFromGallery} dispatch={dispatch} />
                         <TakeImageFromCamera setChooseFromGallery={props.setChooseFromGallery} />
                     </View>
                 </Animatable.View>
@@ -81,7 +84,6 @@ const TakeImageFromCamera = (props) => {
 };
 
 const ChooseFromGallery = (props) => {
-    const [image, setImage] = React.useState(null);
 
     const getImage = async () => {
         let photo = await ImagePicker.launchImageLibraryAsync(
@@ -93,15 +95,15 @@ const ChooseFromGallery = (props) => {
             },
         );
 
-        const manipResult = await manipulateAsync(
-            photo.uri,
-            [{ resize: { width: 500, height: 500 } }],
-            { format: 'jpeg' }
-        );
-
         if (!photo.cancelled) {
+            const manipResult = await manipulateAsync(
+                photo.uri,
+                [{ resize: { width: 500, height: 500 } }],
+                { format: 'jpeg' }
+            );
+
             deleteRef();
-            uploadImageAsync(manipResult.uri);
+            uploadImageAsync(manipResult.uri, props.dispatch);
         };
 
 
@@ -111,7 +113,7 @@ const ChooseFromGallery = (props) => {
         <TouchableOpacity
             activeOpacity={0.7}
             style={styles.button}
-            onPress={() => { props.setChooseFromGallery(false); getImage(); }}
+            onPress={() => { getImage(); props.setChooseFromGallery(false); }}
         >
             <Text>Choose from gallery</Text>
         </TouchableOpacity>
@@ -119,8 +121,8 @@ const ChooseFromGallery = (props) => {
 };
 
 
-const uploadImageAsync = async (uri) => {
-    
+const uploadImageAsync = async (uri, dispatch) => {
+
     const filename = uri.replace(/^.*[\\\/]/, '');
     const storageRef = ref(storage_db, `/userImages/${auth.currentUser.uid}/${filename}`);
 
@@ -149,6 +151,7 @@ const uploadImageAsync = async (uri) => {
         () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 updateUserImage(downloadURL);
+                dispatch(updateUserImg(auth.currentUser.uid, downloadURL));
                 //console.log('File available at', downloadURL);
             });
         }
