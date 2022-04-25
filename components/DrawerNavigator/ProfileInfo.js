@@ -25,7 +25,7 @@ const ProfileInfo = (props) => {
                 >
 
                     <Image
-                        source={images.burger_restaurant_2}
+                        source={auth.currentUser.photoURL ? { uri: auth.currentUser.photoURL } : images.profile}
                         resizeMode="cover"
                         style={{ width: 120, height: 120, borderRadius: 60 }}
                     />
