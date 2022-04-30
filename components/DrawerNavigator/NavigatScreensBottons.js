@@ -30,9 +30,9 @@ const NavigatScreensBottons = ({ navigation, ...props }) => {
                 <HomeButton navigation={navigation} dispatch={dispatch} />
                 <UserInfoButton navigation={navigation} dispatch={dispatch} />
                 {
-                    // currentUser.userInfo?.isAdmin ?
+                     currentUser.userInfo?.isAdmin ?
                     <AdminButton navigation={navigation} dispatch={dispatch} adminInfo={currentUser?.userInfo} />
-                    // : null
+                     : null
                 }
 
                 <SignOutButton navigation={navigation} dispatch={dispatch} />

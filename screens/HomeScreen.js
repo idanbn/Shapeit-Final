@@ -39,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
 
             <HelloHeader />
             <DailyiInTake navigation={navigation} />
-            <Category categoryData={categorysData} selectCategory={selectCategory} selectCategoryHandler={setSelectCategory} />
+            <Category navigation={navigation} categoryData={categorysData} selectCategory={selectCategory} selectCategoryHandler={setSelectCategory} />
             <PopularMeals data={popularMealsData} setModelSelcted={setIsSelcted} setSelectMealData={setSelectMealData} />
             <MealsDataS data={selectMealData} setModelSelcted={setIsSelcted} modelSelcted={isSelcted} />
 

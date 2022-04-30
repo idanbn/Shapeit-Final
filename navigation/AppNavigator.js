@@ -9,6 +9,7 @@ import LoginScreen from '../screens/LoginScreen';
 import TabsNavigator from './tabs';
 import UserInfoScreen from '../screens/UserInfoScreen';
 import AdminScreen from '../screens/AdminScreen';
+import SeeAllScreen from '../screens/SeeAllScreen';
 
 
 
@@ -27,6 +28,8 @@ export default function AppNavigator() {
                 <Stack.Screen name="tabs" component={TabsNavigator} />
                 <Stack.Screen name="userInfo" component={UserInfoScreen} />
                 <Stack.Screen name="Admin" component={AdminScreen} />
+                <Stack.Screen name="SeeAll" component={SeeAllScreen} />
+
 
             </Stack.Navigator>
         </NavigationContainer>

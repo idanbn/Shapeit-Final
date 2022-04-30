@@ -6,14 +6,14 @@ import { COLORS } from '../../constants';
 const Category = ({ navigation, selectCategory, selectCategoryHandler, ...props }) => {
     return (
         <View style={{ backgroundColor: '#eff5f5', }}>
-            {<RenderTitele />}
+            {<RenderTitele navigation={navigation} />}
             {<RenderCategoryImages categoryData={props.categoryData} selectCategory={selectCategory} selectCategoryHandler={selectCategoryHandler} />}
 
         </View>
     );
 }
 
-const RenderTitele = () => {
+const RenderTitele = (props) => {
 
     return (
         <View style={styles.continuer}>
@@ -21,7 +21,7 @@ const RenderTitele = () => {
             <Text style={styles.categoryText}> Category </Text>
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => { console.log('See All Category') }}
+                onPress={() => { props.navigation.navigate('SeeAll'); }}
             >
                 <Text style={styles.seeAll}> See All </Text>
             </TouchableOpacity>
