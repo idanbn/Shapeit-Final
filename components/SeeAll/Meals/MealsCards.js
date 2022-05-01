@@ -2,11 +2,15 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, FlatList, Image, ImageBackground } from 'react-native';
 import { MealsbyCategory } from '../../../API/FoodAPI';
 import { COLORS } from '../../../constants';
+import MealsDataS from '../../Home/MealsDataS';
 
 const MealsCards = (props) => {
 
 
     const [data, setData] = React.useState('');
+
+    const [isSelcted, setIsSelcted] = React.useState(false);
+    const [selectMealData, setSelectMealData] = React.useState('');
 
     React.useEffect(() => {
         PopularMealsData(props.category);
@@ -26,22 +30,25 @@ const MealsCards = (props) => {
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={data}
-                renderItem={({ item }) => <Card item={item} />}
+                renderItem={({ item }) => <Card item={item} setIsSelcted={setIsSelcted} setSelectMealData={setSelectMealData} />}
                 numColumns={2}
             />
+            <MealsDataS data={selectMealData} setModelSelcted={setIsSelcted} modelSelcted={isSelcted} />
+
 
         </View>
 
     );
 };
 
-const Card = ({ item }) => {
+const Card = ({ item, ...props }) => {
     return (
 
 
         <TouchableOpacity
             onPress={() => {
-                console.log(item.title);
+                props.setSelectMealData(item);
+                props.setIsSelcted(true);
             }}
             style={styles.cardsRow}
             activeOpacity={0.8}

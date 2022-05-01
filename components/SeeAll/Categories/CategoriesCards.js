@@ -6,13 +6,13 @@ import { COLORS } from '../../../constants';
 import { LocalCategorysdb } from '../../../Localdbs';
 
 
-const CategoriesCards = () => {
+const CategoriesCards = (props) => {
     return (
         <View style={styles.cards}>
             <FlatList
                 showsVerticalScrollIndicator={false}
                 data={LocalCategorysdb}
-                renderItem={({ item }) => <Card item={item} />}
+                renderItem={({ item }) => <Card item={item} navigation={props.navigation} />}
             // numColumns={2}
             />
 
@@ -22,11 +22,15 @@ const CategoriesCards = () => {
 }
 
 
-const Card = ({ item }) => {
+const Card = ({ item, ...props }) => {
     return (
         <TouchableOpacity
             onPress={() => {
-                console.log(item.name);
+                props.navigation.navigate('SeeAll', {
+                    name: 'Meals',
+                    category: item.name,
+
+                });
             }}
             style={styles.cardsRow}
             activeOpacity={0.8}

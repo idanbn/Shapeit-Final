@@ -6,11 +6,11 @@ import { COLORS, icons } from '../constants';
 import CategoriesCards from '../components/SeeAll/Categories/CategoriesCards';
 import MealsCards from '../components/SeeAll/Meals/MealsCards';
 
-const SeeAllScreen = ({ navigation ,route}) => {
+const SeeAllScreen = ({ navigation, route }) => {
     return (
         <SafeAreaView >
             <Header navigation={navigation} />
-            {route.params.name === 'Categories' ? <CategoriesCards /> : <MealsCards category={route.params.category} /> }
+            {route.params.name === 'Categories' ? <CategoriesCards navigation={navigation} /> : <MealsCards category={route.params.category} />}
         </SafeAreaView>
     );
 }
