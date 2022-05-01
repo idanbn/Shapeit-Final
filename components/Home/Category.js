@@ -21,7 +21,11 @@ const RenderTitele = (props) => {
             <Text style={styles.categoryText}> Category </Text>
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => { props.navigation.navigate('SeeAll'); }}
+                onPress={() => {
+                    props.navigation.navigate('SeeAll', {
+                        name: 'Categories'
+                    });
+                }}
             >
                 <Text style={styles.seeAll}> See All </Text>
             </TouchableOpacity>

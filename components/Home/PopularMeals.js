@@ -5,10 +5,10 @@ import Feather from 'react-native-vector-icons/Feather';
 import MealsDataS from './MealsDataS';
 
 
-const PopularMeals = ({ ...props }) => {
+const PopularMeals = ({navigation, ...props }) => {
     return (
         <View style={{ backgroundColor: '#eff5f5' }}>
-            <RenderTitele name='Popular Meals' />
+            <RenderTitele navigation={navigation} name='Popular Meals' />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
 
                 {props.data.map((item, index) => (
@@ -61,8 +61,11 @@ const RenderTitele = (props) => {
             <Text style={styles.categoryText}> {props.name} </Text>
             <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => { console.log('See All Popular Meals') }}
-            >
+                onPress={() => {
+                    props.navigation.navigate('SeeAll', {
+                        name: 'Meals'
+                    });
+                }}            >
                 <Text style={styles.seeAll}> See All </Text>
             </TouchableOpacity>
         </View>

@@ -1,35 +1,32 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, FlatList, Image } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, FlatList, Image, ImageBackground } from 'react-native';
 import { COLORS, icons } from '../constants';
 import { LocalCategorysdb } from '../Localdbs';
 
-const SeeAllScreen = ({ navigation }) => {
+const SeeAllScreen = ({ navigation ,route}) => {
     return (
-        <View>
+        <SafeAreaView >
             <Header navigation={navigation} />
-            <Cards />
-        </View>
+            {route.params.name === 'Categories' ? <Cards /> : null}
+        </SafeAreaView>
     );
 }
 const Header = (props) => {
     return (
-        <SafeAreaView style={{ marginLeft: 30 }}>
 
-            <TouchableOpacity
-                style={{ marginTop: 8 }}
-                onPress={() => props.navigation.goBack()}
-            >
-                <Image
-                    source={icons.back_arrow}
-                    style={{
-                        width: 30,
-                        height: 30,
-                        tintColor: COLORS.primary
-                    }}
-                />
-            </TouchableOpacity>
-
-        </SafeAreaView>
+        <TouchableOpacity
+            style={{ marginTop: 8, marginLeft: 30 }}
+            onPress={() => props.navigation.goBack()}
+        >
+            <Image
+                source={icons.back_arrow}
+                style={{
+                    width: 30,
+                    height: 30,
+                    tintColor: COLORS.primary
+                }}
+            />
+        </TouchableOpacity>
 
     );
 };
@@ -38,11 +35,10 @@ const Cards = () => {
     return (
         <View style={styles.cards}>
             <FlatList
-                //horizontal={true}
-                //showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
                 data={LocalCategorysdb}
                 renderItem={({ item }) => <Card item={item} />}
-
+            // numColumns={2}
             />
 
         </View>
@@ -52,12 +48,65 @@ const Cards = () => {
 
 const Card = ({ item }) => {
     return (
-        <View style={styles.card}>
-            <Text style={styles.cardText}>{item.name}</Text>
-        </View>
+        <TouchableOpacity
+            onPress={() => {
+                console.log(item.name);
+            }}
+            style={styles.cardsRow}
+            activeOpacity={0.8}
+
+        >
+
+            <ImageBackground source={item.image} resizeMode='cover' borderRadius={10}
+                style={{ position: 'absolute', top: 0, right: 0, opacity: 0.92, width: '96%', height: '100%' }}
+            />
+            <View style={styles.card}  >
+
+                <Text style={styles.cardText}>{item.name}</Text>
+
+            </View>
+
+        </TouchableOpacity >
     );
 };
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    cards: {
+        marginTop: 10,
+        marginHorizontal: 10,
+
+    },
+    cardsRow: {
+        marginTop: 16,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flex: 1,
+
+    },
+    card: {
+        //backgroundColor: COLORS.border,
+        borderColor: COLORS.card,
+        borderWidth: 3,
+        borderRadius: 10,
+        width: '92%',
+        paddingVertical: 60,
+
+
+
+    },
+    cardText: {
+        color: COLORS.primary,
+        fontSize: 50,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0.5, height: 0.5 },
+        shadowOpacity: 0.9,
+        shadowRadius: 2,
+        elevation: 2,
+
+
+    },
+})
 
 export default SeeAllScreen;
