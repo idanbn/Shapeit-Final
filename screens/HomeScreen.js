@@ -9,7 +9,7 @@ import MealsDataS from '../components/Home/MealsDataS';
 
 
 import { LocalCategorysdb, LocalMealsdb } from '../Localdbs';
-import { MealsbyCategory } from '../API/FoodAPI';
+import { MealsbyCategoryFive } from '../API/FoodAPI';
 
 const HomeScreen = ({ navigation }) => {
 
@@ -29,10 +29,9 @@ const HomeScreen = ({ navigation }) => {
 
 
     const PopularMealsData = async (category) => {
-        const mealsdata = await MealsbyCategory(category);
+        const mealsdata = await MealsbyCategoryFive(category);
         setPopularMealsData(mealsdata);
     }
-
 
     return (
         <SafeAreaView style={styles.safearea}>
@@ -40,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
             <HelloHeader />
             <DailyiInTake navigation={navigation} />
             <Category navigation={navigation} categoryData={categorysData} selectCategory={selectCategory} selectCategoryHandler={setSelectCategory} />
-            <PopularMeals navigation={navigation} data={popularMealsData} setModelSelcted={setIsSelcted} setSelectMealData={setSelectMealData} />
+            <PopularMeals navigation={navigation} data={popularMealsData} category={selectCategory} setModelSelcted={setIsSelcted} setSelectMealData={setSelectMealData} />
             <MealsDataS data={selectMealData} setModelSelcted={setIsSelcted} modelSelcted={isSelcted} />
 
         </SafeAreaView>

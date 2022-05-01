@@ -8,6 +8,25 @@ const apiURL = 'https://api.spoonacular.com/recipes/'
 //--- functions ---//
 
 const MealsbyCategory = async (category = 'pasta') => {
+    const CategoryURL = 'complexSearch?number=20&addRecipeNutrition=true&fillIngredients=true&query='
+
+    const dataURL = apiURL + CategoryURL + category + '&' + config;
+
+    try {
+
+        const response = await fetch(dataURL);
+        const respoJsondata = await response.json();
+
+        return respoJsondata.results;
+
+    } catch (error) {
+        console.error(error);
+
+    }
+
+}
+
+const MealsbyCategoryFive = async (category = 'pasta') => {
     const CategoryURL = 'complexSearch?number=5&addRecipeNutrition=true&fillIngredients=true&query='
 
     const dataURL = apiURL + CategoryURL + category + '&' + config;
@@ -83,4 +102,4 @@ const IngredientsByID = async (id) => {
 }
 
 //--- export functions ---//
-export { MealsbyCategory, NutritionByID, IngredientsByID, MealInformation };
+export { MealsbyCategory, MealsbyCategoryFive, NutritionByID, IngredientsByID, MealInformation };

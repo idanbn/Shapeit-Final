@@ -8,7 +8,7 @@ import MealsDataS from './MealsDataS';
 const PopularMeals = ({navigation, ...props }) => {
     return (
         <View style={{ backgroundColor: '#eff5f5' }}>
-            <RenderTitele navigation={navigation} name='Popular Meals' />
+            <RenderTitele navigation={navigation} category={props.category} name='Popular Meals' />
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
 
                 {props.data.map((item, index) => (
@@ -63,7 +63,9 @@ const RenderTitele = (props) => {
                 activeOpacity={0.7}
                 onPress={() => {
                     props.navigation.navigate('SeeAll', {
-                        name: 'Meals'
+                        name: 'Meals',
+                        category: props.category,
+
                     });
                 }}            >
                 <Text style={styles.seeAll}> See All </Text>
