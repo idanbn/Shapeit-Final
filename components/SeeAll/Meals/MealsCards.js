@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, FlatList, Image, ImageBackground } from 'react-native';
 import { MealsbyCategory } from '../../../API/FoodAPI';
 import { COLORS } from '../../../constants';
+import appTheme from '../../../constants/theme';
 import MealsDataS from '../../Home/MealsDataS';
 
 const MealsCards = (props) => {
@@ -78,6 +79,7 @@ const styles = StyleSheet.create({
     cards: {
         marginTop: 10,
         marginHorizontal: 4,
+        marginBottom: appTheme.SIZES.height / 13,
 
     },
     cardsRow: {

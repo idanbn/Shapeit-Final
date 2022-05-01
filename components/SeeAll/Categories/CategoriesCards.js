@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, FlatList, Image
 
 
 import { COLORS } from '../../../constants';
+import appTheme from '../../../constants/theme';
 import { LocalCategorysdb } from '../../../Localdbs';
 
 
@@ -53,15 +54,15 @@ const Card = ({ item, ...props }) => {
 
 const styles = StyleSheet.create({
     cards: {
-        marginTop: 10,
         marginHorizontal: 10,
+        marginBottom: appTheme.SIZES.height / 17,
+
+
 
     },
     cardsRow: {
         marginTop: 16,
-        justifyContent: 'space-between',
         alignItems: 'center',
-        flex: 1,
 
     },
     card: {
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderRadius: 10,
         width: '92%',
-        paddingVertical: 60,
+        paddingVertical: 84,
 
 
 
@@ -85,6 +86,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.9,
         shadowRadius: 2,
         elevation: 2,
+        position: 'absolute',
+        bottom:0,
+        alignSelf: 'center',
 
 
     },

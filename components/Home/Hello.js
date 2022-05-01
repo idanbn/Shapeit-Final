@@ -5,31 +5,7 @@ import { COLORS, images } from '../../constants';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { auth } from '../../FireBase/GetDBs/reduce';
-
-const Userdb = [
-
-    {
-        u_id: 1,
-        u_name: 'Faruch Ismailov',
-        email: 'test@test.com',
-        password: 'nlhuogidgayiugiudhcjixjcix',
-        imageUrl: images.avatar_3,
-        calorie: '1052',
-        NutritionalValues: { protein: '421', fat: '78', carbohydrate: '553' },
-    },
-
-    {
-        u_id: 2,
-        u_name: 'idan ben bahom',
-        email: 'test@test.com',
-        password: 'nlhuogidgayiugiudhcjixjcix',
-        imageUrl: images.avatar_1,
-        calorie: '2302',
-        NutritionalValues: { protein: '534', fat: '200', carbohydrate: '1300' },
-    },
-
-
-];
+import { useSelector } from 'react-redux';
 
 
 const HelloHeader = (props) => {
@@ -68,11 +44,12 @@ const HelloHeader = (props) => {
         // console.log(currentHours);
     }
 
+    const { currentUser } = useSelector(state => state.usersReducer);
 
     return (
         <View style={styles.continuer}>
             <RenderWellcome timeText={timeText} iconName={iconName} />
-            <RenderUserName name={auth.currentUser?.displayName} />
+            <RenderUserName name={currentUser.userInfo?.name} />
 
         </View>
     );
