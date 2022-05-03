@@ -57,8 +57,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginBottom: appTheme.SIZES.height / 17,
 
-
-
     },
     cardsRow: {
         marginTop: 16,
@@ -72,8 +70,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: '92%',
         paddingVertical: 84,
-
-
 
     },
     cardText: {
@@ -89,7 +85,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom:0,
         alignSelf: 'center',
-
 
     },
 })

@@ -6,6 +6,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 
 const SlideModel = (props) => {
+    const height = () => {
+        if( props.fieldName === 'name'){
+            return Dimensions.get('window').height / 5.7;
+        }
+        else if( props.fieldName === 'BMR'){
+            return Dimensions.get('window').height / 3.1;
+        }
+    }
+
 
 
     const ModelContant = (props) => {
@@ -14,7 +23,7 @@ const SlideModel = (props) => {
                 <View
                     style={{
                         flex: 1,
-                        marginTop: Dimensions.get('window').height / 4.4,
+                        marginTop: height(),
                         justifyContent: 'space-between',
                         backgroundColor: COLORS.border,
                         opacity: 0.98,

@@ -7,7 +7,7 @@ import { auth } from '../FireBase/GetDBs/reduce'
 
 import { COLORS } from '../constants'
 
-import UpdateForm from '../components/UserInfo/UpdateForm';
+import UpdateName from '../components/UserInfo/UpdateName';
 import FieldInfo from '../components/UserInfo/FieldInfo';
 import Header from '../components/UserInfo/Header';
 import DrawerNavigator from '../navigation/DrawerNavigator';
@@ -18,10 +18,10 @@ import { setDrawerVisabilty } from '../redux/DrawerNavigator';
 const UserInfoScreen = ({ navigation }) => {
     const { currentUser } = useSelector(state => state.usersReducer);
     const [updateSelect, setUpdateSelect] = useState(false);
+    const [selectedField, setSelectedField] = useState('');
 
     const { drawerOpen } = useSelector(state => state.drawerReducer);
 
-    const dispatch = useDispatch();
     return (
         <View style={{ flex: 1 }}>
 
@@ -29,35 +29,17 @@ const UserInfoScreen = ({ navigation }) => {
 
                 <Header navigation={navigation} />
 
-                <FieldInfo fieldName='name' fieldValue={auth.currentUser?.displayName} />
+                <FieldInfo fieldName='name' fieldValue={currentUser.userInfo?.name} updateSelect={updateSelect} setUpdateSelect={setUpdateSelect} selectedField={selectedField} setSelectedField={setSelectedField} />
                 <FieldInfo fieldName='email' fieldValue={auth.currentUser?.email} />
-                <FieldInfo fieldName='BMR' fieldValue={currentUser.userInfo?.activeBMR} />
-
-                <UpdateInfoButton updateSelect={updateSelect} setUpdateSelect={setUpdateSelect} />
+                <FieldInfo fieldName='BMR' fieldValue={currentUser.userInfo?.activeBMR} updateSelect={updateSelect} setUpdateSelect={setUpdateSelect} selectedField={selectedField} setSelectedField={setSelectedField} />
 
 
-                <View style={styles.adminButton} >
 
-                    <TouchableOpacity
-                        onPress={() => dispatch(setDrawerVisabilty())}
-                    >
-                        <Ionicons
-                            name='ios-menu'
-                            color={COLORS.primary}
-                            style={{
-                                fontSize: 32,
+                {/**<UpdateInfoButton updateSelect={updateSelect} setUpdateSelect={setUpdateSelect}  /> */}
 
-                            }}
-                        />
-                    </TouchableOpacity>
-                </View>
 
             </SafeAreaView>
-            {drawerOpen ?
 
-                <DrawerNavigator navigation={navigation} drawerOpen={drawerOpen} setDrawerOpen={dispatch(setDrawerVisabilty())} />
-                : null
-            }
         </View>
 
     )
@@ -79,7 +61,7 @@ const UpdateInfoButton = (props) => {
 
             </TouchableOpacity>
 
-            <UpdateForm setModelSelcted={props.setUpdateSelect} modelSelcted={props.updateSelect} />
+            <UpdateName setModelSelcted={props.setUpdateSelect} modelSelcted={props.updateSelect} />
         </View>
     );
 };

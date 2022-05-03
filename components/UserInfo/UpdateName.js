@@ -1,25 +1,29 @@
 import { Formik } from 'formik';
 import React from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { COLORS } from '../../constants';
+import { auth } from '../../FireBase/GetDBs/reduce';
+import { updateUserName } from '../../redux/users/action';
 import SlideModel from './SlideModel';
 
-const UpdateForm = (props) => {
+const UpdateName = (props) => {
+    const dispatch = useDispatch();
+
     return (
-        <SlideModel setModelSelcted={props.setModelSelcted} modelSelcted={props.modelSelcted} >
+        <SlideModel setModelSelcted={props.setModelSelcted} modelSelcted={props.modelSelcted} fieldName='name'>
 
 
             <View style={styles.container}>
                 <Formik
-                    initialValues={{ name: '', email: '', password: '' }}
+                    initialValues={{ name: '', }}
                     onSubmit={(values) => {
-                        console.log(values)
+                        dispatch(updateUserName(auth.currentUser.uid, values.name));
 
                     }}
                 >
                     {(props) => (
                         <View>
-
                             <View style={styles.inputContainer}>
 
                                 <TextInput
@@ -30,22 +34,6 @@ const UpdateForm = (props) => {
 
                                 />
 
-                                <TextInput
-                                    placeholder="Email"
-                                    value={props.values.email}
-                                    onChangeText={props.handleChange('email')}
-                                    style={styles.input}
-
-                                />
-
-                                <TextInput
-                                    placeholder="Password"
-                                    value={props.values.password}
-                                    onChangeText={props.handleChange('password')}
-                                    style={styles.input}
-                                    secureTextEntry
-
-                                />
 
                             </View>
 
@@ -103,4 +91,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default UpdateForm;
+export default UpdateName;

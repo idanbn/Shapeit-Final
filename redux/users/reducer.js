@@ -1,5 +1,5 @@
 import { UPDATE_PERMISSION, FETCH_USERS, DELETE_USER } from '../Admin/action';
-import { ADD_USER, GET_USER_BY_ID, UPDATE_USER_DAILY, UPDATE_USER_DAILY_NEGATIVE, UPDATE_IMAGE, UPDATE_USER } from './action';
+import { ADD_USER, GET_USER_BY_ID, UPDATE_USER_DAILY, UPDATE_USER_DAILY_NEGATIVE, UPDATE_IMAGE, UPDATE_USER_NAME } from './action';
 
 
 const initialState = {
@@ -43,6 +43,9 @@ const usersReducer = (state = initialState, action) => {
             // return { ...state, currentUser: {displayPicture: action.payload} };
             return { ...state, currentUser: action.payload };
 
+        case UPDATE_USER_NAME:
+            return { ...state, currentUser: action.payload };
+            
         ///admin
         case FETCH_USERS:
             return { ...state, availableUsers: action.payload };

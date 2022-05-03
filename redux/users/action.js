@@ -3,11 +3,10 @@ export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 export const UPDATE_USER_DAILY = 'UPDATE_USER_DAILY';
 export const UPDATE_USER_DAILY_NEGATIVE = 'UPDATE_USER_DAILY_NEGATIVE';
 export const UPDATE_IMAGE = 'UPDATE_IMAGE';
+export const UPDATE_USER_NAME = 'UPDATE_USER';
 
-export const UPDATE_USER = 'UPDATE_USER';
 
-
-import { createUser, getUserById, updateDailyCalorie, updateLastSignin, updateNegativeDailyCalorie, updateUserPhoto } from "../../FireBase/FireStore/Users/action";
+import { createUser, getUserById, updateDailyCalorie, updateLastSignin, updateName, updateNegativeDailyCalorie, updateUserPhoto } from "../../FireBase/FireStore/Users/action";
 
 
 export const getUser = (uid, lastSignIn) => async dispatch => {
@@ -82,6 +81,16 @@ export const updateUserImg = (uid, photoURL) => async dispatch => {
 
     dispatch({
         type: UPDATE_IMAGE,
+        payload: userInfo
+    });
+
+};
+
+export const updateUserName = (uid, name) => async dispatch => {
+    const userInfo = await updateName(uid, name);
+
+    dispatch({
+        type: UPDATE_USER_NAME,
         payload: userInfo
     });
 

@@ -24,7 +24,7 @@ const Header = (props) => {
                 />
             </TouchableOpacity>
 
-            <Text style={styles.headerText}> Welcome Admin Screen {props.userInfo.name}</Text>
+            <Text style={styles.headerText}> Welcome Admin {props.userInfo.name}</Text>
 
         </SafeAreaView>
 
