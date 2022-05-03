@@ -4,9 +4,9 @@ export const UPDATE_USER_DAILY = 'UPDATE_USER_DAILY';
 export const UPDATE_USER_DAILY_NEGATIVE = 'UPDATE_USER_DAILY_NEGATIVE';
 export const UPDATE_IMAGE = 'UPDATE_IMAGE';
 export const UPDATE_USER_NAME = 'UPDATE_USER';
+export const UPDATE_USER_BMR = 'UPDATE_USER_BMR';
 
-
-import { createUser, getUserById, updateDailyCalorie, updateLastSignin, updateName, updateNegativeDailyCalorie, updateUserPhoto } from "../../FireBase/FireStore/Users/action";
+import { createUser, getUserById, updateBMR, updateDailyCalorie, updateLastSignin, updateName, updateNegativeDailyCalorie, updateUserPhoto } from "../../FireBase/FireStore/Users/action";
 
 
 export const getUser = (uid, lastSignIn) => async dispatch => {
@@ -91,6 +91,16 @@ export const updateUserName = (uid, name) => async dispatch => {
 
     dispatch({
         type: UPDATE_USER_NAME,
+        payload: userInfo
+    });
+
+};
+
+export const updateUserBMR = (uid, BMR) => async dispatch => {
+    const userInfo = await updateBMR(uid, BMR);
+
+    dispatch({
+        type: UPDATE_USER_BMR,
         payload: userInfo
     });
 

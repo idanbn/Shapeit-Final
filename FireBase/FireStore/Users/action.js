@@ -106,4 +106,13 @@ const updateName = async (userId, Name) => {
     return await getUserById(userId)
 };
 
-export { getUserById, createUser, updateDailyCalorie, updateNegativeDailyCalorie, updateLastSignin, updateUserPhoto, updateName };
+const updateBMR = async (userId, BMR) => {
+
+    await updateDoc(doc(firestore_db, "users", userId), {
+        activeBMR: BMR
+    });
+
+    return await getUserById(userId)
+};
+
+export { getUserById, createUser, updateDailyCalorie, updateNegativeDailyCalorie, updateLastSignin, updateUserPhoto, updateName, updateBMR };
