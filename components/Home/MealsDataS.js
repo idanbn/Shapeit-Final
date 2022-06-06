@@ -15,6 +15,8 @@ const MealsDataS = ({ ...props }) => {
     const [addMeal, setAddMeal] = useState(false);
 
     return (
+        <>
+        {props.modelSelcted?
         <SlideModel setModelSelcted={props.setModelSelcted} modelSelcted={props.modelSelcted} setAddMealselected={setAddMeal} >
             {addMeal ?
                 <SelectMealTime data={props.data} setAddMealselected={setAddMeal} />
@@ -25,7 +27,10 @@ const MealsDataS = ({ ...props }) => {
             <RenderIngredients data={props.data.extendedIngredients ? props.data.extendedIngredients : null} />
 
         </SlideModel>
-
+        :
+        null
+        }
+        </>
     );
 }
 

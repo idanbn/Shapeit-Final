@@ -16,7 +16,7 @@ const TENSORFLOW_CHANNEL = 3;
 export const getModel = async () => {
   try {
     // wait until tensorflow is ready
-    await tf.ready();
+    await tf.setBackend('cpu');
     // load the trained model
     return await tf.loadLayersModel(bundleResourceIO(modelJson, modelWeights));
   } catch (error) {

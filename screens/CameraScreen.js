@@ -1,4 +1,4 @@
-import React, {useRef, useState,useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -14,10 +14,12 @@ import {
   convertBase64ToTensor,
   startPrediction,
 } from '../helpers/tensor-helper';
-import {cropPicture} from '../helpers/image-helper';
+import { cropPicture } from '../helpers/image-helper';
+import MealsDataS from '../components/Home/MealsDataS';
 
-import {Camera} from 'expo-camera';
+import { Camera } from 'expo-camera';
 import { Video } from "expo-av";
+import { MealsbyCategory } from '../API/FoodAPI';
 
 const RESULT_MAPPING = ['Ceaser-Salad', 'Omlette', 'Pizza'];
 const WINDOW_HEIGHT = Dimensions.get("window").height;
@@ -31,6 +33,10 @@ const MainScreen = () => {
 
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+
+
+  const [isSelcted, setIsSelected] = useState(false);
+  const [data, setData] = useState(null);
 
 
   useEffect(() => {
@@ -47,7 +53,7 @@ const MainScreen = () => {
     return <Text>No access to camera</Text>;
   }
 
-  
+
   const handleImageCapture = async () => {
     setIsProcessing(true);
     const imageData = await cameraRef.current.takePictureAsync({
@@ -66,39 +72,70 @@ const MainScreen = () => {
     const highestPrediction = prediction.indexOf(
       Math.max.apply(null, prediction),
     );
-    setPresentedShape(RESULT_MAPPING[highestPrediction]);
+
+    const res = RESULT_MAPPING[highestPrediction];
+    setPresentedShape(res);
+
     console.log(prediction);
+
+    const da = await MealsbyCategory(res);
+    setData(da[0]);
+
+    console.log(res);
+
   };
 
-  return (
-    <View style={styles.container}>
-      <Modal visible={isProcessing} transparent={true} animationType="slide">
-        <View style={styles.modal}>
-          <View style={styles.modalContent}>
-            <Text>Your current Meal is {presentedShape}</Text>
-            {presentedShape === '' && <ActivityIndicator size="large" />}
-            <Pressable
-              style={styles.dismissButton}
-              onPress={() => {
-                setPresentedShape('');
-                setIsProcessing(false);
-              }}>
-              <Text>Dismiss</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
 
-      <Camera
-        ref={cameraRef}
-        style={styles.camera}
-        type={Camera.Constants.Type.back}
-        autoFocus={true}
-        whiteBalance={Camera.Constants.WhiteBalance.auto}></Camera>
-      <Pressable
-        onPress={() => handleImageCapture()}
-        style={styles.captureButton}></Pressable>
-    </View>
+  return (
+    <>
+      <View style={styles.container}>
+        <Modal visible={isProcessing} transparent={true} animationType="slide">
+          <View style={styles.modal}>
+            <View style={styles.modalContent}>
+              <Text>Your current Meal is {presentedShape}</Text>
+              {presentedShape === '' && <ActivityIndicator size="large" />}
+
+              {
+                data !== null ?
+                  <>
+                    <Pressable
+                      onPress={() => { setIsSelected(true); }}
+                      style={styles.dismissButton}
+                    >
+                      <Text style={styles.modalButtonText}>result</Text>
+                    </Pressable>
+
+                    <MealsDataS data={data} setModelSelcted={setIsSelected} modelSelcted={isSelcted} />
+                  </>
+                  : null
+              }
+              {data === '' && <ActivityIndicator size="large" />}
+
+
+              <Pressable
+                style={styles.dismissButton}
+                onPress={() => {
+                  setPresentedShape('');
+                  setIsProcessing(false);
+                }}>
+                <Text>Dismiss</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+
+        <Camera
+          ref={cameraRef}
+          style={styles.camera}
+          type={Camera.Constants.Type.back}
+          autoFocus={true}
+          whiteBalance={Camera.Constants.WhiteBalance.auto}></Camera>
+        <Pressable
+          onPress={() => handleImageCapture()}
+          style={styles.captureButton}></Pressable>
+      </View>
+
+    </>
   );
 };
 

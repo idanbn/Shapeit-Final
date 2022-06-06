@@ -21,6 +21,7 @@ const SlideModel = (props) => {
                         backgroundColor: COLORS.lightGray,
                         marginHorizontal: 4,
                         borderRadius: 36,
+                        zIndex:999,
 
 
                     }}
