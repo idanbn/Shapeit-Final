@@ -117,6 +117,7 @@ const MainScreen = () => {
                 onPress={() => {
                   setPresentedShape('');
                   setIsProcessing(false);
+                  setData(null);
                 }}>
                 <Text>Dismiss</Text>
               </Pressable>
